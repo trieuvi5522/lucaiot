@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Mail, MessageCircle, MapPin } from "lucide-react";
+import { Mail, MessageCircle, Facebook, Linkedin, Info } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
-import ContactLinks from "@/components/ContactLinks";
+import CountryPhoneInput from "@/components/CountryPhoneInput";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,8 +14,8 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
-    subject: "",
+    countryCode: "VN",
+    phone: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -25,6 +25,33 @@ const Contact = () => {
     console.log("Contact form submitted:", formData);
     setSubmitted(true);
   };
+
+  const contactShortcuts = [
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      value: siteConfig.whatsappPhone,
+      href: `https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`,
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: siteConfig.contactEmail,
+      href: `mailto:${siteConfig.contactEmail}`,
+    },
+    {
+      icon: Facebook,
+      label: "Facebook",
+      value: "Facebook",
+      href: siteConfig.facebookUrl,
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "LinkedIn",
+      href: siteConfig.linkedinUrl,
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -61,52 +88,39 @@ const Contact = () => {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="c-name">Name *</Label>
-                      <Input
-                        id="c-name"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="c-email">Email *</Label>
-                      <Input
-                        id="c-email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      />
-                    </div>
+                  <div>
+                    <Label htmlFor="c-name">Full Name *</Label>
+                    <Input
+                      id="c-name"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="c-company">Company</Label>
-                      <Input
-                        id="c-company"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="c-subject">Subject *</Label>
-                      <Input
-                        id="c-subject"
-                        required
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      />
-                    </div>
+                  <div>
+                    <Label htmlFor="c-email">Email *</Label>
+                    <Input
+                      id="c-email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    />
                   </div>
+                  <CountryPhoneInput
+                    countryCode={formData.countryCode}
+                    phone={formData.phone}
+                    onCountryChange={(code) => setFormData({ ...formData, countryCode: code })}
+                    onPhoneChange={(phone) => setFormData({ ...formData, phone })}
+                    id="c-phone"
+                  />
                   <div>
                     <Label htmlFor="c-message">Message *</Label>
                     <Textarea
                       id="c-message"
-                      rows={5}
+                      rows={6}
                       required
+                      placeholder="Describe your project requirements..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
@@ -120,36 +134,41 @@ const Contact = () => {
 
             {/* Sidebar */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Contact shortcuts */}
               <div className="bg-card rounded-lg border border-border p-6 shadow-card">
-                <h3 className="font-display font-semibold text-card-foreground mb-4">Contact Information</h3>
+                <h3 className="font-display font-semibold text-card-foreground mb-4">Direct Contact</h3>
                 <ul className="space-y-4 text-sm">
-                  <li className="flex items-start gap-3 text-card-foreground">
-                    <Mail size={18} className="text-accent mt-0.5 shrink-0" />
-                    <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-accent transition-colors">
-                      {siteConfig.contactEmail}
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3 text-card-foreground">
-                    <MessageCircle size={18} className="text-accent mt-0.5 shrink-0" />
-                    <a
-                      href={`https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition-colors"
-                    >
-                      WhatsApp: {siteConfig.whatsappPhone}
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3 text-card-foreground">
-                    <MapPin size={18} className="text-accent mt-0.5 shrink-0" />
-                    <span>Vietnam (Remote worldwide)</span>
-                  </li>
+                  {contactShortcuts.map((s) => (
+                    <li key={s.label}>
+                      <a
+                        href={s.href}
+                        target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 text-card-foreground hover:text-accent transition-colors"
+                      >
+                        <s.icon size={18} className="text-accent shrink-0" />
+                        <div>
+                          <span className="block text-xs text-muted-foreground">{s.label}</span>
+                          <span>{s.value}</span>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
+              {/* Guidance */}
               <div className="bg-card rounded-lg border border-border p-6 shadow-card">
-                <h3 className="font-display font-semibold text-card-foreground mb-4">Follow Me</h3>
-                <ContactLinks />
+                <div className="flex items-center gap-2 mb-3">
+                  <Info size={16} className="text-accent" />
+                  <h3 className="font-display font-semibold text-card-foreground">What to Include</h3>
+                </div>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li>• Your project goal or problem to solve</li>
+                  <li>• Devices or equipment involved</li>
+                  <li>• Dashboard or monitoring needs</li>
+                  <li>• Expected timeline</li>
+                </ul>
               </div>
             </div>
           </div>

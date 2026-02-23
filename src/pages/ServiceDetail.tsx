@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle2, Users, AlertTriangle, Settings, Cpu } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Users, AlertTriangle, Cpu } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -41,11 +41,14 @@ const ServiceDetail = () => {
 
   const relatedServices = services.filter((s) => service.relatedServiceIds.includes(s.id));
   const relatedUseCases = useCases.filter((u) => service.relatedUseCaseIds.includes(u.id));
+  const isHosting = service.group === "hosting";
 
   const handleSelectPlan = (planName: string) => {
     setSelectedPlan(planName);
     setModalOpen(true);
   };
+
+  const selectedPlanData = service.pricingPlans?.find((p) => p.name === selectedPlan);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -59,7 +62,7 @@ const ServiceDetail = () => {
             </Link>
             <div className="max-w-3xl animate-fade-in">
               <span className="inline-block text-accent font-display font-medium text-xs uppercase tracking-wider mb-3">
-                {service.group === "hosting" ? "Hosting" : "Service"}
+                {isHosting ? "Hosting" : "Service"}
               </span>
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {service.title}
@@ -68,7 +71,11 @@ const ServiceDetail = () => {
                 {service.heroText}
               </p>
               <div className="mt-6">
-                <CTAButton className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" />
+                {isHosting ? (
+                  <CTAButton text="Start" className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" to="#pricing" />
+                ) : (
+                  <CTAButton className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" />
+                )}
               </div>
             </div>
           </div>
@@ -87,7 +94,7 @@ const ServiceDetail = () => {
         </SectionWrapper>
 
         {/* Pain Points */}
-        <SectionWrapper title="Problems We Solve" className="bg-muted/50">
+        <SectionWrapper title="Common Problems" className="bg-muted/50">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             {service.painPoints.map((point, i) => (
               <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border">
@@ -143,7 +150,7 @@ const ServiceDetail = () => {
 
         {/* Pricing */}
         {service.pricingType === "public_packages" && service.pricingPlans ? (
-          <SectionWrapper title="Pricing Plans" className="bg-muted/50">
+          <SectionWrapper title="Pricing Plans" className="bg-muted/50" id="pricing">
             <div className="max-w-4xl mx-auto">
               <PricingTable plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
             </div>
@@ -151,8 +158,11 @@ const ServiceDetail = () => {
         ) : (
           <SectionWrapper title="Pricing" className="bg-muted/50">
             <div className="max-w-xl mx-auto text-center">
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-2">
                 Every project is unique. Contact me for a free consultation and custom quote.
+              </p>
+              <p className="text-sm text-muted-foreground/70 mb-6">
+                I'll assess your requirements and provide a detailed proposal with timeline and pricing.
               </p>
               <CTAButton size="lg" />
             </div>
@@ -237,6 +247,9 @@ const ServiceDetail = () => {
         onOpenChange={setModalOpen}
         serviceName={service.title}
         planName={selectedPlan}
+        planPrice={selectedPlanData?.price}
+        planPeriod={selectedPlanData?.period}
+        planFeatures={selectedPlanData?.features}
       />
     </div>
   );

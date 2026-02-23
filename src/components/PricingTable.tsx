@@ -1,4 +1,4 @@
-import { CheckCircle2 } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PricingPlan } from "@/data/types";
 
@@ -7,47 +7,90 @@ interface PricingTableProps {
   onSelectPlan: (planName: string) => void;
 }
 
+// Extract all unique features across plans
+const getAllFeatures = (plans: PricingPlan[]): string[] => {
+  const allFeatures: string[] = [];
+  plans.forEach((plan) => {
+    plan.features.forEach((f) => {
+      if (!allFeatures.includes(f)) allFeatures.push(f);
+    });
+  });
+  return allFeatures;
+};
+
 const PricingTable = ({ plans, onSelectPlan }: PricingTableProps) => {
+  const allFeatures = getAllFeatures(plans);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {plans.map((plan) => (
-        <div
-          key={plan.name}
-          className={`relative bg-card rounded-lg border p-6 flex flex-col ${
-            plan.highlighted
-              ? "border-accent shadow-lg ring-1 ring-accent/20"
-              : "border-border shadow-card"
-          }`}
-        >
-          {plan.highlighted && (
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
-              Most Popular
-            </span>
-          )}
-          <div className="mb-6">
-            <h3 className="text-lg font-display font-semibold text-card-foreground">{plan.name}</h3>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className="text-3xl font-display font-bold text-card-foreground">{plan.price}</span>
-              {plan.period && <span className="text-sm text-muted-foreground">{plan.period}</span>}
-            </div>
-          </div>
-          <ul className="space-y-2.5 mb-8 flex-1">
-            {plan.features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-card-foreground">
-                <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" />
-                <span>{feature}</span>
-              </li>
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse">
+        <thead>
+          <tr>
+            <th className="text-left p-4 border-b border-border text-sm font-display font-semibold text-muted-foreground w-1/4">
+              Features
+            </th>
+            {plans.map((plan) => (
+              <th
+                key={plan.name}
+                className={`p-4 border-b text-center ${
+                  plan.highlighted
+                    ? "border-accent bg-accent/5"
+                    : "border-border"
+                }`}
+              >
+                {plan.highlighted && (
+                  <span className="inline-block bg-accent text-accent-foreground text-xs font-semibold px-2 py-0.5 rounded-full mb-2">
+                    Most Popular
+                  </span>
+                )}
+                <div className="font-display font-semibold text-card-foreground">{plan.name}</div>
+                <div className="mt-1 flex items-baseline justify-center gap-0.5">
+                  <span className="text-2xl font-display font-bold text-card-foreground">{plan.price}</span>
+                  {plan.period && <span className="text-xs text-muted-foreground">{plan.period}</span>}
+                </div>
+              </th>
             ))}
-          </ul>
-          <Button
-            onClick={() => onSelectPlan(plan.name)}
-            variant={plan.highlighted ? "default" : "outline"}
-            className="w-full"
-          >
-            {plan.ctaText}
-          </Button>
-        </div>
-      ))}
+          </tr>
+        </thead>
+        <tbody>
+          {allFeatures.map((feature) => (
+            <tr key={feature} className="border-b border-border/50 last:border-b-0">
+              <td className="p-3 text-sm text-foreground">{feature}</td>
+              {plans.map((plan) => {
+                const has = plan.features.includes(feature);
+                return (
+                  <td
+                    key={plan.name}
+                    className={`p-3 text-center ${plan.highlighted ? "bg-accent/5" : ""}`}
+                  >
+                    {has ? (
+                      <Check size={16} className="text-accent mx-auto" />
+                    ) : (
+                      <X size={16} className="text-muted-foreground/30 mx-auto" />
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td className="p-4" />
+            {plans.map((plan) => (
+              <td key={plan.name} className={`p-4 text-center ${plan.highlighted ? "bg-accent/5" : ""}`}>
+                <Button
+                  onClick={() => onSelectPlan(plan.name)}
+                  variant={plan.highlighted ? "default" : "outline"}
+                  className="w-full"
+                >
+                  {plan.ctaText}
+                </Button>
+              </td>
+            ))}
+          </tr>
+        </tfoot>
+      </table>
     </div>
   );
 };
