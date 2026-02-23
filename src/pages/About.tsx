@@ -19,79 +19,39 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import CTAButton from "@/components/CTAButton";
 import PageMeta from "@/components/PageMeta";
 import { siteConfig } from "@/data/siteConfig";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const focusAreas = [
-  "Industrial IoT system design and deployment",
-  "Communication protocol integration (RS485, Modbus, OPC UA, MQTT)",
-  "Cloud IoT platforms (Node-RED, ThingsBoard PE/CE)",
-  "Real-time dashboards, monitoring, and alert systems",
-  "Smart home design and integration",
-  "End-to-end project delivery from concept to maintenance",
-];
-
-const skills = [
-  "RS485 / Modbus RTU & TCP",
-  "OPC UA / BACnet",
-  "MQTT / HTTP / WebSocket / CoAP",
-  "Node-RED Development & Hosting",
-  "ThingsBoard (PE & CE)",
-  "InfluxDB / TimescaleDB",
-  "Grafana / Custom Dashboards",
-  "Raspberry Pi / Edge Gateways",
-  "Home Assistant / Tuya / Zigbee",
-  "Docker / Linux Server Admin",
-  "Python / JavaScript / TypeScript",
-  "AWS IoT / Azure IoT Hub",
-];
-
-const processSteps = [
-  { icon: Search, title: "Requirement Discovery", desc: "Understand your operations, goals, and constraints." },
-  { icon: PenTool, title: "Solution Design", desc: "Architecture, protocol selection, and data flow planning." },
-  { icon: Cpu, title: "Device Selection", desc: "Choose the right sensors, gateways, and controllers." },
-  { icon: Cable, title: "Connectivity & Integration", desc: "Connect devices using industrial protocols and cloud APIs." },
-  { icon: LayoutDashboard, title: "Dashboard & Automation", desc: "Build monitoring dashboards, alerts, and scheduling." },
-  { icon: Settings, title: "Operation & Maintenance", desc: "Ongoing support, updates, backups, and optimization." },
-];
-
-const whyWorkWithMe = [
-  {
-    icon: Wrench,
-    title: "Hands-On Engineering",
-    desc: "From wiring RS485 on the factory floor to deploying cloud dashboards — I handle every layer of the IoT stack.",
-  },
-  {
-    icon: BookOpen,
-    title: "Deep Protocol Knowledge",
-    desc: "Extensive experience with industrial communication protocols and their real-world quirks and limitations.",
-  },
-  {
-    icon: Award,
-    title: "End-to-End Delivery",
-    desc: "I don't just design — I deploy, commission, document, and maintain. Full lifecycle responsibility.",
-  },
-  {
-    icon: Target,
-    title: "Practical Solutions",
-    desc: "I focus on what works in production, not theoretical architectures. Every solution is built for real-world reliability.",
-  },
-  {
-    icon: Handshake,
-    title: "Direct Communication",
-    desc: "You work directly with me — no account managers, no layers. Clear, fast, and transparent collaboration.",
-  },
-  {
-    icon: Clock,
-    title: "Long-Term Support",
-    desc: "I provide ongoing maintenance, monitoring, and optimization after deployment. Your system evolves with your needs.",
-  },
-];
+const processIcons = [Search, PenTool, Cpu, Cable, LayoutDashboard, Settings];
+const whyIcons = [Wrench, BookOpen, Award, Target, Handshake, Clock];
 
 const About = () => {
+  const { t, loc } = useLanguage();
+
+  const focusAreas = [t.aboutFocus1, t.aboutFocus2, t.aboutFocus3, t.aboutFocus4, t.aboutFocus5, t.aboutFocus6];
+
+  const processSteps = [
+    { icon: processIcons[0], title: t.aboutStep1Title, desc: t.aboutStep1Desc },
+    { icon: processIcons[1], title: t.aboutStep2Title, desc: t.aboutStep2Desc },
+    { icon: processIcons[2], title: t.aboutStep3Title, desc: t.aboutStep3Desc },
+    { icon: processIcons[3], title: t.aboutStep4Title, desc: t.aboutStep4Desc },
+    { icon: processIcons[4], title: t.aboutStep5Title, desc: t.aboutStep5Desc },
+    { icon: processIcons[5], title: t.aboutStep6Title, desc: t.aboutStep6Desc },
+  ];
+
+  const whyWorkWithMe = [
+    { icon: whyIcons[0], title: t.aboutWhy1Title, desc: t.aboutWhy1Desc },
+    { icon: whyIcons[1], title: t.aboutWhy2Title, desc: t.aboutWhy2Desc },
+    { icon: whyIcons[2], title: t.aboutWhy3Title, desc: t.aboutWhy3Desc },
+    { icon: whyIcons[3], title: t.aboutWhy4Title, desc: t.aboutWhy4Desc },
+    { icon: whyIcons[4], title: t.aboutWhy5Title, desc: t.aboutWhy5Desc },
+    { icon: whyIcons[5], title: t.aboutWhy6Title, desc: t.aboutWhy6Desc },
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <PageMeta
-        title="About"
-        description="Luca Nguyen — IoT Specialist & Automation Engineer. End-to-end IoT consulting, deployment, and maintenance."
+        title={t.navAbout}
+        description="Luca Nguyen — IoT Specialist & Automation Engineer."
       />
       <Header />
       <main className="flex-1">
@@ -99,11 +59,11 @@ const About = () => {
         <section className="bg-hero py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl animate-fade-in">
-              <p className="text-accent font-display font-medium text-sm uppercase tracking-wider mb-3">About Me</p>
+              <p className="text-accent font-display font-medium text-sm uppercase tracking-wider mb-3">{t.aboutHeroLabel}</p>
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {siteConfig.ownerName}
               </h1>
-              <p className="mt-2 text-lg text-primary-foreground/70">{siteConfig.role}</p>
+              <p className="mt-2 text-lg text-primary-foreground/70">{loc(siteConfig.role)}</p>
             </div>
           </div>
         </section>
@@ -111,23 +71,13 @@ const About = () => {
         {/* Intro */}
         <SectionWrapper>
           <div className="max-w-3xl mx-auto">
-            <p className="text-lg text-foreground leading-relaxed">
-              I'm an IoT specialist and automation engineer based in Vietnam with a passion for
-              bridging the gap between industrial equipment and the digital world. I help businesses
-              and individuals gain real-time visibility into their operations through reliable,
-              well-engineered IoT systems.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-              My work spans from wiring RS485 sensors on factory floors to building cloud-based
-              dashboards that monitor thousands of data points. I specialize in industrial
-              communication protocols, cloud IoT platforms, and creating end-to-end solutions
-              that are practical, maintainable, and scalable.
-            </p>
+            <p className="text-lg text-foreground leading-relaxed">{t.aboutIntro1}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed mt-4">{t.aboutIntro2}</p>
           </div>
         </SectionWrapper>
 
         {/* What I Focus On */}
-        <SectionWrapper title="What I Focus On" className="bg-muted/50">
+        <SectionWrapper title={t.aboutFocusTitle} className="bg-muted/50">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
             {focusAreas.map((area) => (
               <div key={area} className="flex items-start gap-2 text-foreground">
@@ -139,9 +89,9 @@ const About = () => {
         </SectionWrapper>
 
         {/* Technical Expertise */}
-        <SectionWrapper title="Technical Expertise">
+        <SectionWrapper title={t.aboutExpertiseTitle}>
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {skills.map((skill) => (
+            {t.aboutSkills.map((skill) => (
               <div key={skill} className="flex items-center gap-2 text-sm text-foreground">
                 <CheckCircle2 size={16} className="text-accent shrink-0" />
                 <span>{skill}</span>
@@ -151,10 +101,10 @@ const About = () => {
         </SectionWrapper>
 
         {/* How I Work */}
-        <SectionWrapper title="How I Work" subtitle="End-to-end process from discovery to operation." className="bg-muted/50">
+        <SectionWrapper title={t.aboutProcessTitle} subtitle={t.aboutProcessSubtitle} className="bg-muted/50">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             {processSteps.map((step, i) => (
-              <div key={step.title} className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border shadow-card">
+              <div key={i} className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border shadow-card">
                 <div className="shrink-0 w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
                   <span className="text-xs font-display font-bold text-accent">{i + 1}</span>
                 </div>
@@ -168,7 +118,7 @@ const About = () => {
         </SectionWrapper>
 
         {/* Why Clients Work With Me */}
-        <SectionWrapper title="Why Clients Work With Me">
+        <SectionWrapper title={t.aboutWhyTitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whyWorkWithMe.map((item) => (
               <div key={item.title} className="bg-card rounded-lg border border-border p-6 shadow-card">
@@ -185,13 +135,11 @@ const About = () => {
         {/* CTA */}
         <SectionWrapper dark className="text-center">
           <div className="max-w-xl mx-auto">
-            <h2 className="text-3xl font-display font-bold">Let's Build Something Together</h2>
-            <p className="mt-4 text-primary-foreground/70">
-              Whether you need consulting, hosting, or a full IoT deployment — I'm here to help.
-            </p>
+            <h2 className="text-3xl font-display font-bold">{t.aboutCtaTitle}</h2>
+            <p className="mt-4 text-primary-foreground/70">{t.aboutCtaDesc}</p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
               <CTAButton className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" />
-              <CTAButton text="View Services" to="/services" variant="secondary" size="lg" />
+              <CTAButton text={t.viewServices} to="/services" variant="secondary" size="lg" />
             </div>
           </div>
         </SectionWrapper>

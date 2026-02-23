@@ -4,48 +4,42 @@ import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ServiceCard from "@/components/ServiceCard";
 import PageMeta from "@/components/PageMeta";
+import { useLanguage } from "@/i18n/LanguageContext";
 import { hostingServices, customServices } from "@/data/services";
 
 const Services = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen flex flex-col">
-      <PageMeta
-        title="Services Offer"
-        description="IoT hosting, consulting, and deployment services. Node-RED, ThingsBoard, industrial IoT, and smart home solutions."
-      />
+      <PageMeta title={t.servicesHeroTitle} description={t.servicesHeroDesc} />
       <Header />
       <main className="flex-1">
         {/* Hero */}
         <section className="bg-hero py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-2xl animate-fade-in">
-              <p className="text-accent font-display font-medium text-sm uppercase tracking-wider mb-3">What I Offer</p>
+              <p className="text-accent font-display font-medium text-sm uppercase tracking-wider mb-3">{t.servicesHeroLabel}</p>
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
-                Services Offer
+                {t.servicesHeroTitle}
               </h1>
-              <p className="mt-4 text-lg text-primary-foreground/70">
-                From hosting to end-to-end IoT design and implementation.
-              </p>
+              <p className="mt-4 text-lg text-primary-foreground/70">{t.servicesHeroDesc}</p>
             </div>
           </div>
         </section>
 
         {/* Hosting */}
-        <SectionWrapper title="Hosting">
+        <SectionWrapper title={t.homeHostingTitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {hostingServices.map((s) => (
               <ServiceCard key={s.id} service={s} />
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-6">
-            All hosting services include{" "}
-            <span className="text-foreground font-medium">transparent public pricing</span>{" "}
-            — view each service page for detailed plans and comparison.
-          </p>
+          <p className="text-center text-sm text-muted-foreground mt-6">{t.servicesHostingNote}</p>
         </SectionWrapper>
 
         {/* Custom Services */}
-        <SectionWrapper title="IoT Services" className="bg-muted/50">
+        <SectionWrapper title={t.homeServicesTitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {customServices.map((s) => (
               <ServiceCard key={s.id} service={s} />
@@ -53,9 +47,9 @@ const Services = () => {
           </div>
           <div className="text-center mt-6">
             <p className="text-sm text-muted-foreground">
-              Every IoT project is unique —{" "}
+              {t.servicesIotNote}{" "}
               <Link to="/contact" className="text-accent hover:underline font-medium">
-                contact me for a free consultation and custom quote
+                {t.contactForConsultation}
               </Link>.
             </p>
           </div>
