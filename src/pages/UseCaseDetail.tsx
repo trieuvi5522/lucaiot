@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import CTAButton from "@/components/CTAButton";
+import PageMeta from "@/components/PageMeta";
 import { getUseCaseBySlug } from "@/data/useCases";
 import { services } from "@/data/services";
 
@@ -33,6 +34,10 @@ const UseCaseDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <PageMeta
+        title={useCase.title}
+        description={useCase.shortDescription}
+      />
       <main className="flex-1">
         {/* Hero */}
         <section className="bg-hero py-16 md:py-24">

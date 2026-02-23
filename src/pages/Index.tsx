@@ -1,21 +1,8 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
-  Users,
-  Building2,
-  Wrench,
-  Search,
-  PenTool,
-  Cpu,
-  Cable,
-  LayoutDashboard,
-  Settings,
-  Server,
-  Home as HomeIcon,
-  Lightbulb,
-  Shield,
-  Zap,
-  BarChart3,
+  ArrowRight, Users, Building2, Wrench, Search, PenTool, Cpu,
+  Cable, LayoutDashboard, Settings, Server, Home as HomeIcon,
+  Lightbulb, Shield, Zap, BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
@@ -25,6 +12,7 @@ import ServiceCard from "@/components/ServiceCard";
 import UseCaseCard from "@/components/UseCaseCard";
 import CTAButton from "@/components/CTAButton";
 import ContactShortcuts from "@/components/ContactShortcuts";
+import PageMeta from "@/components/PageMeta";
 import { siteConfig } from "@/data/siteConfig";
 import { hostingServices, customServices } from "@/data/services";
 import { useCases } from "@/data/useCases";
@@ -69,6 +57,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta
+        title="Luca IoT — End-to-End IoT Solutions"
+        description="IoT consulting, design, deployment, and maintenance by Luca Nguyen. Industrial protocols, cloud dashboards, and smart automation."
+      />
       <Header />
       <main className="flex-1">
         {/* Hero */}
@@ -227,49 +219,8 @@ const Index = () => {
                 </Link>
               </Button>
             </div>
-            <div className="mt-8 flex justify-center">
-              <div className="inline-flex items-center gap-6">
-                <a
-                  href={`https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-foreground/50 hover:text-accent transition-colors"
-                  aria-label="WhatsApp"
-                >
-                  <Zap size={20} />
-                </a>
-                <a
-                  href={`mailto:${siteConfig.contactEmail}`}
-                  className="text-primary-foreground/50 hover:text-accent transition-colors"
-                  aria-label="Email"
-                >
-                  <ArrowRight size={20} />
-                </a>
-              </div>
-            </div>
-            <div className="mt-4">
-              <div className="flex flex-wrap justify-center gap-4 text-sm text-primary-foreground/50">
-                <a
-                  href={`https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-accent transition-colors"
-                >
-                  WhatsApp: {siteConfig.whatsappPhone}
-                </a>
-                <span className="hidden sm:inline">·</span>
-                <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-accent transition-colors">
-                  {siteConfig.contactEmail}
-                </a>
-                <span className="hidden sm:inline">·</span>
-                <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  Facebook
-                </a>
-                <span className="hidden sm:inline">·</span>
-                <a href={siteConfig.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                  LinkedIn
-                </a>
-              </div>
+            <div className="mt-6">
+              <ContactShortcuts className="flex flex-wrap justify-center gap-4 text-primary-foreground/50 [&_a]:text-primary-foreground/50 [&_a:hover]:text-accent" />
             </div>
           </div>
         </SectionWrapper>

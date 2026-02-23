@@ -7,6 +7,7 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import PricingTable from "@/components/PricingTable";
 import PlanRequestModal from "@/components/PlanRequestModal";
 import CTAButton from "@/components/CTAButton";
+import PageMeta from "@/components/PageMeta";
 import { getServiceBySlug, services } from "@/data/services";
 import { useCases } from "@/data/useCases";
 import {
@@ -53,6 +54,10 @@ const ServiceDetail = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <PageMeta
+        title={service.title}
+        description={service.shortDescription}
+      />
       <main className="flex-1">
         {/* Hero */}
         <section className="bg-hero py-16 md:py-24">
