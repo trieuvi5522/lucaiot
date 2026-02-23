@@ -13,6 +13,7 @@ import UseCaseDetail from "./pages/UseCaseDetail";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import LocaleRedirect from "./components/LocaleRedirect";
+import ScrollManager from "./components/ScrollManager";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollManager />
         <Routes>
           {/* Root → redirect to stored or default locale */}
           <Route path="/" element={<LocaleRedirect />} />

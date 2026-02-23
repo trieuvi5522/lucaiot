@@ -141,9 +141,11 @@
   animation: fade-in-delay 0.9s ease-out forwards;
 }
 
-/* Hide "Edited with Lovable" badge */
-[id="lovable-badge"],
-a[href*="lovable.dev"][style],
-div[style*="z-index: 99999"] {
+/*
+ * "Edited with Lovable" badge — hidden via CSS.
+ * If this stops working after platform updates, disable
+ * the badge via Lovable publish/project settings instead.
+ */
+[id="lovable-badge"] {
   display: none !important;
 }

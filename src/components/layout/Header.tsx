@@ -11,7 +11,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
  * Order: Home, About, Services, Use Cases, Contact
  */
 const NAV_SLOT_WIDTHS = [80, 90, 90, 110, 90];
-const CTA_MIN_WIDTH = 160;
+const CTA_WIDTH = 170;
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -35,23 +35,25 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      {/* Desktop: 3-column grid keeps logo / nav / actions pinned */}
-      <div className="container mx-auto hidden md:grid h-16 px-4"
-        style={{ gridTemplateColumns: "auto 1fr auto" }}>
-        {/* Left: Logo */}
-        <Link to={localePath("/")} className="flex items-center gap-1 font-display font-bold text-xl text-foreground whitespace-nowrap">
+      {/* Desktop: relative container with absolute-centered nav */}
+      <div className="container mx-auto hidden md:block relative h-16 px-4">
+        {/* Left: Logo — normal flow */}
+        <Link
+          to={localePath("/")}
+          className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-1 font-display font-bold text-xl text-foreground whitespace-nowrap"
+        >
           <span className="text-accent">&lt;</span>
           {siteConfig.brandName}
           <span className="text-accent">/&gt;</span>
         </Link>
 
-        {/* Center: Nav with fixed-width slots */}
-        <nav className="flex items-center justify-center gap-1">
+        {/* Center: Nav — absolutely centered */}
+        <nav className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1">
           {navLinks.map((link, i) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors hover:text-accent text-center whitespace-nowrap ${
+              className={`inline-flex items-center justify-center text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
                 isActive(link.href) ? "text-accent" : "text-muted-foreground"
               }`}
               style={{ width: NAV_SLOT_WIDTHS[i], minWidth: NAV_SLOT_WIDTHS[i] }}
@@ -61,10 +63,10 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Right: Language switch + CTA */}
-        <div className="flex items-center gap-3 justify-end">
+        {/* Right: Language switch + CTA — normal flow, right-aligned */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-3">
           <LanguageSwitcher />
-          <Button asChild size="sm" className="whitespace-nowrap" style={{ minWidth: CTA_MIN_WIDTH }}>
+          <Button asChild size="sm" className="whitespace-nowrap justify-center" style={{ width: CTA_WIDTH }}>
             <Link to={localePath("/contact")}>{t.primaryCTA}</Link>
           </Button>
         </div>
