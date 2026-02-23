@@ -13,13 +13,13 @@ import { useCases } from "@/data/useCases";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const capabilities = [
-  { icon: Server, title: "Industrial Protocols", desc: "RS485, Modbus, OPC UA, BACnet, TCP/IP" },
-  { icon: Cpu, title: "Edge Computing", desc: "Node-RED, Raspberry Pi, industrial gateways" },
-  { icon: Home, title: "Cloud Integration", desc: "ThingsBoard, MQTT, REST APIs, InfluxDB" },
-  { icon: Shield, title: "Security", desc: "SSL/TLS, access control, data encryption" },
-  { icon: Zap, title: "Real-Time Monitoring", desc: "Dashboards, alerts, scheduling, data storage" },
-  { icon: Lightbulb, title: "Smart Automation", desc: "Custom logic, scene control, energy optimization" },
-];
+{ icon: Server, title: "Industrial Protocols", desc: "RS485, Modbus, OPC UA, BACnet, TCP/IP" },
+{ icon: Cpu, title: "Edge Computing", desc: "Node-RED, Raspberry Pi, industrial gateways" },
+{ icon: Home, title: "Cloud Integration", desc: "ThingsBoard, MQTT, REST APIs, InfluxDB" },
+{ icon: Shield, title: "Security", desc: "SSL/TLS, access control, data encryption" },
+{ icon: Zap, title: "Real-Time Monitoring", desc: "Dashboards, alerts, scheduling, data storage" },
+{ icon: Lightbulb, title: "Smart Automation", desc: "Custom logic, scene control, energy optimization" }];
+
 
 const Index = () => {
   const featuredServices = services.slice(0, 4);
@@ -37,9 +37,9 @@ const Index = () => {
           </div>
           <div className="relative container mx-auto px-4 py-24 md:py-36">
             <div className="max-w-2xl animate-fade-in">
-              <p className="text-accent font-display font-medium text-sm uppercase tracking-wider mb-4">
-                {siteConfig.role}
-              </p>
+              
+
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
                 End-to-End{" "}
                 <span className="text-gradient">IoT Solutions</span>{" "}
@@ -66,11 +66,11 @@ const Index = () => {
         {/* Capabilities */}
         <SectionWrapper
           title="Technical Capabilities"
-          subtitle="Deep expertise in industrial communication protocols, cloud platforms, and IoT infrastructure."
-        >
+          subtitle="Deep expertise in industrial communication protocols, cloud platforms, and IoT infrastructure.">
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capabilities.map((cap) => (
-              <div key={cap.title} className="flex items-start gap-4 p-5 rounded-lg bg-card border border-border shadow-card">
+            {capabilities.map((cap) =>
+            <div key={cap.title} className="flex items-start gap-4 p-5 rounded-lg bg-card border border-border shadow-card">
                 <div className="shrink-0 w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center">
                   <cap.icon size={20} className="text-accent" />
                 </div>
@@ -79,7 +79,7 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground mt-1">{cap.desc}</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </SectionWrapper>
 
@@ -87,12 +87,12 @@ const Index = () => {
         <SectionWrapper
           title="Services"
           subtitle="Managed hosting and custom IoT solutions tailored to your needs."
-          className="bg-muted/50"
-        >
+          className="bg-muted/50">
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
+            {featuredServices.map((service) =>
+            <ServiceCard key={service.id} service={service} />
+            )}
           </div>
           <div className="text-center mt-8">
             <CTAButton text="View All Services" to="/services" variant="outline" showArrow />
@@ -102,12 +102,12 @@ const Index = () => {
         {/* Use Cases */}
         <SectionWrapper
           title="Use Cases"
-          subtitle="Real-world IoT implementations delivering measurable results."
-        >
+          subtitle="Real-world IoT implementations delivering measurable results.">
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredUseCases.map((uc) => (
-              <UseCaseCard key={uc.id} useCase={uc} />
-            ))}
+            {featuredUseCases.map((uc) =>
+            <UseCaseCard key={uc.id} useCase={uc} />
+            )}
           </div>
           <div className="text-center mt-8">
             <CTAButton text="View All Use Cases" to="/use-cases" variant="outline" showArrow />
@@ -134,8 +134,8 @@ const Index = () => {
         </SectionWrapper>
       </main>
       <Footer />
-    </div>
-  );
+    </div>);
+
 };
 
 export default Index;
