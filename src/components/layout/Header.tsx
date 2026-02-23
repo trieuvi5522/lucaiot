@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
+/**
+ * Fixed-width nav slots (px) sized to the longest label across EN/VI.
+ * Order: Home, About, Services, Use Cases, Contact
+ */
+const NAV_SLOT_WIDTHS = [80, 90, 90, 110, 90];
+const CTA_MIN_WIDTH = 160;
+
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -19,7 +26,6 @@ const Header = () => {
     { href: localePath("/contact"), label: t.navContact },
   ];
 
-  // Check active: strip locale prefix for comparison
   const pathWithoutLocale = location.pathname.replace(/^\/(en|vi)/, "") || "/";
 
   const isActive = (href: string) => {
@@ -29,36 +35,50 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to={localePath("/")} className="flex items-center gap-1 font-display font-bold text-xl text-foreground">
+      {/* Desktop: 3-column grid keeps logo / nav / actions pinned */}
+      <div className="container mx-auto hidden md:grid h-16 px-4"
+        style={{ gridTemplateColumns: "auto 1fr auto" }}>
+        {/* Left: Logo */}
+        <Link to={localePath("/")} className="flex items-center gap-1 font-display font-bold text-xl text-foreground whitespace-nowrap">
           <span className="text-accent">&lt;</span>
           {siteConfig.brandName}
           <span className="text-accent">/&gt;</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+        {/* Center: Nav with fixed-width slots */}
+        <nav className="flex items-center justify-center gap-1">
+          {navLinks.map((link, i) => (
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-medium transition-colors hover:text-accent ${
+              className={`text-sm font-medium transition-colors hover:text-accent text-center whitespace-nowrap ${
                 isActive(link.href) ? "text-accent" : "text-muted-foreground"
               }`}
+              style={{ width: NAV_SLOT_WIDTHS[i], minWidth: NAV_SLOT_WIDTHS[i] }}
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        {/* Right: Language switch + CTA */}
+        <div className="flex items-center gap-3 justify-end">
           <LanguageSwitcher />
-          <Button asChild size="sm">
+          <Button asChild size="sm" className="whitespace-nowrap" style={{ minWidth: CTA_MIN_WIDTH }}>
             <Link to={localePath("/contact")}>{t.primaryCTA}</Link>
           </Button>
         </div>
+      </div>
 
+      {/* Mobile: simple flex */}
+      <div className="container mx-auto flex md:hidden items-center justify-between h-16 px-4">
+        <Link to={localePath("/")} className="flex items-center gap-1 font-display font-bold text-xl text-foreground whitespace-nowrap">
+          <span className="text-accent">&lt;</span>
+          {siteConfig.brandName}
+          <span className="text-accent">/&gt;</span>
+        </Link>
         <button
-          className="md:hidden p-2 text-foreground"
+          className="p-2 text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -72,7 +92,7 @@ const Header = () => {
             <Link
               key={link.href}
               to={link.href}
-              className={`block py-2.5 text-sm font-medium transition-colors hover:text-accent ${
+              className={`block py-2.5 text-sm font-medium transition-colors hover:text-accent whitespace-nowrap ${
                 isActive(link.href) ? "text-accent" : "text-muted-foreground"
               }`}
               onClick={() => setMobileOpen(false)}
@@ -84,7 +104,7 @@ const Header = () => {
             <span className="text-xs text-muted-foreground">Language</span>
             <LanguageSwitcher />
           </div>
-          <Button asChild className="w-full mt-2" size="sm">
+          <Button asChild className="w-full mt-2 whitespace-nowrap" size="sm">
             <Link to={localePath("/contact")} onClick={() => setMobileOpen(false)}>
               {t.primaryCTA}
             </Link>
