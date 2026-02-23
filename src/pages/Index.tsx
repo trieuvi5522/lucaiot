@@ -9,11 +9,7 @@ import {
   Cable,
   LayoutDashboard,
   Settings,
-  Server,
   Home as HomeIcon,
-  Lightbulb,
-  Shield,
-  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
@@ -30,7 +26,6 @@ import { useCases } from "@/data/useCases";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const processIcons = [Search, PenTool, Cpu, Cable, LayoutDashboard, Settings];
-const expertiseIcons = [Server, Lightbulb, BarChart3, Shield];
 const whoIcons = [HomeIcon, Building2, Wrench];
 
 const Index = () => {
@@ -50,13 +45,6 @@ const Index = () => {
     { icon: processIcons[3], title: t.processStep4Title, desc: t.processStep4Desc },
     { icon: processIcons[4], title: t.processStep5Title, desc: t.processStep5Desc },
     { icon: processIcons[5], title: t.processStep6Title, desc: t.processStep6Desc },
-  ];
-
-  const expertise = [
-    { icon: expertiseIcons[0], title: t.expertiseProtocolsTitle, desc: t.expertiseProtocolsDesc },
-    { icon: expertiseIcons[1], title: t.expertiseCloudTitle, desc: t.expertiseCloudDesc },
-    { icon: expertiseIcons[2], title: t.expertiseDashboardTitle, desc: t.expertiseDashboardDesc },
-    { icon: expertiseIcons[3], title: t.expertiseSecurityTitle, desc: t.expertiseSecurityDesc },
   ];
 
   return (
@@ -120,7 +108,7 @@ const Index = () => {
           <p className="text-center text-sm text-muted-foreground mt-6">
             {t.homeServicesNote}{" "}
             <Link to={localePath("/contact")} className="text-accent hover:underline">
-              {t.contactForConsultation}
+              {t.bookFreeConsultation}
             </Link>
           </p>
         </SectionWrapper>
@@ -157,21 +145,6 @@ const Index = () => {
           </div>
         </SectionWrapper>
 
-        {/* Expertise */}
-        <SectionWrapper title={t.homeExpertiseTitle} subtitle={t.homeExpertiseSubtitle}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {expertise.map((item) => (
-              <div key={item.title} className="text-center">
-                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mx-auto mb-3">
-                  <item.icon size={22} className="text-accent" />
-                </div>
-                <h3 className="font-display font-semibold text-card-foreground text-sm mb-1">{item.title}</h3>
-                <p className="text-xs text-muted-foreground">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </SectionWrapper>
-
         {/* Use Cases */}
         <SectionWrapper title={t.homeUseCasesTitle} subtitle={t.homeUseCasesSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -192,7 +165,7 @@ const Index = () => {
             <div className="mt-8">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                 <Link to={localePath("/contact")}>
-                  {t.primaryCTA} <ArrowRight size={18} className="ml-2" />
+                  {t.bookConsultation} <ArrowRight size={18} className="ml-2" />
                 </Link>
               </Button>
             </div>
