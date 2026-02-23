@@ -8,13 +8,13 @@ export const services: Service[] = [
     title: ls("Node-RED Hosting", "Hosting Node-RED"),
     group: "hosting",
     shortDescription: ls(
-      "Managed Node-RED instances for IoT flow automation. Deploy, scale, and monitor your flows without worrying about infrastructure.",
-      "Node-RED được quản lý cho tự động hoá luồng IoT. Triển khai, mở rộng và giám sát luồng của bạn mà không lo hạ tầng."
+      "Managed Node-RED hosting for IoT automation workflows. Deploy and run your flows reliably without spending time on server setup and maintenance.",
+      "Dịch vụ hosting Node-RED dành cho các luồng tự động hoá IoT. Bạn có thể triển khai và vận hành flow ổn định mà không mất thời gian lo cấu hình server hay bảo trì hạ tầng."
     ),
     bulletPoints: [
       ls("Fully managed cloud instances with 99.9% uptime", "Instance cloud được quản lý hoàn toàn với uptime 99.9%"),
-      ls("Pre-installed industrial nodes (Modbus, OPC UA, MQTT)", "Cài sẵn node công nghiệp (Modbus, OPC UA, MQTT)"),
-      ls("Automated backups and one-click restore", "Sao lưu tự động và khôi phục một cú nhấp"),
+      ls("Access your Node-RED with custom domain or my domain", "Truy cập Node-RED qua domain riêng của bạn hoặc domain do tôi cung cấp"),
+      ls("Powered by super-fast CPUs and NVMe/SSD disks", "Vận hành trên hạ tầng CPU hiệu năng cao và ổ cứng NVMe/SSD tốc độ cao"),
     ],
     heroText: ls(
       "Focus on building automation flows, not managing servers. Our managed Node-RED hosting gives you production-ready instances with industrial protocol support out of the box.",
@@ -71,13 +71,13 @@ export const services: Service[] = [
     title: ls("ThingsBoard Hosting (PE/CE)", "Hosting ThingsBoard (PE/CE)"),
     group: "hosting",
     shortDescription: ls(
-      "Managed ThingsBoard platform for device management, dashboards, and data visualization. Professional and Community editions available.",
-      "Nền tảng ThingsBoard được quản lý cho quản lý thiết bị, dashboard và trực quan hoá dữ liệu. Có phiên bản Professional và Community."
+      "Managed ThingsBoard cloud hosting for device management, telemetry, dashboards, and alerts. Available for both Professional Edition (PE) and Community Edition (CE).",
+      "Dịch vụ ThingsBoard cloud được quản lý cho quản lý thiết bị, telemetry, dashboard và cảnh báo. Hỗ trợ cả phiên bản Professional (PE) và Community (CE)."
     ),
     bulletPoints: [
-      ls("Production-ready ThingsBoard PE or CE instances", "Instance ThingsBoard PE hoặc CE sẵn sàng sản xuất"),
-      ls("Custom dashboard design and configuration support", "Hỗ trợ thiết kế và cấu hình dashboard tuỳ chỉnh"),
-      ls("Scalable from 100 to 100,000+ devices", "Mở rộng từ 100 đến hơn 100.000 thiết bị"),
+      ls("Fully managed cloud instances with 99.9% uptime", "Instance cloud được quản lý hoàn toàn với uptime 99.9%"),
+      ls("Production-ready ThingsBoard PE or CE instances", "Triển khai ThingsBoard PE hoặc CE sẵn sàng cho môi trường vận hành thực tế"),
+      ls("Scalable from 100 to 100,000+ devices", "Khả năng mở rộng từ 100 đến hơn 100.000 thiết bị"),
     ],
     heroText: ls(
       "Enterprise-grade IoT platform without the infrastructure headache. Get ThingsBoard Professional or Community Edition fully managed, so you can focus on building dashboards and connecting devices.",
@@ -134,13 +134,13 @@ export const services: Service[] = [
     title: ls("Industrial IoT Solutions", "Giải pháp IoT Công nghiệp"),
     group: "service",
     shortDescription: ls(
-      "End-to-end design and implementation of industrial IoT systems — from sensor to cloud. Modbus, OPC UA, RS485, and more.",
-      "Thiết kế và triển khai hệ thống IoT công nghiệp toàn diện — từ cảm biến đến cloud. Modbus, OPC UA, RS485 và nhiều hơn."
+      "End-to-end design and implementation of industrial IoT systems — from sensor to cloud.",
+      "Thiết kế và triển khai hệ thống IoT công nghiệp trọn gói — từ thiết bị hiện trường/cảm biến đến nền tảng cloud."
     ),
     bulletPoints: [
-      ls("Protocol expertise: RS485, Modbus, OPC UA, MQTT, TCP/IP", "Chuyên môn giao thức: RS485, Modbus, OPC UA, MQTT, TCP/IP"),
-      ls("Custom dashboard design for monitoring & alerting", "Thiết kế dashboard tuỳ chỉnh cho giám sát & cảnh báo"),
-      ls("Full lifecycle: design → deploy → maintain", "Vòng đời đầy đủ: thiết kế → triển khai → bảo trì"),
+      ls("Protocol: RS485, Modbus, OPC UA, MQTT, TCP/IP", "Hỗ trợ tích hợp nhiều giao thức: RS485, Modbus, OPC UA, MQTT, TCP/IP"),
+      ls("Custom dashboard design for monitoring & alerting", "Thiết kế dashboard theo nhu cầu để giám sát và cảnh báo"),
+      ls("Full lifecycle: design → deploy → maintain", "Đồng hành trọn vòng đời dự án: thiết kế → triển khai → vận hành/bảo trì"),
     ],
     heroText: ls(
       "Bridge the gap between your industrial equipment and the cloud. We design and deploy IoT systems that give you real-time visibility into your operations with reliable, industrial-grade protocols.",
@@ -192,16 +192,16 @@ export const services: Service[] = [
   {
     id: "smart-home-iot",
     slug: "smart-home-iot-solutions",
-    title: ls("Smart Home IoT Solutions", "Giải pháp IoT Nhà thông minh"),
+    title: ls("Smart Home Solutions", "Giải pháp Nhà thông minh"),
     group: "service",
     shortDescription: ls(
-      "Design and integrate smart home systems for comfort, energy efficiency, and security. Tailored solutions for modern living.",
-      "Thiết kế và tích hợp hệ thống nhà thông minh cho sự tiện nghi, tiết kiệm năng lượng và an ninh. Giải pháp tuỳ chỉnh cho cuộc sống hiện đại."
+      "Design and integrate smart home systems tailored to your lifestyle, with a focus on convenience, energy efficiency, and easy day-to-day control.",
+      "Thiết kế và tích hợp hệ thống nhà thông minh phù hợp với nhu cầu sử dụng thực tế, ưu tiên sự tiện nghi, tiết kiệm năng lượng và dễ vận hành hằng ngày."
     ),
     bulletPoints: [
-      ls("Custom smart home design tailored to your lifestyle", "Thiết kế nhà thông minh tuỳ chỉnh theo phong cách sống"),
-      ls("Integration with popular platforms (Home Assistant, Tuya, etc.)", "Tích hợp nền tảng phổ biến (Home Assistant, Tuya, v.v.)"),
-      ls("Energy monitoring and automated scheduling", "Giám sát năng lượng và lập lịch tự động"),
+      ls("Custom smart home design tailored to your lifestyle", "Thiết kế giải pháp nhà thông minh theo nhu cầu và thói quen sử dụng của bạn"),
+      ls("Integration with popular platforms (Home Assistant, SmartThings, etc.)", "Tích hợp với các nền tảng phổ biến (Home Assistant, SmartThings, v.v.)"),
+      ls("Energy monitoring and automated scheduling", "Giám sát năng lượng và tự động hoá theo lịch"),
     ],
     heroText: ls(
       "Transform your home into an intelligent living space. From lighting and climate control to security and energy management — we design and integrate smart home systems that work seamlessly together.",
@@ -252,16 +252,16 @@ export const services: Service[] = [
   {
     id: "iot-consulting",
     slug: "iot-consulting",
-    title: ls("End-to-End IoT Consulting", "Tư vấn IoT toàn diện"),
+    title: ls("End-to-End IoT Consulting", "Tư vấn giải pháp IoT toàn diện"),
     group: "service",
     shortDescription: ls(
-      "Strategic IoT consulting from concept to deployment. Architecture design, technology selection, and project management for your IoT initiatives.",
-      "Tư vấn IoT chiến lược từ ý tưởng đến triển khai. Thiết kế kiến trúc, lựa chọn công nghệ và quản lý dự án cho các sáng kiến IoT."
+      "Strategic IoT consulting from concept to deployment. Architecture design, technology selection, and project planning for your IoT initiatives.",
+      "Tư vấn giải pháp IoT từ giai đoạn ý tưởng đến triển khai thực tế, bao gồm thiết kế kiến trúc, lựa chọn công nghệ và lập kế hoạch triển khai phù hợp."
     ),
     bulletPoints: [
-      ls("Technology-agnostic architecture consulting", "Tư vấn kiến trúc không phụ thuộc công nghệ"),
-      ls("Vendor evaluation and hardware selection", "Đánh giá nhà cung cấp và lựa chọn phần cứng"),
-      ls("Project planning, budgeting, and risk assessment", "Lập kế hoạch, ngân sách và đánh giá rủi ro"),
+      ls("System architecture consulting aligned with your goals and budget", "Tư vấn kiến trúc hệ thống phù hợp với mục tiêu và ngân sách"),
+      ls("Support for vendor evaluation and hardware selection", "Hỗ trợ đánh giá thiết bị/nhà cung cấp và lựa chọn phần cứng phù hợp"),
+      ls("Deployment planning, cost estimation, and early risk identification", "Hỗ trợ lập kế hoạch triển khai, ước tính chi phí và nhận diện rủi ro sớm"),
     ],
     heroText: ls(
       "Navigate the complexity of IoT with expert guidance. From feasibility studies to full deployment, we provide the strategic consulting you need to make your IoT projects succeed.",
