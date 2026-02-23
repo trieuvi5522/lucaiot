@@ -4,13 +4,13 @@ import ContactLinks from "@/components/ContactLinks";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, localePath } = useLanguage();
 
   const quickLinks = [
-    { href: "/services", label: t.navServices },
-    { href: "/use-cases", label: t.navUseCases },
-    { href: "/about", label: t.navAbout },
-    { href: "/contact", label: t.navContact },
+    { href: localePath("/services"), label: t.navServices },
+    { href: localePath("/use-cases"), label: t.navUseCases },
+    { href: localePath("/about"), label: t.navAbout },
+    { href: localePath("/contact"), label: t.navContact },
   ];
 
   return (
@@ -19,7 +19,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <Link to="/" className="font-display font-bold text-xl">
+            <Link to={localePath("/")} className="font-display font-bold text-xl">
               <span className="text-accent">&lt;</span>
               {siteConfig.brandName}
               <span className="text-accent">/&gt;</span>

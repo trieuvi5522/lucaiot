@@ -21,7 +21,7 @@ import {
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const service = getServiceBySlug(slug || "");
-  const { t, loc } = useLanguage();
+  const { t, loc, localePath } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
 
@@ -32,7 +32,7 @@ const ServiceDetail = () => {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-display font-bold">{t.sdNotFound}</h1>
-            <Link to="/services" className="text-accent hover:underline mt-4 inline-block">
+            <Link to={localePath("/services")} className="text-accent hover:underline mt-4 inline-block">
               ← {t.backToServices}
             </Link>
           </div>
@@ -58,10 +58,9 @@ const ServiceDetail = () => {
       <Header />
       <PageMeta title={loc(service.title)} description={loc(service.shortDescription)} />
       <main className="flex-1">
-        {/* Hero */}
         <section className="bg-hero py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <Link to="/services" className="inline-flex items-center gap-1 text-sm text-primary-foreground/60 hover:text-accent mb-6 transition-colors">
+            <Link to={localePath("/services")} className="inline-flex items-center gap-1 text-sm text-primary-foreground/60 hover:text-accent mb-6 transition-colors">
               <ArrowLeft size={14} /> {t.backToServices}
             </Link>
             <div className="max-w-3xl animate-fade-in">
@@ -85,7 +84,6 @@ const ServiceDetail = () => {
           </div>
         </section>
 
-        {/* Target Users */}
         <SectionWrapper title={t.sdWhoFor}>
           <div className="max-w-3xl mx-auto space-y-3">
             {service.targetUsers.map((user, i) => (
@@ -97,7 +95,6 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Pain Points */}
         <SectionWrapper title={t.sdProblems} className="bg-muted/50">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             {service.painPoints.map((point, i) => (
@@ -109,7 +106,6 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Included Scope */}
         <SectionWrapper title={t.sdIncluded}>
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
             {service.includedScope.map((item, i) => (
@@ -121,7 +117,6 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Technical Capabilities */}
         <SectionWrapper title={t.sdCapabilities} className="bg-muted/50">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
             {service.technicalCapabilities.map((cap, i) => (
@@ -133,7 +128,6 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Process Steps */}
         <SectionWrapper title={t.sdProcess}>
           <div className="max-w-3xl mx-auto">
             <div className="space-y-4">
@@ -152,7 +146,6 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Pricing */}
         {service.pricingType === "public_packages" && service.pricingPlans ? (
           <SectionWrapper title={t.sdPricingPlans} className="bg-muted/50" id="pricing">
             <div className="max-w-4xl mx-auto">
@@ -169,19 +162,14 @@ const ServiceDetail = () => {
           </SectionWrapper>
         )}
 
-        {/* FAQ */}
         {service.faq.length > 0 && (
           <SectionWrapper title={t.sdFaq}>
             <div className="max-w-2xl mx-auto">
               <Accordion type="single" collapsible>
                 {service.faq.map((item, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
-                    <AccordionTrigger className="text-left font-display">
-                      {loc(item.question)}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {loc(item.answer)}
-                    </AccordionContent>
+                    <AccordionTrigger className="text-left font-display">{loc(item.question)}</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">{loc(item.answer)}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
@@ -189,7 +177,6 @@ const ServiceDetail = () => {
           </SectionWrapper>
         )}
 
-        {/* Related */}
         {(relatedServices.length > 0 || relatedUseCases.length > 0) && (
           <SectionWrapper title={t.sdRelated} className="bg-muted/50">
             <div className="max-w-3xl mx-auto">
@@ -198,11 +185,7 @@ const ServiceDetail = () => {
                   <h3 className="font-display font-semibold mb-3 text-foreground">{t.sdRelatedServices}</h3>
                   <div className="flex flex-wrap gap-2">
                     {relatedServices.map((s) => (
-                      <Link
-                        key={s.id}
-                        to={`/services/${s.slug}`}
-                        className="px-3 py-1.5 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground"
-                      >
+                      <Link key={s.id} to={localePath(`/services/${s.slug}`)} className="px-3 py-1.5 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground">
                         {loc(s.title)}
                       </Link>
                     ))}
@@ -214,11 +197,7 @@ const ServiceDetail = () => {
                   <h3 className="font-display font-semibold mb-3 text-foreground">{t.sdRelatedUseCases}</h3>
                   <div className="flex flex-wrap gap-2">
                     {relatedUseCases.map((u) => (
-                      <Link
-                        key={u.id}
-                        to={`/use-cases/${u.slug}`}
-                        className="px-3 py-1.5 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground"
-                      >
+                      <Link key={u.id} to={localePath(`/use-cases/${u.slug}`)} className="px-3 py-1.5 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground">
                         {loc(u.title)}
                       </Link>
                     ))}
@@ -229,7 +208,6 @@ const ServiceDetail = () => {
           </SectionWrapper>
         )}
 
-        {/* CTA */}
         <SectionWrapper dark className="text-center">
           <div className="max-w-xl mx-auto">
             <h2 className="text-3xl font-display font-bold">{t.sdCtaTitle}</h2>

@@ -8,7 +8,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
-  const { t, loc } = useLanguage();
+  const { t, loc, localePath } = useLanguage();
 
   return (
     <div className="group bg-card rounded-lg border border-border p-6 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col">
@@ -32,7 +32,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </ul>
       </div>
       <Link
-        to={`/services/${service.slug}`}
+        to={localePath(`/services/${service.slug}`)}
         className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline group-hover:gap-2.5 transition-all"
       >
         {t.learnMore} <ArrowRight size={14} />

@@ -9,20 +9,28 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const { t } = useLanguage();
+  const { t, localePath } = useLanguage();
 
   const navLinks = [
-    { href: "/", label: t.navHome },
-    { href: "/about", label: t.navAbout },
-    { href: "/services", label: t.navServices },
-    { href: "/use-cases", label: t.navUseCases },
-    { href: "/contact", label: t.navContact },
+    { href: localePath("/"), label: t.navHome },
+    { href: localePath("/about"), label: t.navAbout },
+    { href: localePath("/services"), label: t.navServices },
+    { href: localePath("/use-cases"), label: t.navUseCases },
+    { href: localePath("/contact"), label: t.navContact },
   ];
+
+  // Check active: strip locale prefix for comparison
+  const pathWithoutLocale = location.pathname.replace(/^\/(en|vi)/, "") || "/";
+
+  const isActive = (href: string) => {
+    const hrefClean = href.replace(/^\/(en|vi)/, "") || "/";
+    return pathWithoutLocale === hrefClean;
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to="/" className="flex items-center gap-1 font-display font-bold text-xl text-foreground">
+        <Link to={localePath("/")} className="flex items-center gap-1 font-display font-bold text-xl text-foreground">
           <span className="text-accent">&lt;</span>
           {siteConfig.brandName}
           <span className="text-accent">/&gt;</span>
@@ -34,7 +42,7 @@ const Header = () => {
               key={link.href}
               to={link.href}
               className={`text-sm font-medium transition-colors hover:text-accent ${
-                location.pathname === link.href ? "text-accent" : "text-muted-foreground"
+                isActive(link.href) ? "text-accent" : "text-muted-foreground"
               }`}
             >
               {link.label}
@@ -45,7 +53,7 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-3">
           <LanguageSwitcher />
           <Button asChild size="sm">
-            <Link to="/contact">{t.primaryCTA}</Link>
+            <Link to={localePath("/contact")}>{t.primaryCTA}</Link>
           </Button>
         </div>
 
@@ -65,7 +73,7 @@ const Header = () => {
               key={link.href}
               to={link.href}
               className={`block py-2.5 text-sm font-medium transition-colors hover:text-accent ${
-                location.pathname === link.href ? "text-accent" : "text-muted-foreground"
+                isActive(link.href) ? "text-accent" : "text-muted-foreground"
               }`}
               onClick={() => setMobileOpen(false)}
             >
@@ -77,7 +85,7 @@ const Header = () => {
             <LanguageSwitcher />
           </div>
           <Button asChild className="w-full mt-2" size="sm">
-            <Link to="/contact" onClick={() => setMobileOpen(false)}>
+            <Link to={localePath("/contact")} onClick={() => setMobileOpen(false)}>
               {t.primaryCTA}
             </Link>
           </Button>

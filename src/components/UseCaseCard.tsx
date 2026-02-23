@@ -8,7 +8,7 @@ interface UseCaseCardProps {
 }
 
 const UseCaseCard = ({ useCase }: UseCaseCardProps) => {
-  const { t, loc } = useLanguage();
+  const { t, loc, localePath } = useLanguage();
 
   return (
     <div className="group bg-card rounded-lg border border-border overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300">
@@ -24,7 +24,7 @@ const UseCaseCard = ({ useCase }: UseCaseCardProps) => {
           {loc(useCase.shortDescription)}
         </p>
         <Link
-          to={`/use-cases/${useCase.slug}`}
+          to={localePath(`/use-cases/${useCase.slug}`)}
           className="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:underline group-hover:gap-2.5 transition-all"
         >
           {t.readCaseStudy} <ArrowRight size={14} />
