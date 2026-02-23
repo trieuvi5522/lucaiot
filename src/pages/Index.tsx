@@ -34,7 +34,7 @@ const expertiseIcons = [Server, Lightbulb, BarChart3, Shield];
 const whoIcons = [HomeIcon, Building2, Wrench];
 
 const Index = () => {
-  const { t } = useLanguage();
+  const { t, localePath } = useLanguage();
   const featuredUseCases = useCases.slice(0, 2);
 
   const whoIHelp = [
@@ -83,19 +83,19 @@ const Index = () => {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3 animate-fade-in-delay">
                 <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link to="/contact">
+                  <Link to={localePath("/contact")}>
                     {t.primaryCTA} <ArrowRight size={18} className="ml-2" />
                   </Link>
                 </Button>
                 <Button asChild variant="secondary" size="lg">
-                  <Link to="/services">{t.viewServices}</Link>
+                  <Link to={localePath("/services")}>{t.viewServices}</Link>
                 </Button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* What I Do — Hosting */}
+        {/* Hosting */}
         <SectionWrapper title={t.homeHostingTitle} subtitle={t.homeHostingSubtitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {hostingServices.map((service) => (
@@ -104,13 +104,13 @@ const Index = () => {
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">
             {t.homeHostingNote}{" "}
-            <Link to="/services" className="text-accent hover:underline">
+            <Link to={localePath("/services")} className="text-accent hover:underline">
               {t.viewPlans}
             </Link>
           </p>
         </SectionWrapper>
 
-        {/* What I Do — Services */}
+        {/* Services */}
         <SectionWrapper title={t.homeServicesTitle} subtitle={t.homeServicesSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {customServices.map((service) => (
@@ -119,7 +119,7 @@ const Index = () => {
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">
             {t.homeServicesNote}{" "}
-            <Link to="/contact" className="text-accent hover:underline">
+            <Link to={localePath("/contact")} className="text-accent hover:underline">
               {t.contactForConsultation}
             </Link>
           </p>
@@ -140,7 +140,7 @@ const Index = () => {
           </div>
         </SectionWrapper>
 
-        {/* End-to-End Process */}
+        {/* Process */}
         <SectionWrapper title={t.homeProcessTitle} subtitle={t.homeProcessSubtitle} className="bg-muted/50">
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             {processSteps.map((step, i) => (
@@ -157,7 +157,7 @@ const Index = () => {
           </div>
         </SectionWrapper>
 
-        {/* Technical Expertise */}
+        {/* Expertise */}
         <SectionWrapper title={t.homeExpertiseTitle} subtitle={t.homeExpertiseSubtitle}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {expertise.map((item) => (
@@ -172,7 +172,7 @@ const Index = () => {
           </div>
         </SectionWrapper>
 
-        {/* Featured Use Cases */}
+        {/* Use Cases */}
         <SectionWrapper title={t.homeUseCasesTitle} subtitle={t.homeUseCasesSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {featuredUseCases.map((uc) => (
@@ -191,7 +191,7 @@ const Index = () => {
             <p className="mt-4 text-primary-foreground/70 text-lg">{t.homeCtaDesc}</p>
             <div className="mt-8">
               <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                <Link to="/contact">
+                <Link to={localePath("/contact")}>
                   {t.primaryCTA} <ArrowRight size={18} className="ml-2" />
                 </Link>
               </Button>

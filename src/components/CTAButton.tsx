@@ -20,12 +20,15 @@ const CTAButton = ({
   className = "",
   showArrow = true,
 }: CTAButtonProps) => {
-  const { t } = useLanguage();
+  const { t, localePath } = useLanguage();
   const label = text ?? t.primaryCTA;
+
+  // Handle hash links (e.g. "#pricing") — don't prefix with locale
+  const href = to.startsWith("#") ? to : localePath(to);
 
   return (
     <Button asChild variant={variant} size={size} className={className}>
-      <Link to={to} className="inline-flex items-center gap-2">
+      <Link to={href} className="inline-flex items-center gap-2">
         {label}
         {showArrow && <ArrowRight size={16} />}
       </Link>

@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle2, Target, Lightbulb, Layers, TrendingUp } from "lucide-react";
+import { ArrowLeft, Target, Lightbulb, Layers, TrendingUp } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -12,7 +12,7 @@ import { services } from "@/data/services";
 const UseCaseDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const useCase = getUseCaseBySlug(slug || "");
-  const { t, loc } = useLanguage();
+  const { t, loc, localePath } = useLanguage();
 
   if (!useCase) {
     return (
@@ -21,7 +21,7 @@ const UseCaseDetail = () => {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-display font-bold">{t.udNotFound}</h1>
-            <Link to="/use-cases" className="text-accent hover:underline mt-4 inline-block">
+            <Link to={localePath("/use-cases")} className="text-accent hover:underline mt-4 inline-block">
               ← {t.backToUseCases}
             </Link>
           </div>
@@ -38,10 +38,9 @@ const UseCaseDetail = () => {
       <Header />
       <PageMeta title={loc(useCase.title)} description={loc(useCase.shortDescription)} />
       <main className="flex-1">
-        {/* Hero */}
         <section className="bg-hero py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <Link to="/use-cases" className="inline-flex items-center gap-1 text-sm text-primary-foreground/60 hover:text-accent mb-6 transition-colors">
+            <Link to={localePath("/use-cases")} className="inline-flex items-center gap-1 text-sm text-primary-foreground/60 hover:text-accent mb-6 transition-colors">
               <ArrowLeft size={14} /> {t.backToUseCases}
             </Link>
             <div className="max-w-3xl animate-fade-in">
@@ -58,7 +57,6 @@ const UseCaseDetail = () => {
           </div>
         </section>
 
-        {/* Challenge */}
         <SectionWrapper>
           <div className="max-w-3xl mx-auto">
             <div className="flex items-start gap-4">
@@ -73,7 +71,6 @@ const UseCaseDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Solution */}
         <SectionWrapper className="bg-muted/50">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-start gap-4">
@@ -88,7 +85,6 @@ const UseCaseDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Results */}
         <SectionWrapper title={t.udOutcomes}>
           <div className="max-w-3xl mx-auto space-y-3">
             {useCase.results.map((result, i) => (
@@ -100,7 +96,6 @@ const UseCaseDetail = () => {
           </div>
         </SectionWrapper>
 
-        {/* Services Used */}
         {relatedServices.length > 0 && (
           <SectionWrapper className="bg-muted/50">
             <div className="max-w-3xl mx-auto">
@@ -112,11 +107,7 @@ const UseCaseDetail = () => {
                   <h2 className="text-2xl font-display font-bold text-foreground mb-4">{t.udServicesUsed}</h2>
                   <div className="flex flex-wrap gap-2">
                     {relatedServices.map((s) => (
-                      <Link
-                        key={s.id}
-                        to={`/services/${s.slug}`}
-                        className="px-4 py-2 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground"
-                      >
+                      <Link key={s.id} to={localePath(`/services/${s.slug}`)} className="px-4 py-2 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground">
                         {loc(s.title)}
                       </Link>
                     ))}
@@ -127,7 +118,6 @@ const UseCaseDetail = () => {
           </SectionWrapper>
         )}
 
-        {/* CTA */}
         <SectionWrapper dark className="text-center">
           <div className="max-w-xl mx-auto">
             <h2 className="text-3xl font-display font-bold">{t.udCtaTitle}</h2>
