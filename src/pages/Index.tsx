@@ -1,5 +1,22 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Server, Cpu, Home, Lightbulb, Shield, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Users,
+  Building2,
+  Wrench,
+  Search,
+  PenTool,
+  Cpu,
+  Cable,
+  LayoutDashboard,
+  Settings,
+  Server,
+  Home as HomeIcon,
+  Lightbulb,
+  Shield,
+  Zap,
+  BarChart3,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -7,23 +24,48 @@ import SectionWrapper from "@/components/layout/SectionWrapper";
 import ServiceCard from "@/components/ServiceCard";
 import UseCaseCard from "@/components/UseCaseCard";
 import CTAButton from "@/components/CTAButton";
+import ContactShortcuts from "@/components/ContactShortcuts";
 import { siteConfig } from "@/data/siteConfig";
-import { services } from "@/data/services";
+import { hostingServices, customServices } from "@/data/services";
 import { useCases } from "@/data/useCases";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const capabilities = [
-{ icon: Server, title: "Industrial Protocols", desc: "RS485, Modbus, OPC UA, BACnet, TCP/IP" },
-{ icon: Cpu, title: "Edge Computing", desc: "Node-RED, Raspberry Pi, industrial gateways" },
-{ icon: Home, title: "Cloud Integration", desc: "ThingsBoard, MQTT, REST APIs, InfluxDB" },
-{ icon: Shield, title: "Security", desc: "SSL/TLS, access control, data encryption" },
-{ icon: Zap, title: "Real-Time Monitoring", desc: "Dashboards, alerts, scheduling, data storage" },
-{ icon: Lightbulb, title: "Smart Automation", desc: "Custom logic, scene control, energy optimization" }];
+const whoIHelp = [
+  {
+    icon: HomeIcon,
+    title: "Individual Clients",
+    desc: "Smart home solutions — lighting, climate, security, and energy monitoring tailored to your lifestyle.",
+  },
+  {
+    icon: Building2,
+    title: "Business Clients",
+    desc: "Industrial monitoring, energy management, machine status tracking, scheduling, data storage, and automated alerts.",
+  },
+  {
+    icon: Wrench,
+    title: "Technical Teams",
+    desc: "Node-RED & ThingsBoard hosting, infrastructure setup, technical consulting, and managed IoT operations.",
+  },
+];
 
+const processSteps = [
+  { icon: Search, title: "Requirement Discovery", desc: "Understand your operations, goals, and constraints." },
+  { icon: PenTool, title: "Solution Design", desc: "Architecture, protocol selection, and data flow planning." },
+  { icon: Cpu, title: "Device Selection", desc: "Choose the right sensors, gateways, and controllers." },
+  { icon: Cable, title: "Connectivity & Integration", desc: "Connect devices using industrial protocols and cloud APIs." },
+  { icon: LayoutDashboard, title: "Dashboard & Automation", desc: "Build monitoring dashboards, alerts, and scheduling." },
+  { icon: Settings, title: "Operation & Maintenance", desc: "Ongoing support, updates, backups, and optimization." },
+];
+
+const expertise = [
+  { icon: Server, title: "Industrial Protocols", desc: "RS485, Modbus RTU/TCP, OPC UA, BACnet, TCP/IP" },
+  { icon: Lightbulb, title: "Cloud & Edge Integration", desc: "MQTT, REST APIs, Node-RED, ThingsBoard, InfluxDB" },
+  { icon: BarChart3, title: "Dashboards & Monitoring", desc: "Real-time visualization, alerts, scheduling, data storage" },
+  { icon: Shield, title: "Security & Reliability", desc: "SSL/TLS, access control, automated backups, 99.9% uptime" },
+];
 
 const Index = () => {
-  const featuredServices = services.slice(0, 4);
-  const featuredUseCases = useCases.slice(0, 3);
+  const featuredUseCases = useCases.slice(0, 2);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -37,9 +79,6 @@ const Index = () => {
           </div>
           <div className="relative container mx-auto px-4 py-24 md:py-36">
             <div className="max-w-2xl animate-fade-in">
-              
-
-
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
                 Design End-to-End{" "}
                 <span className="text-gradient">IoT Solutions</span>{" "}
@@ -56,65 +95,123 @@ const Index = () => {
                   </Link>
                 </Button>
                 <Button asChild variant="secondary" size="lg">
-                  <Link to="/services">Explore Services</Link>
+                  <Link to="/services">View Services</Link>
                 </Button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Capabilities */}
+        {/* What I Do — Hosting */}
         <SectionWrapper
-          title="Technical Capabilities"
-          subtitle="Deep expertise in industrial communication protocols, cloud platforms, and IoT infrastructure.">
+          title="Hosting"
+          subtitle="Managed cloud hosting for your IoT platforms. Focus on building, not infrastructure."
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {hostingServices.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-6">
+            All hosting plans include transparent public pricing →{" "}
+            <Link to="/services" className="text-accent hover:underline">View plans</Link>
+          </p>
+        </SectionWrapper>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capabilities.map((cap) =>
-            <div key={cap.title} className="flex items-start gap-4 p-5 rounded-lg bg-card border border-border shadow-card">
-                <div className="shrink-0 w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center">
-                  <cap.icon size={20} className="text-accent" />
+        {/* What I Do — Services */}
+        <SectionWrapper
+          title="IoT Services"
+          subtitle="End-to-end IoT design, deployment, and consulting tailored to your requirements."
+          className="bg-muted/50"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {customServices.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-6">
+            Custom IoT projects →{" "}
+            <Link to="/contact" className="text-accent hover:underline">Contact for a free consultation</Link>
+          </p>
+        </SectionWrapper>
+
+        {/* Who I Help */}
+        <SectionWrapper
+          title="Who I Help"
+          subtitle="IoT solutions for individuals, businesses, and technical teams."
+        >
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {whoIHelp.map((item) => (
+              <div
+                key={item.title}
+                className="bg-card rounded-lg border border-border p-6 shadow-card"
+              >
+                <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center mb-4">
+                  <item.icon size={20} className="text-accent" />
+                </div>
+                <h3 className="font-display font-semibold text-card-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </SectionWrapper>
+
+        {/* End-to-End Process */}
+        <SectionWrapper
+          title="End-to-End Process"
+          subtitle="From discovery to operation — I handle every stage of your IoT project."
+          className="bg-muted/50"
+        >
+          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {processSteps.map((step, i) => (
+              <div key={step.title} className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border shadow-card">
+                <div className="shrink-0 w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
+                  <span className="text-xs font-display font-bold text-accent">{i + 1}</span>
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-card-foreground">{cap.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{cap.desc}</p>
+                  <h3 className="font-display font-semibold text-card-foreground text-sm">{step.title}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">{step.desc}</p>
                 </div>
               </div>
-            )}
+            ))}
           </div>
         </SectionWrapper>
 
-        {/* Services */}
+        {/* Technical Expertise */}
         <SectionWrapper
-          title="Services"
-          subtitle="Managed hosting and custom IoT solutions tailored to your needs."
-          className="bg-muted/50">
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredServices.map((service) =>
-            <ServiceCard key={service.id} service={service} />
-            )}
-          </div>
-          <div className="text-center mt-8">
-            <CTAButton text="View All Services" to="/services" variant="outline" showArrow />
+          title="Technical Expertise"
+          subtitle="Deep knowledge in industrial protocols, cloud platforms, and IoT infrastructure."
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {expertise.map((item) => (
+              <div key={item.title} className="text-center">
+                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mx-auto mb-3">
+                  <item.icon size={22} className="text-accent" />
+                </div>
+                <h3 className="font-display font-semibold text-card-foreground text-sm mb-1">{item.title}</h3>
+                <p className="text-xs text-muted-foreground">{item.desc}</p>
+              </div>
+            ))}
           </div>
         </SectionWrapper>
 
-        {/* Use Cases */}
+        {/* Featured Use Cases */}
         <SectionWrapper
           title="Use Cases"
-          subtitle="Real-world IoT implementations delivering measurable results.">
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredUseCases.map((uc) =>
-            <UseCaseCard key={uc.id} useCase={uc} />
-            )}
+          subtitle="Real-world IoT implementations delivering measurable results."
+          className="bg-muted/50"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {featuredUseCases.map((uc) => (
+              <UseCaseCard key={uc.id} useCase={uc} />
+            ))}
           </div>
           <div className="text-center mt-8">
             <CTAButton text="View All Use Cases" to="/use-cases" variant="outline" showArrow />
           </div>
         </SectionWrapper>
 
-        {/* CTA Section */}
+        {/* Final CTA */}
         <SectionWrapper dark className="text-center">
           <div className="max-w-xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-display font-bold">
@@ -130,12 +227,56 @@ const Index = () => {
                 </Link>
               </Button>
             </div>
+            <div className="mt-8 flex justify-center">
+              <div className="inline-flex items-center gap-6">
+                <a
+                  href={`https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-foreground/50 hover:text-accent transition-colors"
+                  aria-label="WhatsApp"
+                >
+                  <Zap size={20} />
+                </a>
+                <a
+                  href={`mailto:${siteConfig.contactEmail}`}
+                  className="text-primary-foreground/50 hover:text-accent transition-colors"
+                  aria-label="Email"
+                >
+                  <ArrowRight size={20} />
+                </a>
+              </div>
+            </div>
+            <div className="mt-4">
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-primary-foreground/50">
+                <a
+                  href={`https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-accent transition-colors"
+                >
+                  WhatsApp: {siteConfig.whatsappPhone}
+                </a>
+                <span className="hidden sm:inline">·</span>
+                <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-accent transition-colors">
+                  {siteConfig.contactEmail}
+                </a>
+                <span className="hidden sm:inline">·</span>
+                <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                  Facebook
+                </a>
+                <span className="hidden sm:inline">·</span>
+                <a href={siteConfig.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                  LinkedIn
+                </a>
+              </div>
+            </div>
           </div>
         </SectionWrapper>
       </main>
       <Footer />
-    </div>);
-
+    </div>
+  );
 };
 
 export default Index;

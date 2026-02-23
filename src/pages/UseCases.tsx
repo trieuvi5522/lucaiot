@@ -18,7 +18,7 @@ const UseCases = () => {
                 Use Cases
               </h1>
               <p className="mt-4 text-lg text-primary-foreground/70">
-                See how IoT solutions deliver measurable impact across industries.
+                Real-world IoT applications and solution patterns.
               </p>
             </div>
           </div>

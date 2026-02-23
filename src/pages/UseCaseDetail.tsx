@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Target, Lightbulb, Layers, LayoutDashboard, TrendingUp } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -47,30 +47,49 @@ const UseCaseDetail = () => {
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {useCase.title}
               </h1>
+              <p className="mt-4 text-lg text-primary-foreground/70 max-w-2xl leading-relaxed">
+                {useCase.shortDescription}
+              </p>
             </div>
           </div>
         </section>
 
         {/* Challenge */}
-        <SectionWrapper title="The Challenge">
+        <SectionWrapper>
           <div className="max-w-3xl mx-auto">
-            <p className="text-lg text-foreground leading-relaxed">{useCase.challenge}</p>
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
+                <Target size={20} className="text-destructive" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-display font-bold text-foreground mb-3">The Challenge</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">{useCase.challenge}</p>
+              </div>
+            </div>
           </div>
         </SectionWrapper>
 
         {/* Solution */}
-        <SectionWrapper title="The Solution" className="bg-muted/50">
+        <SectionWrapper className="bg-muted/50">
           <div className="max-w-3xl mx-auto">
-            <p className="text-lg text-foreground leading-relaxed">{useCase.solution}</p>
+            <div className="flex items-start gap-4">
+              <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                <Lightbulb size={20} className="text-accent" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-display font-bold text-foreground mb-3">The Solution</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">{useCase.solution}</p>
+              </div>
+            </div>
           </div>
         </SectionWrapper>
 
         {/* Results */}
-        <SectionWrapper title="Results">
+        <SectionWrapper title="Outcomes & Benefits">
           <div className="max-w-3xl mx-auto space-y-3">
             {useCase.results.map((result, i) => (
               <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border shadow-card">
-                <CheckCircle2 size={18} className="text-accent mt-0.5 shrink-0" />
+                <TrendingUp size={18} className="text-accent mt-0.5 shrink-0" />
                 <span className="text-card-foreground">{result}</span>
               </div>
             ))}
@@ -79,17 +98,27 @@ const UseCaseDetail = () => {
 
         {/* Services Used */}
         {relatedServices.length > 0 && (
-          <SectionWrapper title="Services Used" className="bg-muted/50">
-            <div className="max-w-3xl mx-auto flex flex-wrap gap-2">
-              {relatedServices.map((s) => (
-                <Link
-                  key={s.id}
-                  to={`/services/${s.slug}`}
-                  className="px-4 py-2 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground"
-                >
-                  {s.title}
-                </Link>
-              ))}
+          <SectionWrapper className="bg-muted/50">
+            <div className="max-w-3xl mx-auto">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <Layers size={20} className="text-accent" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-4">Services Used</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {relatedServices.map((s) => (
+                      <Link
+                        key={s.id}
+                        to={`/services/${s.slug}`}
+                        className="px-4 py-2 text-sm bg-card border border-border rounded-md hover:border-accent transition-colors text-card-foreground"
+                      >
+                        {s.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </SectionWrapper>
         )}
