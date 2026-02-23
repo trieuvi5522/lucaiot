@@ -187,7 +187,7 @@ const en: TranslationStrings = {
   navUseCases: "Use Cases",
   navContact: "Contact",
 
-  primaryCTA: "Contact Now for Consultation",
+  primaryCTA: "Contact for Consultation",
   viewServices: "View Services",
   startNow: "Start",
   readMore: "Read More",
