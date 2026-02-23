@@ -41,9 +41,11 @@ const ContactShortcuts = ({ className = "" }: ContactShortcutsProps) => {
           href={s.href}
           target={s.href.startsWith("mailto") ? undefined : "_blank"}
           rel="noopener noreferrer"
-          className="flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors"
+          className="inline-flex items-center gap-3 text-sm leading-5 text-muted-foreground hover:text-accent transition-colors whitespace-nowrap"
         >
-          <s.icon size={16} className="shrink-0" />
+          <span className="flex items-center justify-center w-5 h-5 shrink-0">
+            <s.icon size={16} />
+          </span>
           <span>{s.value}</span>
         </a>
       ))}

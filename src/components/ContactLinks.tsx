@@ -42,7 +42,7 @@ const ContactLinks = ({ variant = "default" }: ContactLinksProps) => {
           href={link.href}
           target={link.href.startsWith("mailto") ? undefined : "_blank"}
           rel="noopener noreferrer"
-          className={`${iconClass} transition-colors`}
+          className={`inline-flex items-center justify-center w-8 h-8 ${iconClass} transition-colors`}
           aria-label={link.label}
         >
           <link.icon size={20} />
