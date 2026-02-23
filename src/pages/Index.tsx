@@ -41,9 +41,9 @@ const Index = () => {
 
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
-                End-to-End{" "}
+                Design End-to-End{" "}
                 <span className="text-gradient">IoT Solutions</span>{" "}
-                You Can Trust
+                for You
               </h1>
               <p className="mt-6 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
                 From industrial protocols to cloud dashboards — I design, deploy, and maintain
