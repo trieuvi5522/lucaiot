@@ -16,6 +16,7 @@ import ContactShortcuts from "@/components/ContactShortcuts";
 import { siteConfig } from "@/data/siteConfig";
 import { Separator } from "@/components/ui/separator";
 import { submitPlanRequest } from "@/lib/submitForm";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface PlanRequestModalProps {
   open: boolean;
@@ -36,6 +37,7 @@ const PlanRequestModal = ({
   planPeriod,
   planFeatures,
 }: PlanRequestModalProps) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -77,25 +79,25 @@ const PlanRequestModal = ({
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display">
-            {status === "success" ? "Request Sent!" : `Request: ${planName}`}
+            {status === "success" ? t.modalRequestSent : `${t.requestPlan}: ${planName}`}
           </DialogTitle>
           <DialogDescription>
             {status === "success"
-              ? "We'll get back to you within 24 hours."
-              : `${serviceName} — ${planName} plan`}
+              ? t.modalGetBack
+              : `${serviceName} — ${planName}`}
           </DialogDescription>
         </DialogHeader>
 
         {status === "success" ? (
           <div className="text-center py-4">
             <p className="text-sm text-muted-foreground">
-              In the meantime, feel free to reach us at{" "}
+              {t.modalGetBack}{" "}
               <a href={`mailto:${siteConfig.contactEmail}`} className="text-accent hover:underline">
                 {siteConfig.contactEmail}
               </a>
             </p>
             <Button onClick={handleClose} className="mt-4">
-              Close
+              {t.modalClose}
             </Button>
           </div>
         ) : (
@@ -117,7 +119,7 @@ const PlanRequestModal = ({
                     ))}
                     {planFeatures.length > 4 && (
                       <li className="text-xs text-muted-foreground/60 pl-5">
-                        +{planFeatures.length - 4} more features
+                        +{planFeatures.length - 4} more
                       </li>
                     )}
                   </ul>
@@ -127,25 +129,12 @@ const PlanRequestModal = ({
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="plan-name">Full Name *</Label>
-                <Input
-                  id="plan-name"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  disabled={status === "loading"}
-                />
+                <Label htmlFor="plan-name">{t.formFullName}</Label>
+                <Input id="plan-name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} disabled={status === "loading"} />
               </div>
               <div>
-                <Label htmlFor="plan-email">Email *</Label>
-                <Input
-                  id="plan-email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  disabled={status === "loading"}
-                />
+                <Label htmlFor="plan-email">{t.formEmail}</Label>
+                <Input id="plan-email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} disabled={status === "loading"} />
               </div>
               <CountryPhoneInput
                 countryCode={formData.countryCode}
@@ -155,11 +144,11 @@ const PlanRequestModal = ({
                 id="plan-phone"
               />
               <div>
-                <Label htmlFor="plan-notes">Notes / Requirements</Label>
+                <Label htmlFor="plan-notes">{t.formNotes}</Label>
                 <Textarea
                   id="plan-notes"
                   rows={3}
-                  placeholder="Any specific requirements or questions..."
+                  placeholder={t.formNotesPlaceholder}
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                   disabled={status === "loading"}
@@ -169,9 +158,9 @@ const PlanRequestModal = ({
               {status === "error" && (
                 <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3">
                   <p className="text-sm text-destructive font-medium mb-2">
-                    Failed to send: {errorMsg}
+                    {t.contactFailedPrefix} {errorMsg}
                   </p>
-                  <p className="text-xs text-muted-foreground mb-2">Try again or contact directly:</p>
+                  <p className="text-xs text-muted-foreground mb-2">{t.contactRetryMsg}</p>
                   <ContactShortcuts />
                 </div>
               )}
@@ -180,10 +169,10 @@ const PlanRequestModal = ({
                 {status === "loading" ? (
                   <>
                     <Loader2 size={16} className="mr-2 animate-spin" />
-                    Sending…
+                    {t.formSending}
                   </>
                 ) : (
-                  "Request This Plan"
+                  t.requestPlan
                 )}
               </Button>
             </form>
@@ -191,7 +180,7 @@ const PlanRequestModal = ({
             <Separator className="my-2" />
 
             <div>
-              <p className="text-xs text-muted-foreground mb-2">Or contact directly:</p>
+              <p className="text-xs text-muted-foreground mb-2">{t.modalContactDirectly}</p>
               <ContactShortcuts />
             </div>
           </>

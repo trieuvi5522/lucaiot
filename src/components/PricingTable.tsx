@@ -1,13 +1,13 @@
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PricingPlan } from "@/data/types";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface PricingTableProps {
   plans: PricingPlan[];
   onSelectPlan: (planName: string) => void;
 }
 
-// Extract all unique features across plans
 const getAllFeatures = (plans: PricingPlan[]): string[] => {
   const allFeatures: string[] = [];
   plans.forEach((plan) => {
@@ -19,6 +19,7 @@ const getAllFeatures = (plans: PricingPlan[]): string[] => {
 };
 
 const PricingTable = ({ plans, onSelectPlan }: PricingTableProps) => {
+  const { t } = useLanguage();
   const allFeatures = getAllFeatures(plans);
 
   return (
@@ -27,20 +28,16 @@ const PricingTable = ({ plans, onSelectPlan }: PricingTableProps) => {
         <thead>
           <tr>
             <th className="text-left p-4 border-b border-border text-sm font-display font-semibold text-muted-foreground w-1/4">
-              Features
+              {t.pricingFeatures}
             </th>
             {plans.map((plan) => (
               <th
                 key={plan.name}
-                className={`p-4 border-b text-center ${
-                  plan.highlighted
-                    ? "border-accent bg-accent/5"
-                    : "border-border"
-                }`}
+                className={`p-4 border-b text-center ${plan.highlighted ? "border-accent bg-accent/5" : "border-border"}`}
               >
                 {plan.highlighted && (
                   <span className="inline-block bg-accent text-accent-foreground text-xs font-semibold px-2 py-0.5 rounded-full mb-2">
-                    Most Popular
+                    {t.pricingMostPopular}
                   </span>
                 )}
                 <div className="font-display font-semibold text-card-foreground">{plan.name}</div>
@@ -59,15 +56,8 @@ const PricingTable = ({ plans, onSelectPlan }: PricingTableProps) => {
               {plans.map((plan) => {
                 const has = plan.features.includes(feature);
                 return (
-                  <td
-                    key={plan.name}
-                    className={`p-3 text-center ${plan.highlighted ? "bg-accent/5" : ""}`}
-                  >
-                    {has ? (
-                      <Check size={16} className="text-accent mx-auto" />
-                    ) : (
-                      <X size={16} className="text-muted-foreground/30 mx-auto" />
-                    )}
+                  <td key={plan.name} className={`p-3 text-center ${plan.highlighted ? "bg-accent/5" : ""}`}>
+                    {has ? <Check size={16} className="text-accent mx-auto" /> : <X size={16} className="text-muted-foreground/30 mx-auto" />}
                   </td>
                 );
               })}
@@ -79,11 +69,7 @@ const PricingTable = ({ plans, onSelectPlan }: PricingTableProps) => {
             <td className="p-4" />
             {plans.map((plan) => (
               <td key={plan.name} className={`p-4 text-center ${plan.highlighted ? "bg-accent/5" : ""}`}>
-                <Button
-                  onClick={() => onSelectPlan(plan.name)}
-                  variant={plan.highlighted ? "default" : "outline"}
-                  className="w-full"
-                >
+                <Button onClick={() => onSelectPlan(plan.name)} variant={plan.highlighted ? "default" : "outline"} className="w-full">
                   {plan.ctaText}
                 </Button>
               </td>

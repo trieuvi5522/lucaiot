@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import { siteConfig } from "@/data/siteConfig";
 import ContactLinks from "@/components/ContactLinks";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
+  const quickLinks = [
+    { href: "/services", label: t.navServices },
+    { href: "/use-cases", label: t.navUseCases },
+    { href: "/about", label: t.navAbout },
+    { href: "/contact", label: t.navContact },
+  ];
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -14,9 +24,7 @@ const Footer = () => {
               {siteConfig.brandName}
               <span className="text-accent">/&gt;</span>
             </Link>
-            <p className="mt-3 text-sm text-primary-foreground/70 max-w-xs">
-              End-to-end IoT consulting, design, deployment, and maintenance services.
-            </p>
+            <p className="mt-3 text-sm text-primary-foreground/70 max-w-xs">{t.footerDesc}</p>
             <div className="mt-4">
               <ContactLinks variant="light" />
             </div>
@@ -25,20 +33,12 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="font-display font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/50">
-              Quick Links
+              {t.footerQuickLinks}
             </h4>
             <ul className="space-y-2">
-              {[
-                { href: "/services", label: "Services" },
-                { href: "/use-cases", label: "Use Cases" },
-                { href: "/about", label: "About Me" },
-                { href: "/contact", label: "Contact" },
-              ].map((link) => (
+              {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-primary-foreground/70 hover:text-accent transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-primary-foreground/70 hover:text-accent transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -49,7 +49,7 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="font-display font-semibold text-sm uppercase tracking-wider mb-4 text-primary-foreground/50">
-              Contact
+              {t.footerContact}
             </h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>

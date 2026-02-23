@@ -1,10 +1,13 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
 import { translations, type Locale, type TranslationStrings } from "./translations";
+import type { LocaleString } from "@/data/types";
 
 interface LanguageContextValue {
   locale: Locale;
   setLocale: (locale: Locale) => void;
   t: TranslationStrings;
+  /** Resolve a LocaleString to the current locale */
+  loc: (s: LocaleString) => string;
 }
 
 const STORAGE_KEY = "luca-iot-lang";
@@ -35,8 +38,12 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   const t = translations[locale];
 
+  const loc = useCallback((s: LocaleString): string => {
+    return s[locale] ?? s.en;
+  }, [locale]);
+
   return (
-    <LanguageContext.Provider value={{ locale, setLocale, t }}>
+    <LanguageContext.Provider value={{ locale, setLocale, t, loc }}>
       {children}
     </LanguageContext.Provider>
   );
