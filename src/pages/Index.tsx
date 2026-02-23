@@ -1,8 +1,21 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Users, Building2, Wrench, Search, PenTool, Cpu,
-  Cable, LayoutDashboard, Settings, Server, Home as HomeIcon,
-  Lightbulb, Shield, Zap, BarChart3,
+  ArrowRight,
+  Users,
+  Building2,
+  Wrench,
+  Search,
+  PenTool,
+  Cpu,
+  Cable,
+  LayoutDashboard,
+  Settings,
+  Server,
+  Home as HomeIcon,
+  Lightbulb,
+  Shield,
+  Zap,
+  BarChart3,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
@@ -40,15 +53,27 @@ const processSteps = [
   { icon: Search, title: "Requirement Discovery", desc: "Understand your operations, goals, and constraints." },
   { icon: PenTool, title: "Solution Design", desc: "Architecture, protocol selection, and data flow planning." },
   { icon: Cpu, title: "Device Selection", desc: "Choose the right sensors, gateways, and controllers." },
-  { icon: Cable, title: "Connectivity & Integration", desc: "Connect devices using industrial protocols and cloud APIs." },
-  { icon: LayoutDashboard, title: "Dashboard & Automation", desc: "Build monitoring dashboards, alerts, and scheduling." },
+  {
+    icon: Cable,
+    title: "Connectivity & Integration",
+    desc: "Connect devices using industrial protocols and cloud APIs.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Dashboard & Automation",
+    desc: "Build monitoring dashboards, alerts, and scheduling.",
+  },
   { icon: Settings, title: "Operation & Maintenance", desc: "Ongoing support, updates, backups, and optimization." },
 ];
 
 const expertise = [
-  { icon: Server, title: "Industrial Protocols", desc: "RS485, Modbus RTU/TCP, OPC UA, BACnet, TCP/IP" },
+  { icon: Server, title: "Industrial Protocols", desc: "RS485, Modbus RTU/TCP, OPC UA, TCP/IP" },
   { icon: Lightbulb, title: "Cloud & Edge Integration", desc: "MQTT, REST APIs, Node-RED, ThingsBoard, InfluxDB" },
-  { icon: BarChart3, title: "Dashboards & Monitoring", desc: "Real-time visualization, alerts, scheduling, data storage" },
+  {
+    icon: BarChart3,
+    title: "Dashboards & Monitoring",
+    desc: "Real-time visualization, alerts, scheduling, data storage",
+  },
   { icon: Shield, title: "Security & Reliability", desc: "SSL/TLS, access control, automated backups, 99.9% uptime" },
 ];
 
@@ -72,13 +97,11 @@ const Index = () => {
           <div className="relative container mx-auto px-4 py-24 md:py-36">
             <div className="max-w-2xl animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
-                Design End-to-End{" "}
-                <span className="text-gradient">IoT Solutions</span>{" "}
-                for You
+                Design End-to-End <span className="text-gradient">IoT Solutions</span> for You
               </h1>
               <p className="mt-6 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
-                From industrial protocols to cloud dashboards — I design, deploy, and maintain
-                IoT systems that give you real-time visibility and control over your operations.
+                From industrial protocols to cloud dashboards — I design, deploy, and maintain IoT systems that give you
+                real-time visibility and control over your operations.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3 animate-fade-in-delay">
                 <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
@@ -106,7 +129,9 @@ const Index = () => {
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">
             All hosting plans include transparent public pricing →{" "}
-            <Link to="/services" className="text-accent hover:underline">View plans</Link>
+            <Link to="/services" className="text-accent hover:underline">
+              View plans
+            </Link>
           </p>
         </SectionWrapper>
 
@@ -123,21 +148,17 @@ const Index = () => {
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">
             Custom IoT projects →{" "}
-            <Link to="/contact" className="text-accent hover:underline">Contact for a free consultation</Link>
+            <Link to="/contact" className="text-accent hover:underline">
+              Contact for a free consultation
+            </Link>
           </p>
         </SectionWrapper>
 
         {/* Who I Help */}
-        <SectionWrapper
-          title="Who I Help"
-          subtitle="IoT solutions for individuals, businesses, and technical teams."
-        >
+        <SectionWrapper title="Who I Help" subtitle="IoT solutions for individuals, businesses, and technical teams.">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {whoIHelp.map((item) => (
-              <div
-                key={item.title}
-                className="bg-card rounded-lg border border-border p-6 shadow-card"
-              >
+              <div key={item.title} className="bg-card rounded-lg border border-border p-6 shadow-card">
                 <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center mb-4">
                   <item.icon size={20} className="text-accent" />
                 </div>
@@ -156,7 +177,10 @@ const Index = () => {
         >
           <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
             {processSteps.map((step, i) => (
-              <div key={step.title} className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border shadow-card">
+              <div
+                key={step.title}
+                className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border shadow-card"
+              >
                 <div className="shrink-0 w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center">
                   <span className="text-xs font-display font-bold text-accent">{i + 1}</span>
                 </div>
@@ -206,9 +230,7 @@ const Index = () => {
         {/* Final CTA */}
         <SectionWrapper dark className="text-center">
           <div className="max-w-xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-display font-bold">
-              Ready to Connect Your World?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-display font-bold">Ready to Connect Your World?</h2>
             <p className="mt-4 text-primary-foreground/70 text-lg">
               Let's discuss how IoT can transform your operations. Get a free consultation today.
             </p>
