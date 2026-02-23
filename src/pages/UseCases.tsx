@@ -2,11 +2,16 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import UseCaseCard from "@/components/UseCaseCard";
+import PageMeta from "@/components/PageMeta";
 import { useCases } from "@/data/useCases";
 
 const UseCases = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta
+        title="Use Cases"
+        description="Real-world IoT applications and solution patterns by Luca IoT."
+      />
       <Header />
       <main className="flex-1">
         {/* Hero */}

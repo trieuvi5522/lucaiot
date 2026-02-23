@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { Mail, MessageCircle, Facebook, Linkedin, Info } from "lucide-react";
+import { Mail, MessageCircle, Facebook, Linkedin, Info, Loader2 } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import CountryPhoneInput from "@/components/CountryPhoneInput";
+import ContactShortcuts from "@/components/ContactShortcuts";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { siteConfig } from "@/data/siteConfig";
+import { submitContactForm } from "@/lib/submitForm";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,43 +21,28 @@ const Contact = () => {
     phone: "",
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
-    setSubmitted(true);
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      await submitContactForm(formData);
+      setStatus("success");
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+      setStatus("error");
+    }
   };
-
-  const contactShortcuts = [
-    {
-      icon: MessageCircle,
-      label: "WhatsApp",
-      value: siteConfig.whatsappPhone,
-      href: `https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`,
-    },
-    {
-      icon: Mail,
-      label: "Email",
-      value: siteConfig.contactEmail,
-      href: `mailto:${siteConfig.contactEmail}`,
-    },
-    {
-      icon: Facebook,
-      label: "Facebook",
-      value: "Facebook",
-      href: siteConfig.facebookUrl,
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "LinkedIn",
-      href: siteConfig.linkedinUrl,
-    },
-  ];
 
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta
+        title="Contact"
+        description="Get in touch with Luca Nguyen for IoT consulting, project inquiries, and custom quotes."
+      />
       <Header />
       <main className="flex-1">
         {/* Hero */}
@@ -76,13 +64,13 @@ const Contact = () => {
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Form */}
             <div className="lg:col-span-3">
-              {submitted ? (
+              {status === "success" ? (
                 <div className="bg-card rounded-lg border border-border p-8 text-center shadow-card">
                   <h2 className="text-2xl font-display font-bold text-card-foreground">Thank You!</h2>
                   <p className="mt-3 text-muted-foreground">
-                    Your message has been received. I'll get back to you within 24 hours.
+                    Your message has been sent. I'll get back to you within 24 hours.
                   </p>
-                  <Button onClick={() => setSubmitted(false)} className="mt-6">
+                  <Button onClick={() => { setStatus("idle"); setFormData({ name: "", email: "", countryCode: "VN", phone: "", message: "" }); }} className="mt-6">
                     Send Another Message
                   </Button>
                 </div>
@@ -95,6 +83,7 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      disabled={status === "loading"}
                     />
                   </div>
                   <div>
@@ -105,6 +94,7 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      disabled={status === "loading"}
                     />
                   </div>
                   <CountryPhoneInput
@@ -123,10 +113,31 @@ const Contact = () => {
                       placeholder="Describe your project requirements..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      disabled={status === "loading"}
                     />
                   </div>
-                  <Button type="submit" size="lg" className="w-full sm:w-auto">
-                    Send Message
+
+                  {status === "error" && (
+                    <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
+                      <p className="text-sm text-destructive font-medium mb-2">
+                        Failed to send: {errorMsg}
+                      </p>
+                      <p className="text-xs text-muted-foreground mb-3">
+                        Please try again or contact me directly:
+                      </p>
+                      <ContactShortcuts />
+                    </div>
+                  )}
+
+                  <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={status === "loading"}>
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 size={16} className="mr-2 animate-spin" />
+                        Sending…
+                      </>
+                    ) : (
+                      "Send Message"
+                    )}
                   </Button>
                 </form>
               )}
@@ -134,30 +145,11 @@ const Contact = () => {
 
             {/* Sidebar */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Contact shortcuts */}
               <div className="bg-card rounded-lg border border-border p-6 shadow-card">
                 <h3 className="font-display font-semibold text-card-foreground mb-4">Direct Contact</h3>
-                <ul className="space-y-4 text-sm">
-                  {contactShortcuts.map((s) => (
-                    <li key={s.label}>
-                      <a
-                        href={s.href}
-                        target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 text-card-foreground hover:text-accent transition-colors"
-                      >
-                        <s.icon size={18} className="text-accent shrink-0" />
-                        <div>
-                          <span className="block text-xs text-muted-foreground">{s.label}</span>
-                          <span>{s.value}</span>
-                        </div>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <ContactShortcuts />
               </div>
 
-              {/* Guidance */}
               <div className="bg-card rounded-lg border border-border p-6 shadow-card">
                 <div className="flex items-center gap-2 mb-3">
                   <Info size={16} className="text-accent" />

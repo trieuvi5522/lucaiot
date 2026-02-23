@@ -10,11 +10,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import CountryPhoneInput from "@/components/CountryPhoneInput";
 import ContactShortcuts from "@/components/ContactShortcuts";
 import { siteConfig } from "@/data/siteConfig";
 import { Separator } from "@/components/ui/separator";
+import { submitPlanRequest } from "@/lib/submitForm";
 
 interface PlanRequestModalProps {
   open: boolean;
@@ -24,16 +25,6 @@ interface PlanRequestModalProps {
   planPrice?: string;
   planPeriod?: string;
   planFeatures?: string[];
-}
-
-export interface PlanRequestData {
-  name: string;
-  email: string;
-  countryCode: string;
-  phone: string;
-  notes: string;
-  service: string;
-  plan: string;
 }
 
 const PlanRequestModal = ({
@@ -52,23 +43,31 @@ const PlanRequestModal = ({
     phone: "",
     notes: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const requestData: PlanRequestData = {
-      ...formData,
-      service: serviceName,
-      plan: planName,
-    };
-    console.log("Plan request submitted:", requestData);
-    setSubmitted(true);
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      await submitPlanRequest({
+        ...formData,
+        service: serviceName,
+        plan: planName,
+      });
+      setStatus("success");
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+      setStatus("error");
+    }
   };
 
   const handleClose = () => {
     onOpenChange(false);
     setTimeout(() => {
-      setSubmitted(false);
+      setStatus("idle");
+      setErrorMsg("");
       setFormData({ name: "", email: "", countryCode: "VN", phone: "", notes: "" });
     }, 200);
   };
@@ -78,16 +77,16 @@ const PlanRequestModal = ({
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="font-display">
-            {submitted ? "Request Sent!" : `Request: ${planName}`}
+            {status === "success" ? "Request Sent!" : `Request: ${planName}`}
           </DialogTitle>
           <DialogDescription>
-            {submitted
+            {status === "success"
               ? "We'll get back to you within 24 hours."
               : `${serviceName} — ${planName} plan`}
           </DialogDescription>
         </DialogHeader>
 
-        {submitted ? (
+        {status === "success" ? (
           <div className="text-center py-4">
             <p className="text-sm text-muted-foreground">
               In the meantime, feel free to reach us at{" "}
@@ -134,6 +133,7 @@ const PlanRequestModal = ({
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  disabled={status === "loading"}
                 />
               </div>
               <div>
@@ -144,6 +144,7 @@ const PlanRequestModal = ({
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  disabled={status === "loading"}
                 />
               </div>
               <CountryPhoneInput
@@ -161,16 +162,34 @@ const PlanRequestModal = ({
                   placeholder="Any specific requirements or questions..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                  disabled={status === "loading"}
                 />
               </div>
-              <Button type="submit" className="w-full">
-                Request This Plan
+
+              {status === "error" && (
+                <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3">
+                  <p className="text-sm text-destructive font-medium mb-2">
+                    Failed to send: {errorMsg}
+                  </p>
+                  <p className="text-xs text-muted-foreground mb-2">Try again or contact directly:</p>
+                  <ContactShortcuts />
+                </div>
+              )}
+
+              <Button type="submit" className="w-full" disabled={status === "loading"}>
+                {status === "loading" ? (
+                  <>
+                    <Loader2 size={16} className="mr-2 animate-spin" />
+                    Sending…
+                  </>
+                ) : (
+                  "Request This Plan"
+                )}
               </Button>
             </form>
 
             <Separator className="my-2" />
 
-            {/* Contact shortcuts */}
             <div>
               <p className="text-xs text-muted-foreground mb-2">Or contact directly:</p>
               <ContactShortcuts />

@@ -3,11 +3,16 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ServiceCard from "@/components/ServiceCard";
+import PageMeta from "@/components/PageMeta";
 import { hostingServices, customServices } from "@/data/services";
 
 const Services = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta
+        title="Services Offer"
+        description="IoT hosting, consulting, and deployment services. Node-RED, ThingsBoard, industrial IoT, and smart home solutions."
+      />
       <Header />
       <main className="flex-1">
         {/* Hero */}

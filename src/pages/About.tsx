@@ -17,6 +17,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import CTAButton from "@/components/CTAButton";
+import PageMeta from "@/components/PageMeta";
 import { siteConfig } from "@/data/siteConfig";
 
 const focusAreas = [
@@ -88,6 +89,10 @@ const whyWorkWithMe = [
 const About = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PageMeta
+        title="About"
+        description="Luca Nguyen — IoT Specialist & Automation Engineer. End-to-end IoT consulting, deployment, and maintenance."
+      />
       <Header />
       <main className="flex-1">
         {/* Hero */}
