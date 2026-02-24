@@ -64,7 +64,9 @@ const Index = () => {
           <div className="relative container mx-auto px-4 py-24 md:py-36">
             <div className="max-w-2xl animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
-                {t.homeHeroTitle} <span className="text-gradient">{t.homeHeroHighlight}</span>
+                {t.homeHeroTitle}
+                <br className="hidden md:block" />
+                <span className="text-gradient">{t.homeHeroHighlight}</span>
               </h1>
               <p className="mt-6 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
                 {t.homeHeroDesc}
