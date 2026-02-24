@@ -51,7 +51,10 @@ function sanitize(value: string): string {
   return value.replace(/[<>]/g, "");
 }
 
-async function submitToProvider(payload: Record<string, string>): Promise<void> {
+async function submitToProvider(
+  payload: Record<string, string>,
+  opts?: { captcha?: string },
+): Promise<void> {
   const res = await fetch(FORMSUBMIT_URL, {
     method: "POST",
     headers: {
@@ -61,7 +64,13 @@ async function submitToProvider(payload: Record<string, string>): Promise<void> 
     body: JSON.stringify({
       ...payload,
       _subject: payload._subject || "New inquiry from Luca IoT website",
-      _captcha: "false",
+      _template: "table",
+      _captcha: opts?.captcha ?? "false",
+      // Honeypot: FormSubmit checks _honey — value must be empty for legitimate submissions.
+      // A hidden <input name="_honey"> in the form would be more effective against bots,
+      // but including it in the payload still activates FormSubmit's server-side check.
+      _honey: "",
+      ...(payload.Email ? { _replyto: payload.Email } : {}),
     }),
   });
 
@@ -74,13 +83,21 @@ async function submitToProvider(payload: Record<string, string>): Promise<void> 
 
 export async function submitContactForm(data: ContactFormData): Promise<void> {
   const validated = contactFormSchema.parse(data);
-  await submitToProvider({
-    _subject: "New Contact Inquiry — Luca IoT",
-    Name: sanitize(validated.name),
-    Email: sanitize(validated.email),
-    Phone: `${sanitize(validated.countryCode)} ${sanitize(validated.phone)}`,
-    Message: sanitize(validated.message),
-  });
+  const name = sanitize(validated.name);
+  await submitToProvider(
+    {
+      _subject: name ? `Contact from ${name} — Luca IoT` : "Contact Inquiry — Luca IoT",
+      Name: name,
+      Email: sanitize(validated.email),
+      Phone: `${sanitize(validated.countryCode)} ${sanitize(validated.phone)}`,
+      Message: sanitize(validated.message),
+      Source: "Contact Page",
+    },
+    // Enable FormSubmit's built-in reCAPTCHA for the Contact flow.
+    // NOTE: This adds a captcha redirect after submit. If it breaks the AJAX UX,
+    // revert to "false" and rely on _honey alone.
+    { captcha: "true" },
+  );
 }
 
 export async function submitPlanRequest(data: PlanRequestFormData): Promise<void> {
@@ -93,5 +110,6 @@ export async function submitPlanRequest(data: PlanRequestFormData): Promise<void
     Service: sanitize(validated.service),
     Plan: sanitize(validated.plan),
     Notes: sanitize(validated.notes || "") || "(none)",
+    Source: "Plan Request",
   });
 }
