@@ -552,9 +552,9 @@ const vi: TranslationStrings = {
 
   /* Modal */
   modalRequestSent: "Đã gửi yêu cầu!",
-  modalGetBack: "Chúng tôi sẽ phản hồi trong vòng 24 giờ.",
+  modalGetBack: "Tôi sẽ liên hệ lại cho bạn trong thời gian sớm nhất",
   modalClose: "Đóng",
-  modalContactDirectly: "Hoặc liên hệ trực tiếp:",
+  modalContactDirectly: "Liên hệ trực tiếp với tôi:",
 
   /* Footer */
   footerDesc: "Tư vấn, thiết kế, triển khai và bảo trì IoT toàn diện.",
