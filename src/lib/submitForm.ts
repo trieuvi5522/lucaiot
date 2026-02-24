@@ -10,33 +10,46 @@
  *   - Lovable Cloud edge function
  */
 
+import { z } from "zod";
 import { siteConfig } from "@/data/siteConfig";
 
-export interface ContactFormData {
-  name: string;
-  email: string;
-  countryCode: string;
-  phone: string;
-  message: string;
-}
+// ── Validation schemas ──────────────────────────────────────
 
-export interface PlanRequestFormData {
-  name: string;
-  email: string;
-  countryCode: string;
-  phone: string;
-  notes: string;
-  service: string;
-  plan: string;
-}
+const nameSchema = z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters");
+const emailSchema = z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters");
+const phoneSchema = z.string().trim().max(20, "Phone number is too long");
+const countryCodeSchema = z.string().trim().min(1).max(5);
 
-type FormPayload = ContactFormData | PlanRequestFormData;
+const contactFormSchema = z.object({
+  name: nameSchema,
+  email: emailSchema,
+  countryCode: countryCodeSchema,
+  phone: phoneSchema,
+  message: z.string().trim().min(1, "Message is required").max(2000, "Message must be less than 2000 characters"),
+});
+
+const planRequestSchema = z.object({
+  name: nameSchema,
+  email: emailSchema,
+  countryCode: countryCodeSchema,
+  phone: phoneSchema,
+  notes: z.string().trim().max(2000, "Notes must be less than 2000 characters").optional().default(""),
+  service: z.string().trim().min(1).max(200),
+  plan: z.string().trim().min(1).max(200),
+});
+
+export type ContactFormData = z.infer<typeof contactFormSchema>;
+export type PlanRequestFormData = z.infer<typeof planRequestSchema>;
 
 // ── Provider implementation ──────────────────────────────────
 // Using FormSubmit.co free tier — sends to siteConfig.contactEmail.
 // No signup required: first submission triggers an activation email.
 
 const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${siteConfig.contactEmail}`;
+
+function sanitize(value: string): string {
+  return value.replace(/[<>]/g, "");
+}
 
 async function submitToProvider(payload: Record<string, string>): Promise<void> {
   const res = await fetch(FORMSUBMIT_URL, {
@@ -53,31 +66,32 @@ async function submitToProvider(payload: Record<string, string>): Promise<void> 
   });
 
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Submission failed (${res.status}): ${text}`);
+    throw new Error("Submission failed. Please try again later.");
   }
 }
 
 // ── Public API ───────────────────────────────────────────────
 
 export async function submitContactForm(data: ContactFormData): Promise<void> {
+  const validated = contactFormSchema.parse(data);
   await submitToProvider({
     _subject: "New Contact Inquiry — Luca IoT",
-    Name: data.name,
-    Email: data.email,
-    Phone: `${data.countryCode} ${data.phone}`,
-    Message: data.message,
+    Name: sanitize(validated.name),
+    Email: sanitize(validated.email),
+    Phone: `${sanitize(validated.countryCode)} ${sanitize(validated.phone)}`,
+    Message: sanitize(validated.message),
   });
 }
 
 export async function submitPlanRequest(data: PlanRequestFormData): Promise<void> {
+  const validated = planRequestSchema.parse(data);
   await submitToProvider({
-    _subject: `Plan Request: ${data.service} — ${data.plan}`,
-    Name: data.name,
-    Email: data.email,
-    Phone: `${data.countryCode} ${data.phone}`,
-    Service: data.service,
-    Plan: data.plan,
-    Notes: data.notes || "(none)",
+    _subject: `Plan Request: ${sanitize(validated.service)} — ${sanitize(validated.plan)}`,
+    Name: sanitize(validated.name),
+    Email: sanitize(validated.email),
+    Phone: `${sanitize(validated.countryCode)} ${sanitize(validated.phone)}`,
+    Service: sanitize(validated.service),
+    Plan: sanitize(validated.plan),
+    Notes: sanitize(validated.notes || "") || "(none)",
   });
 }
