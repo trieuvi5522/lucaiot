@@ -1,20 +1,30 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Factory, Home, Briefcase } from "lucide-react";
 import { Service } from "@/data/types";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { ReactNode } from "react";
 
 interface ServiceCardProps {
   service: Service;
+  hideCategoryLabel?: boolean;
+  topVisual?: ReactNode;
 }
 
-const ServiceCard = ({ service }: ServiceCardProps) => {
+const ServiceCard = ({ service, hideCategoryLabel, topVisual }: ServiceCardProps) => {
   const { t, loc, localePath } = useLanguage();
 
   return (
     <div className="group bg-card rounded-lg border border-border p-6 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col h-full">
-      <span className="inline-block text-xs font-medium uppercase tracking-wider text-accent mb-3">
-        {service.group === "hosting" ? t.sdHosting : t.sdService}
-      </span>
+      {!hideCategoryLabel && (
+        <span className="inline-block text-xs font-medium uppercase tracking-wider text-accent mb-3">
+          {service.group === "hosting" ? t.sdHosting : t.sdService}
+        </span>
+      )}
+      {topVisual && (
+        <div className="mb-4 flex items-center h-8">
+          {topVisual}
+        </div>
+      )}
       <h3 className="text-xl font-display font-semibold text-card-foreground mb-2 min-h-[1.75rem]">
         {loc(service.title)}
       </h3>
@@ -41,4 +51,12 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
   );
 };
 
+// Icon mapping for service cards on the Services listing page
+const serviceIconMap: Record<string, ReactNode> = {
+  "industrial-iot": <Factory size={24} className="text-accent" />,
+  "smart-home-iot": <Home size={24} className="text-accent" />,
+  "iot-consulting": <Briefcase size={24} className="text-accent" />,
+};
+
+export { serviceIconMap };
 export default ServiceCard;
