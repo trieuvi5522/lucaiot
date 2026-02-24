@@ -18,7 +18,7 @@ export const services: Service[] = [
     ],
     heroText: ls(
       "Focus on building automation flows, not managing servers. Our managed Node-RED hosting gives you production-ready instances with industrial protocol support out of the box.",
-      "Tập trung xây dựng luồng tự động hoá, không quản lý server. Hosting Node-RED được quản lý cung cấp instance sẵn sàng sản xuất với hỗ trợ giao thức công nghiệp ngay từ đầu."
+      "Tập trung xây dựng luồng tự động hoá, không còn nỗi lo quản lý server. Node-RED được tôi quản lý, back up. Cung cấp cho bạn instance sẵn sàng sản xuất để đưa vào sử dụng"
     ),
     targetUsers: [
       ls("Automation engineers needing reliable Node-RED infrastructure", "Kỹ sư tự động hoá cần hạ tầng Node-RED đáng tin cậy"),
@@ -48,9 +48,9 @@ export const services: Service[] = [
     ],
     pricingType: "public_packages",
     pricingPlans: [
-      { name: "Stater", price: "$10", period: "/month", features: [], ctaText: "Get Started", specs: [{ label: "vCPU", value: "1" }, { label: "RAM", value: "1 GB" }, { label: "Disk", value: "10 GB" }] },
-      { name: "Hobby", price: "$20", period: "/month", features: [], ctaText: "Get Started", specs: [{ label: "vCPU", value: "1" }, { label: "RAM", value: "2 GB" }, { label: "Disk", value: "20 GB" }] },
-      { name: "Start Up", price: "$30", period: "/month", features: [], ctaText: "Get Started", highlighted: true, specs: [{ label: "vCPU", value: "2" }, { label: "RAM", value: "4 GB" }, { label: "Disk", value: "40 GB" }] },
+      { name: "Starter", price: "$10", period: "/month", features: [], ctaText: "Get Started", specs: [{ label: "vCPU", value: "1" }, { label: "RAM", value: "1 GB" }, { label: "Disk", value: "10 GB" }] },
+      { name: "Hobby", price: "$20", period: "/month", features: [], ctaText: "Get Started", highlighted: true, specs: [{ label: "vCPU", value: "1" }, { label: "RAM", value: "2 GB" }, { label: "Disk", value: "20 GB" }] },
+      { name: "Start Up", price: "$30", period: "/month", features: [], ctaText: "Get Started", specs: [{ label: "vCPU", value: "2" }, { label: "RAM", value: "4 GB" }, { label: "Disk", value: "40 GB" }] },
       { name: "Unicorn", price: "$50", period: "/month", features: [], ctaText: "Get Started", specs: [{ label: "vCPU", value: "4" }, { label: "RAM", value: "8 GB" }, { label: "Disk", value: "60 GB" }] },
     ],
     faq: [],

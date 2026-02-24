@@ -17,7 +17,7 @@ const PricingRowList = ({ plans, onSelectPlan }: PricingRowListProps) => {
   return (
     <div className="space-y-3">
       {/* Header row — desktop only */}
-      <div className="hidden md:grid md:grid-cols-[1fr_repeat(3,80px)_100px_auto] items-center gap-4 px-5 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      <div className="hidden md:grid md:grid-cols-[minmax(160px,1.5fr)_80px_80px_80px_100px_120px] items-center gap-2 px-5 py-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
         <span>Plan</span>
         <span className="text-center">vCPU</span>
         <span className="text-center">RAM</span>
@@ -42,11 +42,11 @@ const PricingRowList = ({ plans, onSelectPlan }: PricingRowListProps) => {
             }`}
           >
             {/* Desktop row */}
-            <div className="hidden md:grid md:grid-cols-[1fr_repeat(3,80px)_100px_auto] items-center gap-4">
-              <div>
-                <span className="font-display font-semibold text-card-foreground">{plan.name}</span>
+            <div className="hidden md:grid md:grid-cols-[minmax(160px,1.5fr)_80px_80px_80px_100px_120px] items-center gap-2">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="font-display font-semibold text-card-foreground truncate">{plan.name}</span>
                 {plan.highlighted && (
-                  <span className="ml-2 inline-block bg-accent text-accent-foreground text-[10px] font-semibold px-2 py-0.5 rounded-full align-middle">
+                  <span className="shrink-0 inline-block bg-accent text-accent-foreground text-[10px] font-semibold px-2 py-0.5 rounded-full">
                     Popular
                   </span>
                 )}
