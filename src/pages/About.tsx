@@ -90,13 +90,32 @@ const About = () => {
 
         {/* Technical Expertise */}
         <SectionWrapper title={t.aboutExpertiseTitle}>
-          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {t.aboutSkills.map((skill) => (
-              <div key={skill} className="flex items-center gap-2 text-sm text-foreground">
-                <CheckCircle2 size={16} className="text-accent shrink-0" />
-                <span>{skill}</span>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+            {t.aboutSkills.map((skill, i) => {
+              const colonIdx = skill.indexOf(":");
+              const label = colonIdx > -1 ? skill.slice(0, colonIdx) : skill;
+              const desc = colonIdx > -1 ? skill.slice(colonIdx + 1).trim() : "";
+              return (
+                <div
+                  key={i}
+                  className="bg-card rounded-lg border border-border p-5 shadow-card flex items-start gap-4"
+                >
+                  <div className="shrink-0 w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
+                    <CheckCircle2 size={16} className="text-accent" />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-display font-semibold text-card-foreground text-sm leading-snug">
+                      {label}
+                    </h3>
+                    {desc && (
+                      <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
+                        {desc}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </SectionWrapper>
 
