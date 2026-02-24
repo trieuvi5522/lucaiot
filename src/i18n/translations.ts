@@ -174,6 +174,7 @@ export interface TranslationStrings {
 
   /* Modal */
   modalRequestSent: string;
+  modalThanks: string;
   modalGetBack: string;
   modalClose: string;
   modalContactDirectly: string;
@@ -363,7 +364,8 @@ const en: TranslationStrings = {
 
   /* Modal */
   modalRequestSent: "Request Sent!",
-  modalGetBack: "We'll get back to you within 24 hours.",
+  modalThanks: "Thanks for choosing my service",
+  modalGetBack: "I'll get back to you as soon as possible",
   modalClose: "Close",
   modalContactDirectly: "Or contact directly:",
 
@@ -552,6 +554,7 @@ const vi: TranslationStrings = {
 
   /* Modal */
   modalRequestSent: "Đã gửi yêu cầu!",
+  modalThanks: "Cảm ơn bạn đã chọn dịch vụ của tôi",
   modalGetBack: "Tôi sẽ liên hệ lại cho bạn trong thời gian sớm nhất",
   modalClose: "Đóng",
   modalContactDirectly: "Liên hệ trực tiếp với tôi:",
