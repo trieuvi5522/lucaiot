@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2, Facebook, Linkedin, MessageCircle, Mail } from "lucide-react";
 import CountryPhoneInput from "@/components/CountryPhoneInput";
 import ContactShortcuts from "@/components/ContactShortcuts";
 import { siteConfig } from "@/data/siteConfig";
@@ -89,14 +89,34 @@ const PlanRequestModal = ({
         </DialogHeader>
 
         {status === "success" ? (
-          <div className="text-center py-4">
-            <p className="text-sm text-muted-foreground">
-              {t.modalGetBack}{" "}
-              <a href={`mailto:${siteConfig.contactEmail}`} className="text-accent hover:underline">
-                {siteConfig.contactEmail}
-              </a>
+          <div className="text-center py-4 space-y-6">
+            <p className="text-base font-medium text-foreground">
+              {t.modalGetBack}
             </p>
-            <Button onClick={handleClose} className="mt-4">
+
+            <div className="text-left space-y-3">
+              <p className="text-sm font-semibold text-foreground text-center">{t.modalContactDirectly}</p>
+              <div className="flex flex-col items-start gap-2 mx-auto w-fit">
+                <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <span className="flex items-center justify-center w-5 h-5 shrink-0"><Facebook size={16} /></span>
+                  <span>Facebook</span>
+                </a>
+                <a href={siteConfig.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <span className="flex items-center justify-center w-5 h-5 shrink-0"><Linkedin size={16} /></span>
+                  <span>LinkedIn</span>
+                </a>
+                <a href={`https://wa.me/${siteConfig.whatsappPhone.replace(/[\s+]/g, "")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <span className="flex items-center justify-center w-5 h-5 shrink-0"><MessageCircle size={16} /></span>
+                  <span>{siteConfig.whatsappPhone}</span>
+                </a>
+                <a href={`mailto:${siteConfig.contactEmail}`} className="inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-accent transition-colors">
+                  <span className="flex items-center justify-center w-5 h-5 shrink-0"><Mail size={16} /></span>
+                  <span>{siteConfig.contactEmail}</span>
+                </a>
+              </div>
+            </div>
+
+            <Button onClick={handleClose} className="mt-2">
               {t.modalClose}
             </Button>
           </div>

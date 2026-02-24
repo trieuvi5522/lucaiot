@@ -185,7 +185,7 @@ const ServiceDetail = () => {
           </SectionWrapper>
         )}
 
-        {(relatedServices.length > 0 || relatedUseCases.length > 0) && (
+        {!isNodeRed && (relatedServices.length > 0 || relatedUseCases.length > 0) && (
           <SectionWrapper title={t.sdRelated} className="bg-muted/50">
             <div className="max-w-3xl mx-auto">
               {relatedServices.length > 0 && (
