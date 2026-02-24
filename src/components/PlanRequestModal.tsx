@@ -83,7 +83,7 @@ const PlanRequestModal = ({
           </DialogTitle>
           <DialogDescription>
             {status === "success"
-              ? t.modalGetBack
+              ? t.modalThanks
               : `${serviceName} — ${planName}`}
           </DialogDescription>
         </DialogHeader>

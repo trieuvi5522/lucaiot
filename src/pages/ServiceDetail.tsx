@@ -75,13 +75,15 @@ const ServiceDetail = () => {
               <p className="mt-4 text-lg text-primary-foreground/70 max-w-3xl leading-relaxed" style={{ textWrap: 'balance' } as React.CSSProperties}>
                 {loc(service.heroText)}
               </p>
-              <div className="mt-6">
-                {isHosting ? (
-                  <CTAButton text={t.startNow} className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" to="#pricing" />
-                ) : (
-                  <CTAButton className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" />
-                )}
-              </div>
+              {!isNodeRed && (
+                <div className="mt-6">
+                  {isHosting ? (
+                    <CTAButton text={t.startNow} className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" to="#pricing" />
+                  ) : (
+                    <CTAButton className="bg-accent text-accent-foreground hover:bg-accent/90" size="lg" />
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </section>
