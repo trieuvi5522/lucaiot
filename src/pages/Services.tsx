@@ -2,10 +2,15 @@ import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
-import ServiceCard from "@/components/ServiceCard";
+import ServiceCard, { serviceIconMap } from "@/components/ServiceCard";
 import PageMeta from "@/components/PageMeta";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { hostingServices, customServices } from "@/data/services";
+
+const hostingLogos: Record<string, string> = {
+  "nodered-hosting": "/logos/nodered.svg",
+  "thingsboard-hosting": "/logos/thingsboard.svg",
+};
 
 const Services = () => {
   const { t, localePath } = useLanguage();
@@ -27,19 +32,37 @@ const Services = () => {
           </div>
         </section>
 
-        <SectionWrapper title={t.homeHostingTitle}>
+        <SectionWrapper title={t.homeHostingTitle} subtitle={t.servicesHostingSubtitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {hostingServices.map((s) => (
-              <ServiceCard key={s.id} service={s} />
+              <ServiceCard
+                key={s.id}
+                service={s}
+                hideCategoryLabel
+                topVisual={
+                  hostingLogos[s.id] ? (
+                    <img
+                      src={hostingLogos[s.id]}
+                      alt={s.id.includes("nodered") ? "Node-RED" : "ThingsBoard"}
+                      className="h-7 w-auto object-contain"
+                    />
+                  ) : undefined
+                }
+              />
             ))}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">{t.servicesHostingNote}</p>
         </SectionWrapper>
 
-        <SectionWrapper title={t.homeServicesTitle} className="bg-muted/50">
+        <SectionWrapper title={t.homeServicesTitle} subtitle={t.servicesIotSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {customServices.map((s) => (
-              <ServiceCard key={s.id} service={s} />
+              <ServiceCard
+                key={s.id}
+                service={s}
+                hideCategoryLabel
+                topVisual={serviceIconMap[s.id]}
+              />
             ))}
           </div>
           <div className="text-center mt-6">
