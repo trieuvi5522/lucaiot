@@ -17,8 +17,8 @@ export const services: Service[] = [
       ls("Powered by super-fast CPUs and NVMe/SSD disks", "Vận hành trên hạ tầng CPU hiệu năng cao và ổ cứng NVMe/SSD tốc độ cao"),
     ],
     heroText: ls(
-      "Focus on building automation flows, not managing servers. Our managed Node-RED hosting gives you production-ready instances with industrial protocol support out of the box.",
-      "Tập trung xây dựng luồng tự động hoá, không còn nỗi lo quản lý server. Node-RED được tôi quản lý, back up. Cung cấp cho bạn instance sẵn sàng sản xuất để đưa vào sử dụng"
+      "Focus on building your project and leave the infrastructure concerns behind. I'll handle operations and scheduled backups for you, delivering a production-ready Node-RED system so you can start deploying your project immediately.",
+      "Tập trung phát triển dự án, gác lại mọi nỗi lo về quản trị hạ tầng. Tôi sẽ thay bạn đảm nhận việc vận hành và sao lưu định kỳ, mang đến cho bạn một hệ thống Node-RED chuẩn 'production-ready' để triển khai dự án ngay lập tức."
     ),
     targetUsers: [
       ls("Automation engineers needing reliable Node-RED infrastructure", "Kỹ sư tự động hoá cần hạ tầng Node-RED đáng tin cậy"),

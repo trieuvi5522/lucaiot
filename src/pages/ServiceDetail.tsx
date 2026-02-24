@@ -72,7 +72,7 @@ const ServiceDetail = () => {
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {loc(service.title)}
               </h1>
-              <p className="mt-4 text-lg text-primary-foreground/70 max-w-2xl leading-relaxed">
+              <p className="mt-4 text-lg text-primary-foreground/70 max-w-3xl leading-relaxed" style={{ textWrap: 'balance' } as React.CSSProperties}>
                 {loc(service.heroText)}
               </p>
               <div className="mt-6">

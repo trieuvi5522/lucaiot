@@ -22,12 +22,12 @@ const Services = () => {
       <main className="flex-1">
         <section className="bg-hero py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <div className="max-w-2xl animate-fade-in">
+            <div className="max-w-3xl animate-fade-in">
               <p className="text-accent font-display font-medium text-sm uppercase tracking-wider mb-3">{t.servicesHeroLabel}</p>
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {t.servicesHeroTitle}
               </h1>
-              <p className="mt-4 text-lg text-primary-foreground/70">{t.servicesHeroDesc}</p>
+              <p className="mt-4 text-lg text-primary-foreground/70 max-w-3xl" style={{ textWrap: 'balance' } as React.CSSProperties}>{t.servicesHeroDesc}</p>
             </div>
           </div>
         </section>
