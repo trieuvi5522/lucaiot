@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import PricingTable from "@/components/PricingTable";
+import PricingRowList from "@/components/PricingRowList";
 import PlanRequestModal from "@/components/PlanRequestModal";
 import CTAButton from "@/components/CTAButton";
 import PageMeta from "@/components/PageMeta";
@@ -45,7 +46,8 @@ const ServiceDetail = () => {
   const relatedServices = services.filter((s) => service.relatedServiceIds.includes(s.id));
   const relatedUseCases = useCases.filter((u) => service.relatedUseCaseIds.includes(u.id));
   const isHosting = service.group === "hosting";
-
+  const isNodeRed = service.id === "nodered-hosting";
+  const useRowPricing = isNodeRed && service.pricingPlans?.[0]?.specs;
   const handleSelectPlan = (planName: string) => {
     setSelectedPlan(planName);
     setModalOpen(true);
@@ -117,16 +119,18 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        <SectionWrapper title={t.sdCapabilities} className="bg-muted/50">
-          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {service.technicalCapabilities.map((cap, i) => (
-              <div key={i} className="flex items-center gap-2 text-foreground">
-                <Cpu size={16} className="text-accent shrink-0" />
-                <span className="text-sm">{cap}</span>
-              </div>
-            ))}
-          </div>
-        </SectionWrapper>
+        {service.technicalCapabilities.length > 0 && (
+          <SectionWrapper title={t.sdCapabilities} className="bg-muted/50">
+            <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {service.technicalCapabilities.map((cap, i) => (
+                <div key={i} className="flex items-center gap-2 text-foreground">
+                  <Cpu size={16} className="text-accent shrink-0" />
+                  <span className="text-sm">{cap}</span>
+                </div>
+              ))}
+            </div>
+          </SectionWrapper>
+        )}
 
         <SectionWrapper title={t.sdProcess}>
           <div className="max-w-3xl mx-auto">
@@ -149,7 +153,11 @@ const ServiceDetail = () => {
         {service.pricingType === "public_packages" && service.pricingPlans ? (
           <SectionWrapper title={t.sdPricingPlans} className="bg-muted/50" id="pricing">
             <div className="max-w-4xl mx-auto">
-              <PricingTable plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
+              {useRowPricing ? (
+                <PricingRowList plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
+              ) : (
+                <PricingTable plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
+              )}
             </div>
           </SectionWrapper>
         ) : (
