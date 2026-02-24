@@ -291,7 +291,7 @@ const en: TranslationStrings = {
   /* Services */
   servicesHeroLabel: "What I Offer",
   servicesHeroTitle: "Services Offer",
-  servicesHeroDesc: "From hosting to end-to-end IoT design and implementation.",
+  servicesHeroDesc: "From hosting infrastructure management to end-to-end IoT system design and deployment — I'm always ready to support you with optimized solutions for every stage of growth.",
   servicesHostingSubtitle: "Managed cloud hosting for your IoT platforms — stable, secure, and ready to scale.",
   servicesHostingNote: "All hosting services include transparent public pricing — view each service page for detailed plans and comparison.",
   servicesIotSubtitle: "End-to-end IoT consulting, design, and deployment tailored to your requirements.",
@@ -480,8 +480,8 @@ const vi: TranslationStrings = {
   /* Services */
   servicesHeroLabel: "Dịch vụ cung cấp",
   servicesHeroTitle: "Dịch vụ",
-  servicesHeroDesc: "Từ dịch vụ quản lý hosting đến thiết kế và triển khai hệ thống IoT end-to-end — chọn dịch vụ phù hợp với nhu cầu hiện tại của bạn.",
-  servicesHostingSubtitle: "Giải pháp hosting Node-RED và ThingsBoard cho bạn — bảo mật, ổn định và sẵn sàng mở rộng.",
+  servicesHeroDesc: "Từ quản trị hạ tầng hosting đến thiết kế và triển khai hệ thống IoT toàn diện — Tôi luôn sẵn sàng đồng hành cùng bạn với những giải pháp tối ưu theo từng giai đoạn phát triển.",
+  servicesHostingSubtitle: "Giải pháp hosting Node-RED và ThingsBoard — bảo mật, ổn định, sẵn sàng mở rộng.",
   servicesHostingNote: "Tất cả dịch vụ hosting đều có giá công khai minh bạch — xem trang từng dịch vụ để so sánh chi tiết.",
   servicesIotSubtitle: "Tư vấn, thiết kế, tích hợp giải pháp IoT end-to-end cho hệ thống công nghiệp và smart home.",
   servicesIotNote: "Mỗi dự án IoT là duy nhất —",
