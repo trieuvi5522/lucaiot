@@ -90,7 +90,7 @@ const About = () => {
 
         {/* Technical Expertise */}
         <SectionWrapper title={t.aboutExpertiseTitle}>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
             {t.aboutSkills.map((skill, i) => {
               const colonIdx = skill.indexOf(":");
               const label = colonIdx > -1 ? skill.slice(0, colonIdx) : skill;
@@ -98,21 +98,19 @@ const About = () => {
               return (
                 <div
                   key={i}
-                  className="bg-card rounded-lg border border-border p-5 shadow-card flex items-start gap-4"
+                  className="bg-card rounded-lg border border-border p-6 shadow-card flex flex-col items-center text-center gap-3"
                 >
-                  <div className="shrink-0 w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center mt-0.5">
-                    <CheckCircle2 size={16} className="text-accent" />
+                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+                    <CheckCircle2 size={18} className="text-accent" />
                   </div>
-                  <div className="min-w-0">
-                    <h3 className="font-display font-semibold text-card-foreground text-sm leading-snug">
-                      {label}
-                    </h3>
-                    {desc && (
-                      <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
-                        {desc}
-                      </p>
-                    )}
-                  </div>
+                  <h3 className="font-display font-semibold text-card-foreground text-sm leading-snug">
+                    {label}
+                  </h3>
+                  {desc && (
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {desc}
+                    </p>
+                  )}
                 </div>
               );
             })}
