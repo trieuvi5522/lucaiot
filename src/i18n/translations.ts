@@ -480,7 +480,7 @@ const vi: TranslationStrings = {
   /* Services */
   servicesHeroLabel: "Dịch vụ cung cấp",
   servicesHeroTitle: "Dịch vụ",
-  servicesHeroDesc: "Từ quản trị hạ tầng hosting đến thiết kế và triển khai hệ thống IoT toàn diện — Tôi luôn sẵn sàng đồng hành cùng bạn với những giải pháp tối ưu theo từng giai đoạn phát triển.",
+  servicesHeroDesc: "Từ quản trị hạ tầng hosting đến thiết kế và triển khai hệ thống IoT toàn diện — Tôi đồng hành cùng bạn với giải pháp tối ưu theo từng giai đoạn phát triển.",
   servicesHostingSubtitle: "Giải pháp hosting Node-RED và ThingsBoard — bảo mật, ổn định, sẵn sàng mở rộng.",
   servicesHostingNote: "Tất cả dịch vụ hosting đều có giá công khai minh bạch — xem trang từng dịch vụ để so sánh chi tiết.",
   servicesIotSubtitle: "Tư vấn, thiết kế, tích hợp giải pháp IoT end-to-end cho hệ thống công nghiệp và smart home.",
