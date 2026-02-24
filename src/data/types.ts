@@ -23,6 +23,8 @@ export interface PricingPlan {
   features: string[];
   highlighted?: boolean;
   ctaText: string;
+  /** Optional spec columns for row-style pricing (e.g. vCPU, RAM, Disk) */
+  specs?: { label: string; value: string }[];
 }
 
 export interface FAQItem {
