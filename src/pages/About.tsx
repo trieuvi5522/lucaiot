@@ -12,6 +12,11 @@ import {
   Cable,
   LayoutDashboard,
   Settings,
+  Network,
+  CloudUpload,
+  Workflow,
+  Database,
+  ShieldCheck,
 } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -23,6 +28,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 const processIcons = [Search, PenTool, Cpu, Cable, LayoutDashboard, Settings];
 const whyIcons = [Wrench, BookOpen, Award, Target, Handshake, Clock];
+const expertiseIcons = [Network, CloudUpload, Workflow, LayoutDashboard, Database, ShieldCheck];
 
 const About = () => {
   const { t, loc } = useLanguage();
@@ -95,13 +101,14 @@ const About = () => {
               const colonIdx = skill.indexOf(":");
               const label = colonIdx > -1 ? skill.slice(0, colonIdx) : skill;
               const desc = colonIdx > -1 ? skill.slice(colonIdx + 1).trim() : "";
+              const ExpertiseIcon = expertiseIcons[i] || Network;
               return (
                 <div
                   key={i}
                   className="bg-card rounded-lg border border-border p-6 shadow-card flex flex-col items-center text-center gap-3"
                 >
                   <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
-                    <CheckCircle2 size={18} className="text-accent" />
+                    <ExpertiseIcon size={18} className="text-accent" />
                   </div>
                   <h3 className="font-display font-semibold text-card-foreground text-sm leading-snug">
                     {label}
