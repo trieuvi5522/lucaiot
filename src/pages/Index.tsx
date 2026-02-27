@@ -23,6 +23,7 @@ import PageMeta from "@/components/PageMeta";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { hostingServices, customServices } from "@/data/services";
 import { useCases } from "@/data/useCases";
+import IoTNetworkOrb from "@/components/IoTNetworkOrb";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const processIcons = [Search, PenTool, Cpu, Cable, LayoutDashboard, Settings];
@@ -62,25 +63,28 @@ const Index = () => {
             <div className="absolute inset-0 bg-hero" style={{ mixBlendMode: "multiply" }} />
           </div>
           <div className="relative container mx-auto px-4 py-24 md:py-36">
-            <div className="max-w-2xl animate-fade-in">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
-                {t.homeHeroTitle}
-                <br className="hidden md:block" />
-                <span className="text-gradient">{t.homeHeroHighlight}</span>
-              </h1>
-              <p className="mt-6 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
-                {t.homeHeroDesc}
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3 animate-fade-in-delay">
-                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link to={localePath("/contact")}>
-                    {t.primaryCTA} <ArrowRight size={18} className="ml-2" />
-                  </Link>
-                </Button>
-                <Button asChild variant="secondary" size="lg">
-                  <Link to={localePath("/services")}>{t.viewServices}</Link>
-                </Button>
+            <div className="flex items-center gap-8 lg:gap-12">
+              <div className="max-w-2xl animate-fade-in flex-1">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
+                  {t.homeHeroTitle}
+                  <br className="hidden md:block" />
+                  <span className="text-gradient">{t.homeHeroHighlight}</span>
+                </h1>
+                <p className="mt-6 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
+                  {t.homeHeroDesc}
+                </p>
+                <div className="mt-8 flex flex-col sm:flex-row gap-3 animate-fade-in-delay">
+                  <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                    <Link to={localePath("/contact")}>
+                      {t.primaryCTA} <ArrowRight size={18} className="ml-2" />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="secondary" size="lg">
+                    <Link to={localePath("/services")}>{t.viewServices}</Link>
+                  </Button>
+                </div>
               </div>
+              <IoTNetworkOrb />
             </div>
           </div>
         </section>
