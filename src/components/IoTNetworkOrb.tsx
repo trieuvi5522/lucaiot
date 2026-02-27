@@ -1,116 +1,137 @@
-const IoTNetworkOrb = () => {
-  // Node positions (cx, cy) within a 300x300 viewBox, centered at 150,150
-  const nodes = [
-    { cx: 150, cy: 60 },
-    { cx: 210, cy: 80 },
-    { cx: 245, cy: 130 },
-    { cx: 240, cy: 190 },
-    { cx: 205, cy: 235 },
-    { cx: 150, cy: 250 },
-    { cx: 95, cy: 235 },
-    { cx: 60, cy: 190 },
-    { cx: 55, cy: 130 },
-    { cx: 90, cy: 80 },
-    // Inner ring
-    { cx: 150, cy: 110 },
-    { cx: 185, cy: 135 },
-    { cx: 180, cy: 180 },
-    { cx: 150, cy: 200 },
-    { cx: 120, cy: 180 },
-    { cx: 115, cy: 135 },
-  ];
-
-  // Connections between node indices
-  const lines = [
-    [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 0],
-    [0, 10], [1, 11], [3, 12], [5, 13], [7, 14], [9, 15],
-    [10, 11], [11, 12], [12, 13], [13, 14], [14, 15], [15, 10],
-    [10, 13], [11, 14], [12, 15],
-  ];
-
+const CloudIoTVisual = () => {
   return (
     <div className="hidden md:flex items-center justify-center w-full max-w-md lg:max-w-lg xl:max-w-xl">
       <svg
-        viewBox="0 0 300 300"
+        viewBox="0 0 320 280"
         className="w-full h-auto animate-orb-float motion-reduce:animate-none"
         aria-hidden="true"
       >
         <defs>
-          <radialGradient id="orb-grad" cx="40%" cy="35%" r="55%">
-            <stop offset="0%" stopColor="hsl(185 70% 55%)" stopOpacity="0.18" />
-            <stop offset="60%" stopColor="hsl(185 70% 42%)" stopOpacity="0.10" />
-            <stop offset="100%" stopColor="hsl(220 55% 15%)" stopOpacity="0.04" />
+          {/* Cloud glow */}
+          <radialGradient id="cloud-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="hsl(185 70% 55%)" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="hsl(185 70% 55%)" stopOpacity="0" />
           </radialGradient>
-          <radialGradient id="orb-stroke-grad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="hsl(185 70% 55%)" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="hsl(185 70% 42%)" stopOpacity="0.12" />
+          {/* Packet gradient */}
+          <radialGradient id="packet-dot">
+            <stop offset="0%" stopColor="hsl(185 70% 60%)" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="hsl(185 70% 50%)" stopOpacity="0.4" />
           </radialGradient>
-          <linearGradient id="line-shimmer" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(185 70% 50%)" stopOpacity="0">
-              <animate attributeName="stopOpacity" values="0;0.4;0" dur="4s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="50%" stopColor="hsl(185 70% 55%)" stopOpacity="0.3">
-              <animate attributeName="stopOpacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="100%" stopColor="hsl(185 70% 50%)" stopOpacity="0">
-              <animate attributeName="stopOpacity" values="0;0.4;0" dur="4s" repeatCount="indefinite" />
-            </stop>
+          {/* Cloud body fill */}
+          <linearGradient id="cloud-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(185 70% 55%)" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="hsl(220 55% 15%)" stopOpacity="0.06" />
           </linearGradient>
         </defs>
 
-        {/* Main orb */}
-        <circle cx="150" cy="150" r="120" fill="url(#orb-grad)" stroke="url(#orb-stroke-grad)" strokeWidth="1" />
-        <circle cx="150" cy="150" r="80" fill="none" stroke="hsl(185 70% 50%)" strokeOpacity="0.08" strokeWidth="0.5" strokeDasharray="4 6" />
-
-        {/* Connecting lines */}
-        {lines.map(([a, b], i) => (
-          <line
-            key={`l${i}`}
-            x1={nodes[a].cx} y1={nodes[a].cy}
-            x2={nodes[b].cx} y2={nodes[b].cy}
-            stroke="url(#line-shimmer)"
-            strokeWidth="0.7"
-            className="motion-reduce:[&_animate]:hidden"
+        {/* Cloud breathing glow */}
+        <ellipse cx="160" cy="75" rx="70" ry="40" fill="url(#cloud-glow)">
+          <animate
+            attributeName="rx"
+            values="70;75;70"
+            dur="5s"
+            repeatCount="indefinite"
+            className="motion-reduce:hidden"
           />
-        ))}
-
-        {/* Nodes */}
-        {nodes.map((n, i) => (
-          <circle
-            key={`n${i}`}
-            cx={n.cx} cy={n.cy}
-            r={i < 10 ? 3.5 : 2.5}
-            fill="hsl(185 70% 55%)"
-            fillOpacity="0.7"
-            className="animate-node-pulse motion-reduce:animate-none"
-            style={{ animationDelay: `${i * 0.35}s` }}
+          <animate
+            attributeName="opacity"
+            values="1;0.7;1"
+            dur="5s"
+            repeatCount="indefinite"
+            className="motion-reduce:hidden"
           />
-        ))}
+        </ellipse>
 
-        {/* Micro-icons at low opacity */}
-        {/* Chip icon */}
-        <g transform="translate(140, 140)" opacity="0.12">
-          <rect x="0" y="0" width="20" height="20" rx="3" fill="none" stroke="hsl(185 70% 60%)" strokeWidth="1" />
-          <line x1="5" y1="0" x2="5" y2="-4" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-          <line x1="10" y1="0" x2="10" y2="-4" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-          <line x1="15" y1="0" x2="15" y2="-4" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-          <line x1="5" y1="20" x2="5" y2="24" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-          <line x1="10" y1="20" x2="10" y2="24" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-          <line x1="15" y1="20" x2="15" y2="24" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-        </g>
-        {/* Wifi icon */}
-        <g transform="translate(85, 120)" opacity="0.09">
-          <path d="M0 6 Q8 -4 16 6" fill="none" stroke="hsl(185 70% 60%)" strokeWidth="1" />
-          <path d="M3 4 Q8 -1 13 4" fill="none" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-          <circle cx="8" cy="7" r="1.2" fill="hsl(185 70% 60%)" />
-        </g>
-        {/* Cloud icon */}
-        <g transform="translate(195, 160)" opacity="0.09">
-          <path d="M4 12 Q0 12 0 9 Q0 6 3 5 Q4 2 8 2 Q12 2 13 5 Q16 5 16 8 Q16 12 12 12 Z" fill="none" stroke="hsl(185 70% 60%)" strokeWidth="0.8" />
-        </g>
+        {/* Cloud shape */}
+        <path
+          d="M110 95 Q90 95 90 78 Q90 60 108 55 Q115 38 135 38 Q150 38 158 48 Q162 35 180 35 Q200 35 205 52 Q225 52 228 68 Q232 85 215 95 Z"
+          fill="url(#cloud-fill)"
+          stroke="hsl(185 70% 55%)"
+          strokeOpacity="0.3"
+          strokeWidth="1"
+        />
+        {/* Cloud label (very faint) */}
+        <text x="160" y="75" textAnchor="middle" fontSize="8" fill="hsl(185 70% 55%)" fillOpacity="0.25" fontFamily="sans-serif" fontWeight="600">CLOUD</text>
+
+        {/* Edge gateway box */}
+        <rect x="140" y="135" width="40" height="24" rx="4" fill="hsl(220 55% 15%)" fillOpacity="0.08" stroke="hsl(185 70% 55%)" strokeOpacity="0.25" strokeWidth="0.8" />
+        <text x="160" y="150" textAnchor="middle" fontSize="6" fill="hsl(185 70% 55%)" fillOpacity="0.3" fontFamily="sans-serif">EDGE</text>
+        {/* Chip pins on gateway */}
+        <line x1="148" y1="135" x2="148" y2="131" stroke="hsl(185 70% 55%)" strokeOpacity="0.15" strokeWidth="0.6" />
+        <line x1="155" y1="135" x2="155" y2="131" stroke="hsl(185 70% 55%)" strokeOpacity="0.15" strokeWidth="0.6" />
+        <line x1="165" y1="135" x2="165" y2="131" stroke="hsl(185 70% 55%)" strokeOpacity="0.15" strokeWidth="0.6" />
+        <line x1="172" y1="135" x2="172" y2="131" stroke="hsl(185 70% 55%)" strokeOpacity="0.15" strokeWidth="0.6" />
+
+        {/* Connection: Cloud to Edge */}
+        <path
+          d="M160 95 L160 135"
+          fill="none"
+          stroke="hsl(185 70% 55%)"
+          strokeOpacity="0.18"
+          strokeWidth="0.8"
+          strokeDasharray="3 3"
+        />
+        {/* Packet cloud→edge */}
+        <circle r="2" fill="url(#packet-dot)">
+          <animateMotion dur="3s" repeatCount="indefinite" className="motion-reduce:hidden">
+            <mpath href="#path-cloud-edge" />
+          </animateMotion>
+        </circle>
+        <path id="path-cloud-edge" d="M160 95 L160 135" fill="none" stroke="none" />
+
+        {/* Device nodes positions & paths to edge */}
+        {/* Device 1 - top-left sensor */}
+        <circle cx="70" cy="195" r="4" fill="hsl(185 70% 55%)" fillOpacity="0.5" className="animate-node-pulse motion-reduce:animate-none" style={{ animationDelay: "0s" }} />
+        <text x="70" y="210" textAnchor="middle" fontSize="5" fill="hsl(185 70% 55%)" fillOpacity="0.2" fontFamily="sans-serif">Sensor</text>
+        <path id="path-d1" d="M70 195 Q100 175 140 147" fill="none" stroke="hsl(185 70% 55%)" strokeOpacity="0.12" strokeWidth="0.7" />
+        <circle r="1.5" fill="url(#packet-dot)">
+          <animateMotion dur="4s" repeatCount="indefinite" className="motion-reduce:hidden">
+            <mpath href="#path-d1" />
+          </animateMotion>
+        </circle>
+
+        {/* Device 2 - bottom-left PLC */}
+        <circle cx="95" cy="240" r="4" fill="hsl(185 70% 55%)" fillOpacity="0.5" className="animate-node-pulse motion-reduce:animate-none" style={{ animationDelay: "0.6s" }} />
+        <text x="95" y="255" textAnchor="middle" fontSize="5" fill="hsl(185 70% 55%)" fillOpacity="0.2" fontFamily="sans-serif">PLC</text>
+        <path id="path-d2" d="M95 240 Q120 200 145 159" fill="none" stroke="hsl(185 70% 55%)" strokeOpacity="0.12" strokeWidth="0.7" />
+        <circle r="1.5" fill="url(#packet-dot)">
+          <animateMotion dur="4.5s" repeatCount="indefinite" className="motion-reduce:hidden">
+            <mpath href="#path-d2" />
+          </animateMotion>
+        </circle>
+
+        {/* Device 3 - bottom-center meter */}
+        <circle cx="160" cy="250" r="4" fill="hsl(185 70% 55%)" fillOpacity="0.5" className="animate-node-pulse motion-reduce:animate-none" style={{ animationDelay: "1.2s" }} />
+        <text x="160" y="265" textAnchor="middle" fontSize="5" fill="hsl(185 70% 55%)" fillOpacity="0.2" fontFamily="sans-serif">Meter</text>
+        <path id="path-d3" d="M160 250 L160 159" fill="none" stroke="hsl(185 70% 55%)" strokeOpacity="0.12" strokeWidth="0.7" />
+        <circle r="1.5" fill="url(#packet-dot)">
+          <animateMotion dur="3.8s" repeatCount="indefinite" className="motion-reduce:hidden">
+            <mpath href="#path-d3" />
+          </animateMotion>
+        </circle>
+
+        {/* Device 4 - bottom-right thermostat */}
+        <circle cx="225" cy="240" r="4" fill="hsl(185 70% 55%)" fillOpacity="0.5" className="animate-node-pulse motion-reduce:animate-none" style={{ animationDelay: "1.8s" }} />
+        <text x="225" y="255" textAnchor="middle" fontSize="5" fill="hsl(185 70% 55%)" fillOpacity="0.2" fontFamily="sans-serif">Thermo</text>
+        <path id="path-d4" d="M225 240 Q200 200 175 159" fill="none" stroke="hsl(185 70% 55%)" strokeOpacity="0.12" strokeWidth="0.7" />
+        <circle r="1.5" fill="url(#packet-dot)">
+          <animateMotion dur="4.2s" repeatCount="indefinite" className="motion-reduce:hidden">
+            <mpath href="#path-d4" />
+          </animateMotion>
+        </circle>
+
+        {/* Device 5 - top-right camera */}
+        <circle cx="250" cy="195" r="4" fill="hsl(185 70% 55%)" fillOpacity="0.5" className="animate-node-pulse motion-reduce:animate-none" style={{ animationDelay: "2.4s" }} />
+        <text x="250" y="210" textAnchor="middle" fontSize="5" fill="hsl(185 70% 55%)" fillOpacity="0.2" fontFamily="sans-serif">Camera</text>
+        <path id="path-d5" d="M250 195 Q220 175 180 147" fill="none" stroke="hsl(185 70% 55%)" strokeOpacity="0.12" strokeWidth="0.7" />
+        <circle r="1.5" fill="url(#packet-dot)">
+          <animateMotion dur="3.5s" repeatCount="indefinite" className="motion-reduce:hidden">
+            <mpath href="#path-d5" />
+          </animateMotion>
+        </circle>
       </svg>
     </div>
   );
 };
 
-export default IoTNetworkOrb;
+export default CloudIoTVisual;
