@@ -158,6 +158,10 @@ export interface TranslationStrings {
   udCtaTitle: string;
   udCtaDesc: string;
   udNotFound: string;
+  udTechHighlights: string;
+  udFeature: string;
+  udApproach: string;
+  udBenefit: string;
 
   /* Form */
   formFullName: string;
@@ -348,6 +352,10 @@ const en: TranslationStrings = {
   udCtaTitle: "Want Similar Results?",
   udCtaDesc: "Let's discuss how IoT can transform your operations.",
   udNotFound: "Use Case Not Found",
+  udTechHighlights: "Technical Highlights",
+  udFeature: "Feature",
+  udApproach: "Technical Approach",
+  udBenefit: "Benefit",
 
   /* Form */
   formFullName: "Full Name *",
@@ -538,6 +546,10 @@ const vi: TranslationStrings = {
   udCtaTitle: "Muốn kết quả tương tự?",
   udCtaDesc: "Hãy trao đổi về cách IoT có thể chuyển đổi hoạt động của bạn.",
   udNotFound: "Không tìm thấy ứng dụng",
+  udTechHighlights: "Điểm nổi bật kỹ thuật",
+  udFeature: "Tính năng",
+  udApproach: "Phương pháp kỹ thuật",
+  udBenefit: "Lợi ích",
 
   /* Form */
   formFullName: "Họ và tên *",

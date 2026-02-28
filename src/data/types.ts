@@ -57,6 +57,21 @@ export interface Service {
   relatedUseCaseIds: string[];
 }
 
+export interface UseCaseSection {
+  id: string;
+  title: LocaleString;
+  body: LocaleString;
+  image?: string;
+  imageAlt?: LocaleString;
+  imageCaption?: LocaleString;
+}
+
+export interface TechHighlight {
+  feature: LocaleString;
+  technical: LocaleString;
+  benefit: LocaleString;
+}
+
 export interface UseCase {
   id: string;
   slug: string;
@@ -67,4 +82,7 @@ export interface UseCase {
   solution: LocaleString;
   results: LocaleString[];
   servicesUsed: string[];
+  heroImage?: string;
+  sections?: UseCaseSection[];
+  techHighlights?: TechHighlight[];
 }
