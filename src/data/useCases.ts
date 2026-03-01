@@ -84,10 +84,7 @@ export const useCases: UseCase[] = [
       "Smart Heat Control & Monitoring for 40 Apartments in Denmark",
       "Hệ Thống Điều Khiển & Giám Sát Nhiệt Lượng Thông Minh Cho 40 Căn Hộ Tại Đan Mạch"
     ),
-    shortDescription: ls(
-      "Offline-first buffer tank & DHW control across 40 apartments using Shelly edge logic, Node-RED orchestration, and a Datacake operations dashboard.",
-      "Điều khiển bồn đệm (Buffer Tank) và nước nóng sinh hoạt (DHW) cho 40 căn hộ theo hướng offline-first với Shelly, Node-RED và dashboard vận hành tập trung trên Datacake."
-    ),
+    shortDescription: ls("", ""),
     industry: ls("Smart Building / Heating", "Toà nhà thông minh / Hệ thống sưởi"),
     challenge: ls(
       "A multi-apartment heating system must stay stable even when the internet is unreliable, while allowing per-apartment customization and reducing wasted energy during low-demand hours.",
@@ -104,17 +101,16 @@ export const useCases: UseCase[] = [
       ls("Faster troubleshooting with online/offline and last-heard visibility", "Xử lý sự cố nhanh hơn nhờ theo dõi online/offline và last-heard"),
     ],
     servicesUsed: ["industrial-iot", "nodered-hosting"],
-    heroImage: "/use-cases/alkes-have/datacake-1.png",
+    hideChallenge: true,
+    hideSolution: true,
     sections: [
       {
         id: "overview",
         title: ls("Project Overview", "Tổng quan dự án"),
         body: ls(
-          "• Location: Alkes Have, Denmark\n• Scale: 40 independent apartments\n• Goal: Automate Buffer Tank and DHW control, optimize energy usage, and provide real-time operational visibility.",
-          "• Địa điểm: Alkes Have, Đan Mạch\n• Quy mô: 40 căn hộ độc lập\n• Mục tiêu: Tự động hoá điều khiển bồn đệm (Buffer Tank) và nước nóng sinh hoạt (DHW), tối ưu năng lượng và giám sát vận hành theo thời gian thực."
+          "• Customer: Alkes Have\n• Location: Denmark\n• Scale: 40 independent apartments\n• Goal: Automate Buffer Tank and DHW control, optimize energy usage, and provide real-time operational visibility.",
+          "• Khách hàng: Alkes Have\n• Địa điểm: Đan Mạch\n• Quy mô: 40 căn hộ độc lập\n• Mục tiêu: Tự động hoá điều khiển bồn đệm (Buffer Tank) và nước nóng sinh hoạt (DHW), tối ưu năng lượng và giám sát vận hành theo thời gian thực."
         ),
-        image: "/use-cases/alkes-have/datacake-1.png",
-        imageAlt: ls("Global operations dashboard overview", "Dashboard giám sát tổng quan toàn hệ thống"),
       },
       {
         id: "challenges",

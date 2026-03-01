@@ -102,9 +102,11 @@ const UseCaseDetail = () => {
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {loc(useCase.title)}
               </h1>
-              <p className="mt-4 text-lg text-primary-foreground/70 max-w-2xl leading-relaxed">
-                {loc(useCase.shortDescription)}
-              </p>
+              {loc(useCase.shortDescription) && (
+                <p className="mt-4 text-lg text-primary-foreground/70 max-w-2xl leading-relaxed">
+                  {loc(useCase.shortDescription)}
+                </p>
+              )}
             </div>
           </div>
         </section>
@@ -125,34 +127,38 @@ const UseCaseDetail = () => {
         )}
 
         {/* Challenge */}
-        <SectionWrapper className={useCase.heroImage ? "" : ""}>
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-start gap-4">
-              <div className="shrink-0 w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
-                <Target size={20} className="text-destructive" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-display font-bold text-foreground mb-3">{t.udChallenge}</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">{loc(useCase.challenge)}</p>
+        {!useCase.hideChallenge && (
+          <SectionWrapper>
+            <div className="max-w-3xl mx-auto">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
+                  <Target size={20} className="text-destructive" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-3">{t.udChallenge}</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">{loc(useCase.challenge)}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </SectionWrapper>
+          </SectionWrapper>
+        )}
 
         {/* Solution */}
-        <SectionWrapper className="bg-muted/50">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-start gap-4">
-              <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                <Lightbulb size={20} className="text-accent" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-display font-bold text-foreground mb-3">{t.udSolution}</h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">{loc(useCase.solution)}</p>
+        {!useCase.hideSolution && (
+          <SectionWrapper className="bg-muted/50">
+            <div className="max-w-3xl mx-auto">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <Lightbulb size={20} className="text-accent" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-3">{t.udSolution}</h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">{loc(useCase.solution)}</p>
+                </div>
               </div>
             </div>
-          </div>
-        </SectionWrapper>
+          </SectionWrapper>
+        )}
 
         {/* Sections (if any) */}
         {useCase.sections?.map((section, idx) => (
