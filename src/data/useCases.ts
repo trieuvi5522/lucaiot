@@ -95,10 +95,9 @@ export const useCases: UseCase[] = [
       "Kiến trúc 3 lớp: Shelly chạy logic cục bộ offline, Node-RED điều phối mapping MQTT và cấu hình retain, Datacake cung cấp dashboard vận hành tập trung, timer tiết kiệm điện và cơ chế override."
     ),
     results: [
-      ls("Stable operation with offline-first local logic", "Vận hành ổn định nhờ logic cục bộ theo hướng offline-first"),
-      ls("Centralized monitoring across 40 apartments from a single dashboard", "Giám sát tập trung toàn bộ 40 căn hộ trên một dashboard"),
-      ls("Reduced unnecessary heating runtime via timer-based valve scheduling", "Giảm vận hành dư thừa nhờ lịch timer cho van bồn đệm"),
-      ls("Faster troubleshooting with online/offline and last-heard visibility", "Xử lý sự cố nhanh hơn nhờ theo dõi online/offline và last-heard"),
+      ls("Peace of mind: the heating system runs 24/7 even during connectivity issues.", "Sự an tâm tuyệt đối: Hệ thống sưởi luôn hoạt động 24/7 bất chấp sự cố đường truyền."),
+      ls("Real energy savings: timer-based buffer valve scheduling significantly reduces unnecessary electricity usage.", "Tiết kiệm năng lượng thực tế: Việc lên lịch cho van bồn đệm giúp cắt giảm đáng kể lượng điện tiêu thụ dư thừa."),
+      ls("Smarter operations: technicians can troubleshoot remotely, reducing on-site maintenance cost.", "Quản lý thông minh: Kỹ thuật viên có thể xử lý sự cố từ xa, giảm thiểu chi phí bảo trì tại hiện trường."),
     ],
     servicesUsed: ["industrial-iot", "nodered-hosting"],
     hideChallenge: true,
@@ -108,32 +107,32 @@ export const useCases: UseCase[] = [
         id: "overview",
         title: ls("Project Overview", "Tổng quan dự án"),
         body: ls(
-          "• Customer: Alkes Have\n• Location: Denmark\n• Scale: 40 independent apartments\n• Goal: Automate Buffer Tank and DHW control, optimize energy usage, and provide real-time operational visibility.",
-          "• Khách hàng: Alkes Have\n• Địa điểm: Đan Mạch\n• Quy mô: 40 căn hộ độc lập\n• Mục tiêu: Tự động hoá điều khiển bồn đệm (Buffer Tank) và nước nóng sinh hoạt (DHW), tối ưu năng lượng và giám sát vận hành theo thời gian thực."
+          "My project with Alkes Have in Denmark is a clear example of applying IoT to solve large-scale heat management. With 40 independent apartments, the core goal was to automate Buffer Tank and DHW control—balancing energy efficiency with maximum comfort.",
+          "Dự án của tôi với đối tác Alkes Have tại Đan Mạch là minh chứng điển hình cho việc ứng dụng IoT để giải quyết bài toán quản lý nhiệt lượng quy mô lớn. Với 40 căn hộ độc lập, mục tiêu trọng tâm là tự động hóa điều khiển bồn đệm (Buffer Tank) và nước nóng sinh hoạt (DHW), đảm bảo sự cân bằng hoàn hảo giữa tiết kiệm năng lượng và tiện nghi tối đa."
         ),
       },
       {
         id: "challenges",
         title: ls("Key Challenges", "Thách thức đặt ra"),
         body: ls(
-          "1) Absolute stability: heating must keep running even if the internet is down (fail-safe).\n2) Per-apartment customization: different temperature needs and usage windows.\n3) Energy optimization: avoid wasting power during low-demand periods.",
-          "1) Tính ổn định tuyệt đối: hệ thống vẫn phải chạy khi mất Internet (fail-safe).\n2) Tuỳ biến theo từng căn hộ: ngưỡng nhiệt và khung giờ sử dụng khác nhau.\n3) Tối ưu năng lượng: tránh lãng phí điện trong các khung giờ thấp điểm/ít nhu cầu."
+          "To operate the building efficiently, the system had to overcome three major barriers:\n- Fail-safe operation: remain stable and keep running even when the internet is down.\n- Personalized demand: each apartment has different habits and preferred temperature thresholds.\n- Cost optimization: reduce wasted electricity during low-demand hours or when there is no usage.",
+          "Để vận hành hiệu quả một tòa nhà, hệ thống phải vượt qua 3 rào cản lớn:\n- Vận hành không gián đoạn: Hệ thống phải duy trì tính ổn định tuyệt đối ngay cả khi mất kết nối Internet (chế độ Fail-safe).\n- Cá nhân hóa nhu cầu: Mỗi căn hộ là một thực thể riêng biệt với thói quen sinh hoạt và ngưỡng nhiệt độ mong muốn khác nhau.\n- Bài toán chi phí: Tối ưu hóa việc sử dụng điện năng, tránh lãng phí vào các khung giờ thấp điểm hoặc khi không có nhu cầu sử dụng."
         ),
       },
       {
         id: "solution-overview",
         title: ls("Solution Overview", "Giải pháp đề ra"),
         body: ls(
-          "A practical 3-layer architecture designed for stable real-world operations:\n• Layer 1 (Edge): Shelly runs offline local control to keep heating stable even without internet.\n• Layer 2 (Orchestration): Node-RED maps MQTT data per apartment and pushes configuration using MQTT retain.\n• Layer 3 (Operations): Datacake provides a single monitoring dashboard plus centralized control and scheduling.",
-          "Kiến trúc 3 lớp tập trung vào vận hành ổn định trong thực tế:\n• Lớp 1 (Edge): Shelly chạy logic cục bộ offline để hệ thống vẫn hoạt động khi mất Internet.\n• Lớp 2 (Điều phối): Node-RED mapping dữ liệu MQTT theo từng căn hộ và đẩy cấu hình bằng MQTT retain.\n• Lớp 3 (Vận hành): Datacake cung cấp dashboard giám sát tập trung, điều khiển và lập lịch."
+          "Solution: a \"Smart & Resilient\" 3-layer architecture\n- Edge Computing: Shelly runs on-site logic so the system still operates when the internet is down.\n- Orchestration: Node-RED maps data per apartment and uses MQTT Retain to restore configuration after reconnect.\n- Operations: Datacake provides a centralized dashboard with manual override and timer scheduling for energy optimization.",
+          "Giải pháp: Kiến trúc 3 lớp \"Thông minh & Bền bỉ\"\n- Tầng biên (Edge Computing): Shelly vận hành logic tại chỗ để hệ thống vẫn hoạt động khi mất Internet.\n- Tầng điều phối: Node-RED định danh dữ liệu theo từng căn hộ và đẩy cấu hình bằng MQTT Retain để tự phục hồi sau khi reconnect.\n- Tầng vận hành: Datacake cung cấp dashboard tập trung, điều khiển manual/override và lập lịch (timer) cho tối ưu năng lượng."
         ),
       },
       {
         id: "edge-shelly",
         title: ls("Layer 1 — Edge Computing (Shelly)", "Lớp 1 — Edge Computing (Shelly)"),
         body: ls(
-          "Shelly runs the local 'nervous system' for the project.\n• Devices: Shelly Plus 2PM + temperature add-on for Buffer/DHW monitoring and valve control.\n• Local scripts: Auto-control and MQTT reporting ensure decisions keep working even when cloud connectivity is lost.",
-          "Shelly đóng vai trò như \"hệ thần kinh\" tại biên, đảm bảo hệ thống chạy ổn định tại chỗ.\n• Thiết bị: Shelly Plus 2PM + cảm biến nhiệt Add-on để theo dõi Buffer/DHW và điều khiển van.\n• Logic cục bộ: script Auto-control và MQTT reporting giúp thiết bị tự đóng/ngắt theo nhiệt độ thực tế ngay cả khi mất kết nối cloud."
+          "Edge Computing: On-site intelligence with Shelly\nActing as the on-site \"nervous system\", Shelly Plus 2PM combined with temperature add-ons enables:\n- Autonomous operation: control scripts run directly on the device to switch valves based on real temperature—without waiting for cloud commands.\n- Instant response: removes latency and reduces risk during network outages.",
+          "Tầng biên (Edge Computing): Trí tuệ tại chỗ với Shelly\nĐóng vai trò là \"hệ thần kinh\" trực tiếp tại hiện trường, thiết bị Shelly Plus 2PM kết hợp cùng cảm biến nhiệt Add-on cho phép:\n- Tự chủ vận hành: Các script điều khiển chạy trực tiếp trên thiết bị giúp đóng/ngắt van dựa theo nhiệt độ thực tế mà không cần chờ lệnh từ Cloud.\n- Phản ứng tức thì: Loại bỏ độ trễ và rủi ro khi mất mạng."
         ),
         image: "/use-cases/alkes-have/shelly-1.png",
         imageAlt: ls("Shelly device used in the project", "Thiết bị Shelly sử dụng trong dự án"),
@@ -152,8 +151,8 @@ export const useCases: UseCase[] = [
         id: "orchestration-nodered",
         title: ls("Layer 2 — Orchestration (Node-RED)", "Lớp 2 — Điều phối (Node-RED)"),
         body: ls(
-          "Node-RED acts as the orchestration brain between devices and the platform:\n• MQTT data mapping: correctly maps each apartment's telemetry to its unique ID (no overlap).\n• State persistence: uses MQTT Retain for configuration so devices receive the latest settings immediately after reconnect.",
-          "Node-RED đóng vai trò điều phối giữa thiết bị và nền tảng:\n• Data mapping: ánh xạ dữ liệu MQTT của từng căn hộ về đúng ID, tránh chồng chéo.\n• State persistence: dùng MQTT Retain để thiết bị nhận cấu hình mới nhất ngay khi kết nối lại."
+          "Orchestration: Smart data management with Node-RED\nNode-RED acts as the \"conductor\" for system data flows:\n- Accurate identification: automatically maps each apartment's MQTT data to the correct management ID—preventing data mix-ups.\n- Self-recovery: uses MQTT Retain so devices immediately receive the latest configuration after reconnect.",
+          "Tầng điều phối: Quản lý dữ liệu thông minh qua Node-RED\nNode-RED đóng vai trò là \"nhạc trưởng\" điều phối các luồng thông tin:\n- Định danh chính xác: Tự động ánh xạ dữ liệu MQTT của từng căn hộ về đúng ID quản lý, loại bỏ sai sót dữ liệu.\n- Khả năng tự phục hồi: Sử dụng cơ chế MQTT Retain để đảm bảo thiết bị nhận lại ngay cấu hình gần nhất khi kết nối lại."
         ),
         image: "/use-cases/alkes-have/node-red.png",
         imageAlt: ls("Node-RED flows used for orchestration and mapping", "Luồng Node-RED dùng để điều phối và mapping"),
@@ -162,8 +161,8 @@ export const useCases: UseCase[] = [
         id: "platform-datacake",
         title: ls("Layer 3 — Operations Dashboard (Datacake)", "Lớp 3 — Trung tâm vận hành (Datacake)"),
         body: ls(
-          "A single-pane operations dashboard helps the operator manage all 40 apartments:\n• Global dashboard: online status, temperatures, valves, last-heard.\n• Real-time visibility across the entire building from one screen.",
-          "Dashboard vận hành tập trung giúp kỹ thuật viên kiểm soát toàn bộ 40 căn hộ:\n• Global dashboard: trạng thái online, nhiệt độ, van, last-heard.\n• Tầm nhìn toàn bộ toà nhà trên một màn hình."
+          "Operations: Centralized dashboard on Datacake\nThe status of all 40 apartments is brought into a single operations screen:\n- Multi-level monitoring: from a building-wide view down to per-apartment temperatures and valve states.\n- Flexible control: technicians can manually override or schedule timers with a few clicks.",
+          "Tầng vận hành: Dashboard tập trung trên Datacake\nToàn bộ trạng thái của 40 căn hộ được \"gói gọn\" trong một màn hình điều khiển:\n- Giám sát đa tầng: Từ cái nhìn tổng thể toàn tòa nhà đến chi tiết từng thông số nhiệt độ, trạng thái van của từng hộ dân.\n- Tương tác linh hoạt: Kỹ thuật viên có thể can thiệp thủ công (Override) hoặc thiết lập lịch trình (Timer) chỉ với vài thao tác."
         ),
         image: "/use-cases/alkes-have/datacake-1.png",
         imageAlt: ls("Global operations dashboard overview", "Dashboard giám sát tổng quan toàn hệ thống"),
