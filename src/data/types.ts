@@ -82,6 +82,8 @@ export interface UseCase {
   solution: LocaleString;
   results: LocaleString[];
   servicesUsed: string[];
+  hideChallenge?: boolean;
+  hideSolution?: boolean;
   heroImage?: string;
   sections?: UseCaseSection[];
   techHighlights?: TechHighlight[];
