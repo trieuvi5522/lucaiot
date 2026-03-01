@@ -7,13 +7,15 @@ interface SectionWrapperProps {
   className?: string;
   id?: string;
   dark?: boolean;
+  compact?: boolean;
 }
 
-const SectionWrapper = ({ children, title, subtitle, className = "", id, dark }: SectionWrapperProps) => {
+const SectionWrapper = ({ children, title, subtitle, className = "", id, dark, compact }: SectionWrapperProps) => {
+  const padding = compact ? "py-8 md:py-12" : "py-16 md:py-24";
   return (
     <section
       id={id}
-      className={`py-16 md:py-24 ${dark ? "bg-primary text-primary-foreground" : ""} ${className}`}
+      className={`${padding} ${dark ? "bg-primary text-primary-foreground" : ""} ${className}`}
     >
       <div className="container mx-auto px-4">
         {(title || subtitle) && (

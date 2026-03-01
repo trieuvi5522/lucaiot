@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
-import { ArrowLeft, Target, Lightbulb, Layers, TrendingUp, Zap, X } from "lucide-react";
+import { ArrowLeft, Target, Lightbulb, Layers, TrendingUp, Zap, X, ShieldCheck, Timer, Database, SlidersHorizontal } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -113,7 +113,7 @@ const UseCaseDetail = () => {
 
         {/* Hero Image */}
         {useCase.heroImage && (
-          <SectionWrapper>
+          <SectionWrapper compact>
             <div className="max-w-4xl mx-auto">
               <img
                 src={useCase.heroImage}
@@ -128,7 +128,7 @@ const UseCaseDetail = () => {
 
         {/* Challenge */}
         {!useCase.hideChallenge && (
-          <SectionWrapper>
+          <SectionWrapper compact>
             <div className="max-w-3xl mx-auto">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
@@ -145,7 +145,7 @@ const UseCaseDetail = () => {
 
         {/* Solution */}
         {!useCase.hideSolution && (
-          <SectionWrapper className="bg-muted/50">
+          <SectionWrapper compact className="bg-muted/50">
             <div className="max-w-3xl mx-auto">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
@@ -162,7 +162,7 @@ const UseCaseDetail = () => {
 
         {/* Sections (if any) */}
         {useCase.sections?.map((section, idx) => (
-          <SectionWrapper key={section.id} className={idx % 2 === 0 ? "" : "bg-muted/50"}>
+          <SectionWrapper key={section.id} compact className={idx % 2 === 0 ? "" : "bg-muted/50"}>
             <div className="max-w-3xl mx-auto">
               <h3 className="text-xl md:text-2xl font-display font-bold text-foreground mb-4">
                 {loc(section.title)}
@@ -194,28 +194,32 @@ const UseCaseDetail = () => {
 
         {/* Tech Highlights */}
         {useCase.techHighlights && useCase.techHighlights.length > 0 && (
-          <SectionWrapper title={t.udTechHighlights} className="bg-muted/50">
+          <SectionWrapper compact title={t.udTechHighlights} className="bg-muted/50">
             <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {useCase.techHighlights.map((th, i) => (
-                <div key={i} className="bg-card rounded-lg border border-border p-5 shadow-card">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Zap size={16} className="text-accent shrink-0" />
-                    <h4 className="font-display font-semibold text-card-foreground text-sm">{loc(th.feature)}</h4>
+              {useCase.techHighlights.map((th, i) => {
+                const icons = [ShieldCheck, Timer, Database, SlidersHorizontal];
+                const IconComp = icons[i] || Zap;
+                return (
+                  <div key={i} className="bg-card rounded-lg border border-border p-5 shadow-card">
+                    <div className="flex items-center gap-2 mb-3">
+                      <IconComp size={16} className="text-accent shrink-0" />
+                      <h4 className="font-display font-semibold text-card-foreground text-sm">{loc(th.feature)}</h4>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-2">
+                      <span className="font-medium text-foreground/80">{t.udApproach}:</span> {loc(th.technical)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      <span className="font-medium text-foreground/80">{t.udBenefit}:</span> {loc(th.benefit)}
+                    </p>
                   </div>
-                  <p className="text-xs text-muted-foreground mb-2">
-                    <span className="font-medium text-foreground/80">{t.udApproach}:</span> {loc(th.technical)}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    <span className="font-medium text-foreground/80">{t.udBenefit}:</span> {loc(th.benefit)}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </SectionWrapper>
         )}
 
         {/* Outcomes */}
-        <SectionWrapper title={t.udOutcomes}>
+        <SectionWrapper compact title={t.udOutcomes}>
           <div className="max-w-3xl mx-auto space-y-3">
             {useCase.results.map((result, i) => (
               <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border shadow-card">
@@ -228,7 +232,7 @@ const UseCaseDetail = () => {
 
         {/* Services Used */}
         {relatedServices.length > 0 && (
-          <SectionWrapper className="bg-muted/50">
+          <SectionWrapper compact className="bg-muted/50">
             <div className="max-w-3xl mx-auto">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
@@ -250,7 +254,7 @@ const UseCaseDetail = () => {
         )}
 
         {/* CTA */}
-        <SectionWrapper dark className="text-center">
+        <SectionWrapper compact dark className="text-center">
           <div className="max-w-xl mx-auto">
             <h2 className="text-3xl font-display font-bold">{t.udCtaTitle}</h2>
             <p className="mt-4 text-primary-foreground/70">{t.udCtaDesc}</p>

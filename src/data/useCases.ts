@@ -121,6 +121,14 @@ export const useCases: UseCase[] = [
         ),
       },
       {
+        id: "solution-overview",
+        title: ls("Solution Overview", "Giải pháp đề ra"),
+        body: ls(
+          "A practical 3-layer architecture designed for stable real-world operations:\n• Layer 1 (Edge): Shelly runs offline local control to keep heating stable even without internet.\n• Layer 2 (Orchestration): Node-RED maps MQTT data per apartment and pushes configuration using MQTT retain.\n• Layer 3 (Operations): Datacake provides a single monitoring dashboard plus centralized control and scheduling.",
+          "Kiến trúc 3 lớp tập trung vào vận hành ổn định trong thực tế:\n• Lớp 1 (Edge): Shelly chạy logic cục bộ offline để hệ thống vẫn hoạt động khi mất Internet.\n• Lớp 2 (Điều phối): Node-RED mapping dữ liệu MQTT theo từng căn hộ và đẩy cấu hình bằng MQTT retain.\n• Lớp 3 (Vận hành): Datacake cung cấp dashboard giám sát tập trung, điều khiển và lập lịch."
+        ),
+      },
+      {
         id: "edge-shelly",
         title: ls("Layer 1 — Edge Computing (Shelly)", "Lớp 1 — Edge Computing (Shelly)"),
         body: ls(
@@ -154,11 +162,23 @@ export const useCases: UseCase[] = [
         id: "platform-datacake",
         title: ls("Layer 3 — Operations Dashboard (Datacake)", "Lớp 3 — Trung tâm vận hành (Datacake)"),
         body: ls(
-          "A single-pane operations dashboard helps the operator manage all apartments:\n• Global dashboard: online status, temperatures, valves, last-heard.\n• Manual control: centralized override commands when required.",
-          "Dashboard vận hành tập trung giúp kỹ thuật viên kiểm soát toàn bộ hệ thống:\n• Global dashboard: trạng thái online, nhiệt độ, van, last-heard.\n• Manual control: gửi lệnh override tập trung khi cần."
+          "A single-pane operations dashboard helps the operator manage all 40 apartments:\n• Global dashboard: online status, temperatures, valves, last-heard.\n• Real-time visibility across the entire building from one screen.",
+          "Dashboard vận hành tập trung giúp kỹ thuật viên kiểm soát toàn bộ 40 căn hộ:\n• Global dashboard: trạng thái online, nhiệt độ, van, last-heard.\n• Tầm nhìn toàn bộ toà nhà trên một màn hình."
+        ),
+        image: "/use-cases/alkes-have/datacake-1.png",
+        imageAlt: ls("Global operations dashboard overview", "Dashboard giám sát tổng quan toàn hệ thống"),
+        imageCaption: ls("Main monitoring dashboard for all 40 apartments", "Giao diện chính giám sát toàn bộ 40 căn hộ"),
+      },
+      {
+        id: "datacake-manual-timer",
+        title: ls("Manual Control & Timer Scheduling", "Điều khiển manual & cài đặt timer"),
+        body: ls(
+          "Operator tools for energy saving and fast intervention:\n• Manual control/override when needed\n• Timer scheduling for Buffer Valve to reduce unnecessary runtime",
+          "Công cụ vận hành để tiết kiệm điện và can thiệp nhanh khi cần:\n• Điều khiển manual/override khi cần\n• Cài đặt timer cho Buffer Valve để giảm vận hành dư thừa"
         ),
         image: "/use-cases/alkes-have/datacake-2.png",
         imageAlt: ls("Datacake manual control and timer settings", "Datacake — điều khiển thủ công và thiết lập timer"),
+        imageCaption: ls("Manual control interface and timer scheduling settings", "Giao diện điều khiển manual và setting timer"),
       },
       {
         id: "per-apartment-thresholds",
@@ -169,6 +189,7 @@ export const useCases: UseCase[] = [
         ),
         image: "/use-cases/alkes-have/datacake-3.png",
         imageAlt: ls("Per-apartment threshold configuration", "Cấu hình ngưỡng nhiệt theo từng căn hộ"),
+        imageCaption: ls("Per-apartment configuration and control interface", "Giao diện cài đặt và điều khiển riêng cho từng căn hộ"),
       },
     ],
     techHighlights: [
