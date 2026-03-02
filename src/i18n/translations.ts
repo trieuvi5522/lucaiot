@@ -448,8 +448,8 @@ const vi: TranslationStrings = {
 
   /* About */
   aboutHeroLabel: "Giới thiệu",
-  aboutIntro1: "Là một chuyên gia IoT và Kỹ sư Tự động hóa tại Việt Nam, với kinh nghiệm trong việc chuyển đổi các dữ liệu vận hành phức tạp thành những thông tin chi tiết và có giá trị thực tiễn. Tôi thiết kế và triển khai các hệ thống IoT mạnh mẽ nhằm tối ưu, trực quan hóa việc giám sát và điều khiển thiết bị. Đảm bảo hệ thống của bạn không chỉ hoạt động ổn định mà còn đạt hiệu quả cao nhất trong môi trường thực tế.",
-  aboutIntro2: "Thế mạnh của tôi là kết nối các giao thức truyền thông công nghiệp tại hiện trường—như RS485, Modbus và OPC UA — tích hợp với điện toán đám mây. Với kinh nghiệm hợp tác cùng các đối tác quốc tế để cung cấp các giải pháp tổng thể (end-to-end), tôi đảm bảo mọi hệ thống đều có tính thực tiễn cao trong vận hành, dễ dàng bảo trì và sẵn sàng mở rộng linh hoạt theo nhu cầu tương lai.",
+  aboutIntro1: "Xin chào ! Tôi là Triều Vĩ nhưng bạn có thể gọi tôi là Luca, chào mừng bạn đến website của tôi 😄😄\n\nLà 1 kỹ sư tự động hóa và chuyên viên IoT đang sinh sống tại Việt Nam. Tôi đã cùng các đối tác trong và ngoài nước triển khai nhiều hệ thống IoT đa dạng - từ Công nghiệp (IIoT), Tòa nhà thông minh (Smart Building) đến Nông nghiệp công nghệ cao.",
+  aboutIntro2: "Triết lý làm việc của tôi gói gọn trong hai chữ: \"Bền vững\" và \"Mở rộng\". Thay vì chỉ tập trung vào giải pháp tức thời, tôi chú trọng việc thiết kế các hệ thống có khả năng mở rộng (scalable) linh hoạt, đảm bảo vận hành chuyên nghiệp với độ ổn định cao và tính bảo mật tuyệt đối.",
   aboutFocusTitle: "Lĩnh vực chuyên môn",
   aboutFocus1: "Thiết kế cấu trúc & Triển khai Hệ thống IoT Công nghiệp",
   aboutFocus2: "Tích hợp & Đồng bộ Đa giao thức Công nghiệp",
