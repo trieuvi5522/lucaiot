@@ -77,6 +77,9 @@ const About = () => {
         {/* Intro */}
         <SectionWrapper>
           <div className="max-w-3xl mx-auto">
+            <div className="bg-accent/5 border-l-4 border-accent rounded-r-lg px-5 py-4 mb-6">
+              <p className="text-lg font-semibold text-foreground leading-relaxed">{t.aboutGreeting}</p>
+            </div>
             <p className="text-lg text-foreground leading-relaxed">{t.aboutIntro1}</p>
             <p className="text-lg text-muted-foreground leading-relaxed mt-4">{t.aboutIntro2}</p>
           </div>
