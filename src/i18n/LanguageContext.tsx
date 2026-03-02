@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
+
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { translations, type Locale, type TranslationStrings } from "./translations";
 import type { LocaleString } from "@/data/types";
