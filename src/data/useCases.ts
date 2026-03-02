@@ -35,6 +35,9 @@ export const useCases: UseCase[] = [
           "My project with Alkes Have in Denmark is a clear example of applying IoT to solve large-scale heat management. With 40 independent apartments, the core goal was to automate Buffer Tank and DHW control—balancing energy efficiency with maximum comfort.",
           "Dự án của tôi với đối tác Alkes Have tại Đan Mạch là minh chứng điển hình cho việc ứng dụng IoT để giải quyết bài toán quản lý nhiệt lượng quy mô lớn. Với 40 căn hộ độc lập, mục tiêu trọng tâm là tự động hóa điều khiển bồn đệm (Buffer Tank) và nước nóng sinh hoạt (DHW), đảm bảo sự cân bằng hoàn hảo giữa tiết kiệm năng lượng và tiện nghi tối đa."
         ),
+        image: "/use-cases/alkes-have/alkes-have.png",
+        imageAlt: ls("Alkes Have site overview", "Tổng quan khu Alkes Have"),
+        imageCaption: ls("Project site overview (Alkes Have, Denmark)", "Tổng quan dự án (Alkes Have, Đan Mạch)"),
       },
       {
         id: "challenges",

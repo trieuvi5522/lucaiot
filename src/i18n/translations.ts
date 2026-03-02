@@ -70,6 +70,7 @@ export interface TranslationStrings {
 
   /* About */
   aboutHeroLabel: string;
+  aboutGreeting: string;
   aboutIntro1: string;
   aboutIntro2: string;
   aboutFocusTitle: string;
@@ -254,8 +255,9 @@ const en: TranslationStrings = {
 
   /* About */
   aboutHeroLabel: "About Me",
-  aboutIntro1: "Based in Vietnam, I am an IoT Specialist and Automation Engineer dedicated to transforming complex operational data into clear, actionable intelligence. I design and deploy robust IoT ecosystems that streamline device control and monitoring, ensuring your systems are not just functional, but optimized for the real world.",
-  aboutIntro2: "My expertise bridges the gap between field-level industrial communication—including RS485, Modbus, and OPC UA—and seamless cloud integration. Having partnered with global providers to deliver comprehensive end-to-end solutions, I ensure every system is practical to operate, easy to maintain, and ready for future scale.",
+  aboutGreeting: "Hi! I'm Triều Vĩ, but you can call me Luca — welcome to my website 😄😄",
+  aboutIntro1: "I'm an Automation Engineer and IoT specialist based in Vietnam. I've worked with local and international partners to deliver a wide range of IoT systems — from Industrial IoT (IIoT) and Smart Buildings to high-tech agriculture.",
+  aboutIntro2: "My working philosophy can be summed up in two words: \"Sustainable\" and \"Scalable\". Instead of focusing on short-term fixes, I design systems that can scale flexibly, operate reliably with professional practices, and maintain strong security.",
   aboutFocusTitle: "What I Focus On",
   aboutFocus1: "Industrial IoT Architecture & Deployment",
   aboutFocus2: "Multi-Protocol Interoperability (Modbus, OPC UA, MQTT, etc.)",
@@ -448,7 +450,8 @@ const vi: TranslationStrings = {
 
   /* About */
   aboutHeroLabel: "Giới thiệu",
-  aboutIntro1: "Xin chào ! Tôi là Triều Vĩ nhưng bạn có thể gọi tôi là Luca, chào mừng bạn đến website của tôi 😄😄\n\nLà 1 kỹ sư tự động hóa và chuyên viên IoT đang sinh sống tại Việt Nam. Tôi đã cùng các đối tác trong và ngoài nước triển khai nhiều hệ thống IoT đa dạng - từ Công nghiệp (IIoT), Tòa nhà thông minh (Smart Building) đến Nông nghiệp công nghệ cao.",
+  aboutGreeting: "Xin chào ! Tôi là Triều Vĩ nhưng bạn có thể gọi tôi là Luca, chào mừng bạn đến website của tôi 😄😄",
+  aboutIntro1: "Là 1 kỹ sư tự động hóa và chuyên viên IoT đang sinh sống tại Việt Nam. Tôi đã cùng các đối tác trong và ngoài nước triển khai nhiều hệ thống IoT đa dạng - từ Công nghiệp (IIoT), Tòa nhà thông minh (Smart Building) đến Nông nghiệp công nghệ cao.",
   aboutIntro2: "Triết lý làm việc của tôi gói gọn trong hai chữ: \"Bền vững\" và \"Mở rộng\". Thay vì chỉ tập trung vào giải pháp tức thời, tôi chú trọng việc thiết kế các hệ thống có khả năng mở rộng (scalable) linh hoạt, đảm bảo vận hành chuyên nghiệp với độ ổn định cao và tính bảo mật tuyệt đối.",
   aboutFocusTitle: "Lĩnh vực chuyên môn",
   aboutFocus1: "Thiết kế cấu trúc & Triển khai Hệ thống IoT Công nghiệp",
