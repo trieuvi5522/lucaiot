@@ -42,13 +42,14 @@ const Services = () => {
 
         <SectionWrapper title={t.homeHostingTitle} subtitle={t.servicesHostingSubtitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {hostingServices.map((s) => (
+            {hostingServices.map((s, i) => (
               <ServiceCard
                 key={s.id}
                 service={s}
                 hideCategoryLabel
                 inlineIcon={hostingLogos[s.id]}
                 hoverGlow
+                index={i}
               />
             ))}
           </div>
@@ -57,13 +58,14 @@ const Services = () => {
 
         <SectionWrapper title={t.homeServicesTitle} subtitle={t.servicesIotSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {customServices.map((s) => (
+            {customServices.map((s, i) => (
               <ServiceCard
                 key={s.id}
                 service={s}
                 hideCategoryLabel
                 inlineIcon={serviceIcons[s.id]}
                 hoverGlow
+                index={i}
               />
             ))}
           </div>

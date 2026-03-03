@@ -106,12 +106,13 @@ const Index = () => {
         {/* Hosting */}
         <SectionWrapper title={t.homeHostingTitle} subtitle={t.homeHostingSubtitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {hostingServices.map((service) => (
+            {hostingServices.map((service, i) => (
               <ServiceCard
                 key={service.id}
                 service={service}
                 inlineIcon={hostingLogos[service.id]}
                 hoverGlow
+                index={i}
               />
             ))}
           </div>
@@ -126,12 +127,13 @@ const Index = () => {
         {/* Services */}
         <SectionWrapper title={t.homeServicesTitle} subtitle={t.homeServicesSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {customServices.map((service) => (
+            {customServices.map((service, i) => (
               <ServiceCard
                 key={service.id}
                 service={service}
                 inlineIcon={serviceIcons[service.id]}
                 hoverGlow
+                index={i}
               />
             ))}
           </div>

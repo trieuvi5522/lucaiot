@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, Factory, Home, Briefcase } from "lucide-react
 import { Service } from "@/data/types";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { ReactNode } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface ServiceCardProps {
   service: Service;
@@ -12,13 +13,18 @@ interface ServiceCardProps {
   inlineIcon?: ReactNode;
   /** Enable premium hover glow + lift effect */
   hoverGlow?: boolean;
+  /** Index for staggered scroll-reveal on mobile */
+  index?: number;
 }
 
-const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverGlow }: ServiceCardProps) => {
+const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverGlow, index = 0 }: ServiceCardProps) => {
   const { t, loc, localePath } = useLanguage();
+  const { ref, style: revealStyle } = useScrollReveal(index);
 
   return (
     <div
+      ref={ref}
+      style={revealStyle}
       className={[
         "group relative bg-card rounded-xl border border-border p-6 shadow-card transition-all duration-300 ease-out will-change-transform flex flex-col h-full",
         hoverGlow
