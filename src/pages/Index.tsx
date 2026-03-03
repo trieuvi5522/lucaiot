@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -10,6 +11,8 @@ import {
   LayoutDashboard,
   Settings,
   Home as HomeIcon,
+  Factory,
+  Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
@@ -28,6 +31,17 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const processIcons = [Search, PenTool, Cpu, Cable, LayoutDashboard, Settings];
 const whoIcons = [HomeIcon, Building2, Wrench];
+
+const hostingLogos: Record<string, React.ReactNode> = {
+  "nodered-hosting": <img src="/logos/nodered.svg" alt="Node-RED" className="w-7 h-7" />,
+  "thingsboard-hosting": <img src="/logos/thingsboard.svg" alt="ThingsBoard" className="w-7 h-7" />,
+};
+
+const serviceIcons: Record<string, React.ReactNode> = {
+  "industrial-iot": <Factory size={22} className="text-accent" />,
+  "smart-home-iot": <HomeIcon size={22} className="text-accent" />,
+  "iot-consulting": <Briefcase size={22} className="text-accent" />,
+};
 
 const Index = () => {
   const { t, localePath } = useLanguage();
@@ -93,7 +107,12 @@ const Index = () => {
         <SectionWrapper title={t.homeHostingTitle} subtitle={t.homeHostingSubtitle}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {hostingServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard
+                key={service.id}
+                service={service}
+                inlineIcon={hostingLogos[service.id]}
+                hoverGlow
+              />
             ))}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">
@@ -108,7 +127,12 @@ const Index = () => {
         <SectionWrapper title={t.homeServicesTitle} subtitle={t.homeServicesSubtitle} className="bg-muted/50">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {customServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard
+                key={service.id}
+                service={service}
+                inlineIcon={serviceIcons[service.id]}
+                hoverGlow
+              />
             ))}
           </div>
           <p className="text-center text-sm text-muted-foreground mt-6">
