@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
 import ServiceCard from "@/components/ServiceCard";
+import ActiveCardGrid from "@/components/ActiveCardGrid";
 import PageMeta from "@/components/PageMeta";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { hostingServices, customServices } from "@/data/services";
@@ -41,34 +42,40 @@ const Services = () => {
         </section>
 
         <SectionWrapper title={t.homeHostingTitle} subtitle={t.servicesHostingSubtitle}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {hostingServices.map((s, i) => (
-              <ServiceCard
-                key={s.id}
-                service={s}
-                hideCategoryLabel
-                inlineIcon={hostingLogos[s.id]}
-                hoverGlow
-                index={i}
-              />
-            ))}
-          </div>
+          <ActiveCardGrid className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {(activeIndex) =>
+              hostingServices.map((s, i) => (
+                <ServiceCard
+                  key={s.id}
+                  service={s}
+                  hideCategoryLabel
+                  inlineIcon={hostingLogos[s.id]}
+                  hoverGlow
+                  index={i}
+                  isActive={activeIndex === i}
+                />
+              ))
+            }
+          </ActiveCardGrid>
           <p className="text-center text-sm text-muted-foreground mt-6">{t.servicesHostingNote}</p>
         </SectionWrapper>
 
         <SectionWrapper title={t.homeServicesTitle} subtitle={t.servicesIotSubtitle} className="bg-muted/50">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {customServices.map((s, i) => (
-              <ServiceCard
-                key={s.id}
-                service={s}
-                hideCategoryLabel
-                inlineIcon={serviceIcons[s.id]}
-                hoverGlow
-                index={i}
-              />
-            ))}
-          </div>
+          <ActiveCardGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeIndex) =>
+              customServices.map((s, i) => (
+                <ServiceCard
+                  key={s.id}
+                  service={s}
+                  hideCategoryLabel
+                  inlineIcon={serviceIcons[s.id]}
+                  hoverGlow
+                  index={i}
+                  isActive={activeIndex === i}
+                />
+              ))
+            }
+          </ActiveCardGrid>
           <div className="text-center mt-6">
             <p className="text-sm text-muted-foreground">
               {t.servicesIotNote}{" "}

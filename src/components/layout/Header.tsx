@@ -79,13 +79,16 @@ const Header = () => {
           {siteConfig.brandName}
           <span className="text-accent">/&gt;</span>
         </Link>
-        <button
-          className="p-2 text-foreground"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <button
+            className="p-2 text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
@@ -102,10 +105,6 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
-          <div className="flex items-center justify-between mt-3 mb-2">
-            <span className="text-xs text-muted-foreground">Language</span>
-            <LanguageSwitcher />
-          </div>
           <Button asChild className="w-full mt-2 whitespace-nowrap" size="sm">
             <Link to={localePath("/contact")} onClick={() => setMobileOpen(false)}>
               {t.primaryCTA}

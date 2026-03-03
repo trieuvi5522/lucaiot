@@ -27,6 +27,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import { hostingServices, customServices } from "@/data/services";
 import { useCases } from "@/data/useCases";
 import IoTNetworkOrb from "@/components/IoTNetworkOrb";
+import ActiveCardGrid from "@/components/ActiveCardGrid";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const processIcons = [Search, PenTool, Cpu, Cable, LayoutDashboard, Settings];
@@ -82,7 +83,7 @@ const Index = () => {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight">
                   {t.homeHeroTitle}
                   <br className="hidden md:block" />
-                  <span className="text-gradient">{t.homeHeroHighlight}</span>
+                  <span className="block sm:inline text-gradient">{t.homeHeroHighlight}</span>
                 </h1>
                 <p className="mt-6 text-lg text-primary-foreground/70 max-w-xl leading-relaxed">
                   {t.homeHeroDesc}
@@ -105,17 +106,20 @@ const Index = () => {
 
         {/* Hosting */}
         <SectionWrapper title={t.homeHostingTitle} subtitle={t.homeHostingSubtitle}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {hostingServices.map((service, i) => (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                inlineIcon={hostingLogos[service.id]}
-                hoverGlow
-                index={i}
-              />
-            ))}
-          </div>
+          <ActiveCardGrid className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {(activeIndex) =>
+              hostingServices.map((service, i) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  inlineIcon={hostingLogos[service.id]}
+                  hoverGlow
+                  index={i}
+                  isActive={activeIndex === i}
+                />
+              ))
+            }
+          </ActiveCardGrid>
           <p className="text-center text-sm text-muted-foreground mt-6">
             {t.homeHostingNote}{" "}
             <Link to={localePath("/services")} className="text-accent hover:underline">
@@ -126,17 +130,20 @@ const Index = () => {
 
         {/* Services */}
         <SectionWrapper title={t.homeServicesTitle} subtitle={t.homeServicesSubtitle} className="bg-muted/50">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {customServices.map((service, i) => (
-              <ServiceCard
-                key={service.id}
-                service={service}
-                inlineIcon={serviceIcons[service.id]}
-                hoverGlow
-                index={i}
-              />
-            ))}
-          </div>
+          <ActiveCardGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(activeIndex) =>
+              customServices.map((service, i) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  inlineIcon={serviceIcons[service.id]}
+                  hoverGlow
+                  index={i}
+                  isActive={activeIndex === i}
+                />
+              ))
+            }
+          </ActiveCardGrid>
           <p className="text-center text-sm text-muted-foreground mt-6">
             {t.homeServicesNote}{" "}
             <Link to={localePath("/contact")} className="text-accent hover:underline">
