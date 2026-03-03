@@ -20,9 +20,9 @@ const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverG
   return (
     <div
       className={[
-        "group bg-card rounded-lg border border-border p-6 shadow-card transition-all duration-300 flex flex-col h-full",
+        "group relative bg-card rounded-xl border border-border p-6 shadow-card transition-all duration-300 ease-out will-change-transform flex flex-col h-full",
         hoverGlow
-          ? "md:hover:-translate-y-1.5 md:hover:shadow-[0_8px_30px_-8px_hsl(var(--accent)/0.18)] md:hover:border-accent/30 focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none"
+          ? "md:hover:-translate-y-2.5 md:hover:scale-[1.015] md:hover:shadow-2xl md:hover:ring-4 md:hover:ring-primary/15 md:hover:border-primary/30 focus-visible:ring-4 focus-visible:ring-primary/25 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:scale-100 motion-reduce:transition-none"
           : "hover:shadow-card-hover",
       ].join(" ")}
     >

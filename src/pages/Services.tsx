@@ -1,15 +1,23 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import { Factory, Home as HomeIcon, Briefcase } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
-import ServiceCard, { serviceIconMap } from "@/components/ServiceCard";
+import ServiceCard from "@/components/ServiceCard";
 import PageMeta from "@/components/PageMeta";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { hostingServices, customServices } from "@/data/services";
 
-const hostingLogos: Record<string, string> = {
-  "nodered-hosting": "/logos/nodered.svg",
-  "thingsboard-hosting": "/logos/thingsboard.svg",
+const hostingLogos: Record<string, React.ReactNode> = {
+  "nodered-hosting": <img src="/logos/nodered.svg" alt="Node-RED" className="w-7 h-7" />,
+  "thingsboard-hosting": <img src="/logos/thingsboard.svg" alt="ThingsBoard" className="w-7 h-7" />,
+};
+
+const serviceIcons: Record<string, React.ReactNode> = {
+  "industrial-iot": <Factory size={22} className="text-accent" />,
+  "smart-home-iot": <HomeIcon size={22} className="text-accent" />,
+  "iot-consulting": <Briefcase size={22} className="text-accent" />,
 };
 
 const Services = () => {
@@ -39,15 +47,8 @@ const Services = () => {
                 key={s.id}
                 service={s}
                 hideCategoryLabel
-                topVisual={
-                  hostingLogos[s.id] ? (
-                    <img
-                      src={hostingLogos[s.id]}
-                      alt={s.id.includes("nodered") ? "Node-RED" : "ThingsBoard"}
-                      className="h-7 w-auto object-contain"
-                    />
-                  ) : undefined
-                }
+                inlineIcon={hostingLogos[s.id]}
+                hoverGlow
               />
             ))}
           </div>
@@ -61,7 +62,8 @@ const Services = () => {
                 key={s.id}
                 service={s}
                 hideCategoryLabel
-                topVisual={serviceIconMap[s.id]}
+                inlineIcon={serviceIcons[s.id]}
+                hoverGlow
               />
             ))}
           </div>
