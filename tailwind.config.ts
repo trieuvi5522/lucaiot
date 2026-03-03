@@ -104,7 +104,8 @@ export default {
   		},
   		boxShadow: {
   			card: 'var(--card-shadow)',
-  			'card-hover': 'var(--card-shadow-hover)'
+  			'card-hover': 'var(--card-shadow-hover)',
+  			'card-glow': 'var(--card-glow)'
   		},
   		keyframes: {
   			'accordion-down': {

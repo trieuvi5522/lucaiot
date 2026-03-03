@@ -28,10 +28,10 @@ const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverG
       className={[
         "group relative bg-card rounded-xl border border-border p-6 shadow-card transition-all duration-300 ease-out will-change-transform flex flex-col h-full",
         hoverGlow
-          ? "md:hover:-translate-y-2.5 md:hover:scale-[1.015] md:hover:shadow-2xl md:hover:ring-4 md:hover:ring-primary/15 md:hover:border-primary/30 focus-visible:ring-4 focus-visible:ring-primary/25 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:scale-100 motion-reduce:transition-none"
+          ? "md:hover:-translate-y-2.5 md:hover:scale-[1.015] md:hover:shadow-card-glow md:hover:ring-4 md:hover:ring-accent/15 md:hover:border-accent/30 active:scale-[0.985] active:ring-4 active:ring-accent/20 active:border-accent/25 active:shadow-card-glow focus-visible:ring-4 focus-visible:ring-accent/25 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:scale-100 motion-reduce:transition-none"
           : "hover:shadow-card-hover",
         isActive
-          ? "-translate-y-2 scale-[1.02] shadow-2xl ring-4 ring-primary/20 border-primary/30 motion-reduce:transform-none motion-reduce:scale-100"
+          ? "-translate-y-2 scale-[1.02] shadow-card-glow ring-4 ring-accent/20 border-accent/30 motion-reduce:transform-none motion-reduce:scale-100"
           : "",
       ].join(" ")}
     >
