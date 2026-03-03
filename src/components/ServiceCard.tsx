@@ -9,15 +9,14 @@ interface ServiceCardProps {
   service: Service;
   hideCategoryLabel?: boolean;
   topVisual?: ReactNode;
-  /** Inline icon shown next to the title in a single row */
   inlineIcon?: ReactNode;
-  /** Enable premium hover glow + lift effect */
   hoverGlow?: boolean;
-  /** Index for staggered scroll-reveal on mobile */
   index?: number;
+  /** Mobile center-pop active state */
+  isActive?: boolean;
 }
 
-const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverGlow, index = 0 }: ServiceCardProps) => {
+const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverGlow, index = 0, isActive }: ServiceCardProps) => {
   const { t, loc, localePath } = useLanguage();
   const { ref, style: revealStyle } = useScrollReveal(index);
 
@@ -25,11 +24,15 @@ const ServiceCard = ({ service, hideCategoryLabel, topVisual, inlineIcon, hoverG
     <div
       ref={ref}
       style={revealStyle}
+      data-card-index={index}
       className={[
         "group relative bg-card rounded-xl border border-border p-6 shadow-card transition-all duration-300 ease-out will-change-transform flex flex-col h-full",
         hoverGlow
           ? "md:hover:-translate-y-2.5 md:hover:scale-[1.015] md:hover:shadow-2xl md:hover:ring-4 md:hover:ring-primary/15 md:hover:border-primary/30 focus-visible:ring-4 focus-visible:ring-primary/25 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:scale-100 motion-reduce:transition-none"
           : "hover:shadow-card-hover",
+        isActive
+          ? "-translate-y-2 scale-[1.02] shadow-2xl ring-4 ring-primary/20 border-primary/30 motion-reduce:transform-none motion-reduce:scale-100"
+          : "",
       ].join(" ")}
     >
       {!hideCategoryLabel && !inlineIcon && (
