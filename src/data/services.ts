@@ -138,8 +138,9 @@ export const services: Service[] = [
       "Digitize your factory, optimize operations, and monitor remotely to improve performance and reduce maintenance costs with centralized data management.",
       "Số hóa nhà máy, điều tiết vận hành, giám sát từ xa giúp tối ưu hiệu suất và cắt giảm chi phí bảo trì với hệ thống quản lý dữ liệu tập trung."
     ),
-    heroText: ls(
-      "I deliver end-to-end IIoT solutions—connecting both legacy and modern machines, collecting real-time data, and turning it into clear dashboards so you can make better operational decisions.",
+    heroText: ls("", ""),
+    introBlock: ls(
+      "I deliver a complete IIoT solution: connect both legacy and modern machines, collect real-time data, and turn it into clear dashboards—so you can make faster, more accurate operational decisions.",
       "Tôi mang đến giải pháp IIoT toàn diện: Kết nối máy móc cũ lẫn mới, thu thập dữ liệu thời gian thực và biến chúng thành những biểu đồ trực quan, giúp bạn ra quyết định quản trị chính xác hơn bao giờ hết."
     ),
     targetUsers: [],
@@ -151,6 +152,7 @@ export const services: Service[] = [
           "Machines run independently with no unified view to evaluate performance.",
           "Máy móc hoạt động độc lập, không có sự liên kết dữ liệu tổng thể để đánh giá hiệu suất."
         ),
+        icon: "Database",
       },
       {
         title: ls("Reactive maintenance", "Bảo trì thụ động"),
@@ -158,6 +160,7 @@ export const services: Service[] = [
           "Issues are fixed only after failure, causing downtime and unexpected costs.",
           "Chỉ sửa chữa khi máy đã hỏng, gây đình trệ sản xuất và tốn kém chi phí phát sinh."
         ),
+        icon: "Wrench",
       },
       {
         title: ls("Resource waste", "Lãng phí tài nguyên"),
@@ -165,6 +168,7 @@ export const services: Service[] = [
           "Limited visibility into electricity, water, and material usage by time window or shift.",
           "Không kiểm soát được chính xác lượng điện, nước, nguyên liệu tiêu thụ theo từng khung giờ."
         ),
+        icon: "Zap",
       },
       {
         title: ls("People dependency", "Phụ thuộc nhân sự"),
@@ -172,6 +176,7 @@ export const services: Service[] = [
           "Manual monitoring is error-prone, subjective, and leads to slow reporting.",
           "Quy trình giám sát thủ công, dễ sai sót, thiếu tính khách quan và báo cáo chậm trễ."
         ),
+        icon: "Users",
       },
     ],
     includedScope: [],
@@ -182,6 +187,7 @@ export const services: Service[] = [
           "Use Node-RED to connect Modbus, OPC UA, MQTT, HTTP, and more across Siemens, Mitsubishi, Schneider, etc.",
           "Sử dụng Node-RED để 'nói chuyện' với mọi thiết bị (Modbus, OPC-UA, MQTT, HTTP...) từ các hãng lớn như Siemens, Mitsubishi, Schneider..."
         ),
+        icon: "Network",
       },
       {
         title: ls("Visual monitoring", "Giám sát trực quan"),
@@ -189,6 +195,7 @@ export const services: Service[] = [
           "Cloud dashboards for web/mobile access—reports, control, and insights anywhere.",
           "Triển khai giao diện điều khiển hiện đại trên Cloud, cho phép bạn xem báo cáo và quản lý mọi lúc mọi nơi qua Web/Mobile."
         ),
+        icon: "LayoutDashboard",
       },
       {
         title: ls("Optimized IoT hosting", "Hạ tầng Hosting tối ưu"),
@@ -196,6 +203,7 @@ export const services: Service[] = [
           "Purpose-built cloud hosting for 24/7 operation, low latency, and strong security.",
           "Cung cấp dịch vụ Cloud chuyên dụng cho IoT, đảm bảo hệ thống vận hành 24/7 với độ trễ cực thấp và bảo mật cao."
         ),
+        icon: "Cloud",
       },
       {
         title: ls("Smart alerts", "Cảnh báo thông minh"),
@@ -203,6 +211,7 @@ export const services: Service[] = [
           "Instant notifications via Telegram, Email, or SMS when anomalies occur—so issues are handled fast.",
           "Hệ thống tự động gửi thông báo tức thời qua Telegram, Email, SMS ngay khi có thông số bất thường, giúp xử lý sự cố ngay lập tức."
         ),
+        icon: "BellRing",
       },
     ],
     technicalCapabilities: [],
@@ -214,6 +223,7 @@ export const services: Service[] = [
       { title: ls("Handover & operations", "Vận hành & Chuyển giao"), description: ls("Train your team and provide ongoing maintenance and periodic upgrades.", "Đào tạo nhân sự vận hành và cung cấp dịch vụ bảo trì, nâng cấp định kỳ.") },
     ],
     pricingType: "contact_for_quote",
+    hidePricing: true,
     faq: [],
     relatedServiceIds: ["nodered-hosting", "thingsboard-hosting", "iot-consulting"],
     relatedUseCaseIds: ["energy-monitoring", "factory-automation"],

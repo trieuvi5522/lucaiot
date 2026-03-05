@@ -41,6 +41,8 @@ export interface ProcessStep {
 export interface ContentCard {
   title: LocaleString;
   description: LocaleString;
+  /** Optional icon name from lucide-react */
+  icon?: string;
 }
 
 export interface Service {
@@ -63,6 +65,10 @@ export interface Service {
   technicalCapabilities: string[];
   processSteps: ProcessStep[];
   pricingType: "public_packages" | "contact_for_quote";
+  /** When true, hide the pricing section on the detail page */
+  hidePricing?: boolean;
+  /** Standalone intro block shown before pain points (separate from heroText) */
+  introBlock?: LocaleString;
   pricingPlans?: PricingPlan[];
   faq: FAQItem[];
   relatedServiceIds: string[];
