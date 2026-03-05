@@ -72,7 +72,12 @@ const ServiceDetail = () => {
               <h1 className="text-3xl md:text-5xl font-display font-bold text-primary-foreground leading-tight">
                 {loc(service.title)}
               </h1>
-              <p className="mt-4 text-lg text-primary-foreground/70 max-w-3xl leading-relaxed" style={{ textWrap: 'balance' } as React.CSSProperties}>
+              {service.heroSubheadline && (
+                <p className="mt-4 text-lg text-primary-foreground/80 max-w-3xl leading-relaxed font-medium" style={{ textWrap: 'balance' } as React.CSSProperties}>
+                  {loc(service.heroSubheadline)}
+                </p>
+              )}
+              <p className="mt-3 text-base text-primary-foreground/65 max-w-3xl leading-relaxed" style={{ textWrap: 'balance' } as React.CSSProperties}>
                 {loc(service.heroText)}
               </p>
               {!isNodeRed && (
@@ -88,38 +93,75 @@ const ServiceDetail = () => {
           </div>
         </section>
 
-        <SectionWrapper title={t.sdWhoFor}>
-          <div className="max-w-3xl mx-auto space-y-3">
-            {service.targetUsers.map((user, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border shadow-card">
-                <Users size={18} className="text-accent mt-0.5 shrink-0" />
-                <span className="text-card-foreground">{loc(user)}</span>
-              </div>
-            ))}
-          </div>
-        </SectionWrapper>
+        {service.targetUsers.length > 0 && (
+          <SectionWrapper title={t.sdWhoFor}>
+            <div className="max-w-3xl mx-auto space-y-3">
+              {service.targetUsers.map((user, i) => (
+                <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border shadow-card">
+                  <Users size={18} className="text-accent mt-0.5 shrink-0" />
+                  <span className="text-card-foreground">{loc(user)}</span>
+                </div>
+              ))}
+            </div>
+          </SectionWrapper>
+        )}
 
-        <SectionWrapper title={t.sdProblems} className="bg-muted/50">
-          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {service.painPoints.map((point, i) => (
-              <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border">
-                <AlertTriangle size={16} className="text-destructive mt-0.5 shrink-0" />
-                <span className="text-sm text-card-foreground">{loc(point)}</span>
-              </div>
-            ))}
-          </div>
-        </SectionWrapper>
+        {(service.painPointCards?.length || service.painPoints.length > 0) && (
+          <SectionWrapper
+            title={service.sectionTitles?.painPoints ? loc(service.sectionTitles.painPoints) : t.sdProblems}
+            subtitle={service.sectionIntros?.painPoints ? loc(service.sectionIntros.painPoints) : undefined}
+            className="bg-muted/50"
+          >
+            <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {service.painPointCards ? (
+                service.painPointCards.map((card, i) => (
+                  <div key={i} className="p-5 bg-card rounded-lg border border-border shadow-card">
+                    <div className="flex items-center gap-2 mb-2">
+                      <AlertTriangle size={16} className="text-destructive shrink-0" />
+                      <h3 className="font-display font-semibold text-card-foreground">{loc(card.title)}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{loc(card.description)}</p>
+                  </div>
+                ))
+              ) : (
+                service.painPoints.map((point, i) => (
+                  <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-lg border border-border">
+                    <AlertTriangle size={16} className="text-destructive mt-0.5 shrink-0" />
+                    <span className="text-sm text-card-foreground">{loc(point)}</span>
+                  </div>
+                ))
+              )}
+            </div>
+          </SectionWrapper>
+        )}
 
-        <SectionWrapper title={t.sdIncluded}>
-          <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {service.includedScope.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 text-foreground">
-                <CheckCircle2 size={16} className="text-accent shrink-0" />
-                <span className="text-sm">{loc(item)}</span>
-              </div>
-            ))}
-          </div>
-        </SectionWrapper>
+        {(service.offerCards?.length || service.includedScope.length > 0) && (
+          <SectionWrapper
+            title={service.sectionTitles?.included ? loc(service.sectionTitles.included) : t.sdIncluded}
+            subtitle={service.sectionIntros?.included ? loc(service.sectionIntros.included) : undefined}
+          >
+            <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {service.offerCards ? (
+                service.offerCards.map((card, i) => (
+                  <div key={i} className="p-5 bg-card rounded-lg border border-border shadow-card">
+                    <div className="flex items-center gap-2 mb-2">
+                      <CheckCircle2 size={16} className="text-accent shrink-0" />
+                      <h3 className="font-display font-semibold text-card-foreground">{loc(card.title)}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{loc(card.description)}</p>
+                  </div>
+                ))
+              ) : (
+                service.includedScope.map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-foreground">
+                    <CheckCircle2 size={16} className="text-accent shrink-0" />
+                    <span className="text-sm">{loc(item)}</span>
+                  </div>
+                ))
+              )}
+            </div>
+          </SectionWrapper>
+        )}
 
         {service.technicalCapabilities.length > 0 && (
           <SectionWrapper title={t.sdCapabilities} className="bg-muted/50">
@@ -134,7 +176,11 @@ const ServiceDetail = () => {
           </SectionWrapper>
         )}
 
-        <SectionWrapper title={t.sdProcess}>
+        <SectionWrapper
+          title={service.sectionTitles?.process ? loc(service.sectionTitles.process) : t.sdProcess}
+          subtitle={service.sectionIntros?.process ? loc(service.sectionIntros.process) : undefined}
+          className={service.sectionTitles?.process ? "bg-muted/50" : ""}
+        >
           <div className="max-w-3xl mx-auto">
             <div className="space-y-4">
               {service.processSteps.map((step, i) => (
