@@ -123,7 +123,7 @@ export const services: Service[] = [
   {
     id: "industrial-iot",
     slug: "industrial-iot-solutions",
-    title: ls("Industrial IoT Solutions", "Giải pháp IoT Công nghiệp"),
+    title: ls("Industrial IoT Consulting & Solutions", "Tư vấn / Cung cấp Giải pháp IoT Công nghiệp"),
     group: "service",
     shortDescription: ls(
       "End-to-end design and implementation of industrial IoT systems — from sensor to cloud.",
@@ -134,52 +134,108 @@ export const services: Service[] = [
       ls("Custom dashboard design for monitoring & alerting", "Thiết kế dashboard theo nhu cầu để giám sát và cảnh báo"),
       ls("Full lifecycle: design → deploy → maintain", "Đồng hành trọn vòng đời dự án: thiết kế → triển khai → vận hành/bảo trì"),
     ],
-    heroText: ls(
-      "Bridge the gap between your industrial equipment and the cloud. We design and deploy IoT systems that give you real-time visibility into your operations with reliable, industrial-grade protocols.",
-      "Kết nối thiết bị công nghiệp với cloud. Chúng tôi thiết kế và triển khai hệ thống IoT mang lại tầm nhìn thời gian thực vào hoạt động với giao thức cấp công nghiệp đáng tin cậy."
+    heroSubheadline: ls(
+      "Digitize your factory, optimize operations, and monitor remotely to improve performance and reduce maintenance costs with centralized data management.",
+      "Số hóa nhà máy, điều tiết vận hành, giám sát từ xa giúp tối ưu hiệu suất và cắt giảm chi phí bảo trì với hệ thống quản lý dữ liệu tập trung."
     ),
-    targetUsers: [
-      ls("Factory and plant managers seeking operational visibility", "Quản lý nhà máy cần tầm nhìn vận hành"),
-      ls("Energy companies monitoring distributed assets", "Công ty năng lượng giám sát tài sản phân tán"),
-      ls("Facility managers optimizing building systems", "Quản lý cơ sở tối ưu hoá hệ thống toà nhà"),
+    heroText: ls(
+      "I deliver end-to-end IIoT solutions—connecting both legacy and modern machines, collecting real-time data, and turning it into clear dashboards so you can make better operational decisions.",
+      "Tôi mang đến giải pháp IIoT toàn diện: Kết nối máy móc cũ lẫn mới, thu thập dữ liệu thời gian thực và biến chúng thành những biểu đồ trực quan, giúp bạn ra quyết định quản trị chính xác hơn bao giờ hết."
+    ),
+    targetUsers: [],
+    painPoints: [],
+    painPointCards: [
+      {
+        title: ls("Siloed data", "Dữ liệu rời rạc"),
+        description: ls(
+          "Machines run independently with no unified view to evaluate performance.",
+          "Máy móc hoạt động độc lập, không có sự liên kết dữ liệu tổng thể để đánh giá hiệu suất."
+        ),
+      },
+      {
+        title: ls("Reactive maintenance", "Bảo trì thụ động"),
+        description: ls(
+          "Issues are fixed only after failure, causing downtime and unexpected costs.",
+          "Chỉ sửa chữa khi máy đã hỏng, gây đình trệ sản xuất và tốn kém chi phí phát sinh."
+        ),
+      },
+      {
+        title: ls("Resource waste", "Lãng phí tài nguyên"),
+        description: ls(
+          "Limited visibility into electricity, water, and material usage by time window or shift.",
+          "Không kiểm soát được chính xác lượng điện, nước, nguyên liệu tiêu thụ theo từng khung giờ."
+        ),
+      },
+      {
+        title: ls("People dependency", "Phụ thuộc nhân sự"),
+        description: ls(
+          "Manual monitoring is error-prone, subjective, and leads to slow reporting.",
+          "Quy trình giám sát thủ công, dễ sai sót, thiếu tính khách quan và báo cáo chậm trễ."
+        ),
+      },
     ],
-    painPoints: [
-      ls("Legacy equipment lacks connectivity", "Thiết bị cũ thiếu kết nối"),
-      ls("No centralized view of operations across sites", "Không có cái nhìn tổng thể qua các site"),
-      ls("Downtime and faults detected too late", "Sự cố và lỗi phát hiện quá muộn"),
-      ls("Data silos between OT and IT systems", "Dữ liệu phân mảnh giữa hệ thống OT và IT"),
+    includedScope: [],
+    offerCards: [
+      {
+        title: ls("Multi-protocol connectivity", "Kết nối đa giao thức"),
+        description: ls(
+          "Use Node-RED to connect Modbus, OPC UA, MQTT, HTTP, and more across Siemens, Mitsubishi, Schneider, etc.",
+          "Sử dụng Node-RED để 'nói chuyện' với mọi thiết bị (Modbus, OPC-UA, MQTT, HTTP...) từ các hãng lớn như Siemens, Mitsubishi, Schneider..."
+        ),
+      },
+      {
+        title: ls("Visual monitoring", "Giám sát trực quan"),
+        description: ls(
+          "Cloud dashboards for web/mobile access—reports, control, and insights anywhere.",
+          "Triển khai giao diện điều khiển hiện đại trên Cloud, cho phép bạn xem báo cáo và quản lý mọi lúc mọi nơi qua Web/Mobile."
+        ),
+      },
+      {
+        title: ls("Optimized IoT hosting", "Hạ tầng Hosting tối ưu"),
+        description: ls(
+          "Purpose-built cloud hosting for 24/7 operation, low latency, and strong security.",
+          "Cung cấp dịch vụ Cloud chuyên dụng cho IoT, đảm bảo hệ thống vận hành 24/7 với độ trễ cực thấp và bảo mật cao."
+        ),
+      },
+      {
+        title: ls("Smart alerts", "Cảnh báo thông minh"),
+        description: ls(
+          "Instant notifications via Telegram, Email, or SMS when anomalies occur—so issues are handled fast.",
+          "Hệ thống tự động gửi thông báo tức thời qua Telegram, Email, SMS ngay khi có thông số bất thường, giúp xử lý sự cố ngay lập tức."
+        ),
+      },
     ],
-    includedScope: [
-      ls("Site assessment and system architecture design", "Khảo sát hiện trường và thiết kế kiến trúc hệ thống"),
-      ls("Hardware selection and procurement guidance", "Lựa chọn phần cứng và hướng dẫn mua sắm"),
-      ls("Communication protocol implementation", "Triển khai giao thức truyền thông"),
-      ls("Cloud platform setup and integration", "Thiết lập và tích hợp nền tảng cloud"),
-      ls("Custom dashboard and alert system", "Dashboard tuỳ chỉnh và hệ thống cảnh báo"),
-      ls("Commissioning and handover", "Nghiệm thu và bàn giao"),
-      ls("Post-deployment support and maintenance", "Hỗ trợ và bảo trì sau triển khai"),
-    ],
-    technicalCapabilities: [
-      "RS485, Modbus RTU/TCP, OPC UA, BACnet",
-      "MQTT, HTTP, WebSocket cloud integration",
-      "Edge gateways: Raspberry Pi, industrial PLCs, Teltonika",
-      "Time-series databases: InfluxDB, TimescaleDB",
-      "Visualization: ThingsBoard, Grafana, custom dashboards",
-    ],
+    technicalCapabilities: [],
     processSteps: [
-      { title: ls("Discovery", "Khảo sát"), description: ls("Understand your operations, equipment, and goals.", "Tìm hiểu hoạt động, thiết bị và mục tiêu.") },
-      { title: ls("Architecture", "Kiến trúc"), description: ls("Design the system topology, protocols, and data flow.", "Thiết kế topology hệ thống, giao thức và luồng dữ liệu.") },
-      { title: ls("Implementation", "Triển khai"), description: ls("Deploy hardware, configure protocols, build dashboards.", "Triển khai phần cứng, cấu hình giao thức, xây dashboard.") },
-      { title: ls("Testing", "Kiểm thử"), description: ls("End-to-end validation and performance testing.", "Kiểm tra toàn diện và đánh giá hiệu suất.") },
-      { title: ls("Handover", "Bàn giao"), description: ls("Training, documentation, and ongoing support.", "Đào tạo, tài liệu và hỗ trợ liên tục.") },
+      { title: ls("Discovery & consulting", "Khảo sát & Tư vấn"), description: ls("Assess your current infrastructure and real operational needs.", "Trực tiếp đánh giá hạ tầng hiện tại và nhu cầu thực tế của nhà máy.") },
+      { title: ls("Architecture design", "Thiết kế kiến trúc"), description: ls("Select sensors/gateways and design an optimal data-flow architecture.", "Lựa chọn phần cứng (Sensor/Gateway) và xây dựng cấu trúc luồng dữ liệu tối ưu.") },
+      { title: ls("Deployment & integration", "Triển khai & Kết nối"), description: ls("Configure field devices and enable edge data collection/processing.", "Cấu hình thiết bị tại hiện trường để thu thập và xử lý dữ liệu tại biên (Edge Computing).") },
+      { title: ls("Dashboard build", "Xây dựng giao diện"), description: ls("Create web/app dashboards tailored to your operations.", "Thiết lập Dashboard giám sát trên Web/App theo yêu cầu riêng, phù hợp với nghiệp vụ của bạn.") },
+      { title: ls("Handover & operations", "Vận hành & Chuyển giao"), description: ls("Train your team and provide ongoing maintenance and periodic upgrades.", "Đào tạo nhân sự vận hành và cung cấp dịch vụ bảo trì, nâng cấp định kỳ.") },
     ],
     pricingType: "contact_for_quote",
-    faq: [
-      { question: ls("Do you work with legacy equipment?", "Bạn có làm việc với thiết bị cũ không?"), answer: ls("Yes. We specialize in connecting legacy industrial devices using RS485, Modbus, and serial protocols.", "Có. Chúng tôi chuyên kết nối thiết bị công nghiệp cũ bằng RS485, Modbus và giao thức serial.") },
-      { question: ls("Can you integrate with our existing SCADA?", "Có thể tích hợp với SCADA hiện tại không?"), answer: ls("Yes. We design systems that complement your existing infrastructure, not replace it.", "Có. Chúng tôi thiết kế hệ thống bổ sung cho hạ tầng hiện tại, không thay thế.") },
-      { question: ls("What is the typical project timeline?", "Thời gian dự án thông thường là bao lâu?"), answer: ls("Most projects range from 4–12 weeks depending on scope and complexity.", "Hầu hết dự án từ 4–12 tuần tuỳ thuộc phạm vi và độ phức tạp.") },
-    ],
+    faq: [],
     relatedServiceIds: ["nodered-hosting", "thingsboard-hosting", "iot-consulting"],
     relatedUseCaseIds: ["energy-monitoring", "factory-automation"],
+    sectionTitles: {
+      painPoints: ls("Solve the Problems You Face", "Giải quyết các vấn đề của bạn"),
+      included: ls("What I Offer", "Giải pháp của tôi"),
+      process: ls("Implementation Process", "Quy trình triển khai"),
+    },
+    sectionIntros: {
+      painPoints: ls(
+        "From real-world operations, I've seen the barriers that typically block performance improvements:",
+        "Trong quá trình vận hành thực tế, tôi hiểu những rào cản mà bạn đang đối mặt:"
+      ),
+      included: ls(
+        "I design systems for flexibility, reliability, and cost efficiency—so your data becomes actionable and valuable.",
+        "Tôi sẽ thiết kế hệ thống tập trung vào tính linh hoạt, sự ổn định và tối ưu chi phí cho doanh nghiệp, đảm bảo dữ liệu được sử dụng đúng cách và có giá trị."
+      ),
+      process: ls(
+        "I work with you through five structured steps to ensure the system goes live successfully:",
+        "Tôi đồng hành cùng bạn qua 5 bước chặt chẽ để đảm bảo hệ thống đi vào hoạt động hiệu quả nhất:"
+      ),
+    },
   },
   {
     id: "smart-home-iot",

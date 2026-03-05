@@ -37,6 +37,12 @@ export interface ProcessStep {
   description: LocaleString;
 }
 
+/** A card with title and description for richer section content */
+export interface ContentCard {
+  title: LocaleString;
+  description: LocaleString;
+}
+
 export interface Service {
   id: string;
   slug: string;
@@ -45,9 +51,15 @@ export interface Service {
   shortDescription: LocaleString;
   bulletPoints: [LocaleString, LocaleString, LocaleString];
   heroText: LocaleString;
+  /** Optional sub-headline shown above heroText in the hero section */
+  heroSubheadline?: LocaleString;
   targetUsers: LocaleString[];
   painPoints: LocaleString[];
+  /** Rich pain-point cards with title + description (used instead of painPoints when present) */
+  painPointCards?: ContentCard[];
   includedScope: LocaleString[];
+  /** Rich offer cards with title + description (used instead of includedScope when present) */
+  offerCards?: ContentCard[];
   technicalCapabilities: string[];
   processSteps: ProcessStep[];
   pricingType: "public_packages" | "contact_for_quote";
@@ -55,6 +67,18 @@ export interface Service {
   faq: FAQItem[];
   relatedServiceIds: string[];
   relatedUseCaseIds: string[];
+  /** Optional per-service overrides for section titles */
+  sectionTitles?: {
+    painPoints?: LocaleString;
+    included?: LocaleString;
+    process?: LocaleString;
+  };
+  /** Optional per-service intro text for sections */
+  sectionIntros?: {
+    painPoints?: LocaleString;
+    included?: LocaleString;
+    process?: LocaleString;
+  };
 }
 
 export interface UseCaseSection {
