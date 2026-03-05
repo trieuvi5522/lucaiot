@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, CheckCircle2, Users, AlertTriangle, Cpu } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Users, AlertTriangle, Cpu, Database, Wrench, Zap, Network, LayoutDashboard, Cloud, BellRing } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SectionWrapper from "@/components/layout/SectionWrapper";
@@ -18,6 +18,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+
+const cardIconMap: Record<string, React.ReactNode> = {
+  Database: <Database size={16} className="text-destructive shrink-0" />,
+  Wrench: <Wrench size={16} className="text-destructive shrink-0" />,
+  Zap: <Zap size={16} className="text-destructive shrink-0" />,
+  Users: <Users size={16} className="text-destructive shrink-0" />,
+  Network: <Network size={16} className="text-accent shrink-0" />,
+  LayoutDashboard: <LayoutDashboard size={16} className="text-accent shrink-0" />,
+  Cloud: <Cloud size={16} className="text-accent shrink-0" />,
+  BellRing: <BellRing size={16} className="text-accent shrink-0" />,
+};
 
 const ServiceDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -77,9 +88,11 @@ const ServiceDetail = () => {
                   {loc(service.heroSubheadline)}
                 </p>
               )}
-              <p className="mt-3 text-base text-primary-foreground/65 max-w-3xl leading-relaxed" style={{ textWrap: 'balance' } as React.CSSProperties}>
-                {loc(service.heroText)}
-              </p>
+              {loc(service.heroText) && (
+                <p className="mt-3 text-base text-primary-foreground/65 max-w-3xl leading-relaxed" style={{ textWrap: 'balance' } as React.CSSProperties}>
+                  {loc(service.heroText)}
+                </p>
+              )}
               {!isNodeRed && (
                 <div className="mt-6">
                   {isHosting ? (
@@ -92,6 +105,16 @@ const ServiceDetail = () => {
             </div>
           </div>
         </section>
+
+        {service.introBlock && (
+          <section className="py-12 md:py-16">
+            <div className="container mx-auto px-4">
+              <p className="max-w-3xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed text-center" style={{ textWrap: 'balance' } as React.CSSProperties}>
+                {loc(service.introBlock)}
+              </p>
+            </div>
+          </section>
+        )}
 
         {service.targetUsers.length > 0 && (
           <SectionWrapper title={t.sdWhoFor}>
@@ -117,7 +140,7 @@ const ServiceDetail = () => {
                 service.painPointCards.map((card, i) => (
                   <div key={i} className="p-5 bg-card rounded-lg border border-border shadow-card">
                     <div className="flex items-center gap-2 mb-2">
-                      <AlertTriangle size={16} className="text-destructive shrink-0" />
+                      {card.icon && cardIconMap[card.icon] ? cardIconMap[card.icon] : <AlertTriangle size={16} className="text-destructive shrink-0" />}
                       <h3 className="font-display font-semibold text-card-foreground">{loc(card.title)}</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{loc(card.description)}</p>
@@ -145,7 +168,7 @@ const ServiceDetail = () => {
                 service.offerCards.map((card, i) => (
                   <div key={i} className="p-5 bg-card rounded-lg border border-border shadow-card">
                     <div className="flex items-center gap-2 mb-2">
-                      <CheckCircle2 size={16} className="text-accent shrink-0" />
+                      {card.icon && cardIconMap[card.icon] ? cardIconMap[card.icon] : <CheckCircle2 size={16} className="text-accent shrink-0" />}
                       <h3 className="font-display font-semibold text-card-foreground">{loc(card.title)}</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">{loc(card.description)}</p>
@@ -198,24 +221,26 @@ const ServiceDetail = () => {
           </div>
         </SectionWrapper>
 
-        {service.pricingType === "public_packages" && service.pricingPlans ? (
-          <SectionWrapper title={t.sdPricingPlans} className="bg-muted/50" id="pricing">
-            <div className="max-w-4xl mx-auto">
-              {useRowPricing ? (
-                <PricingRowList plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
-              ) : (
-                <PricingTable plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
-              )}
-            </div>
-          </SectionWrapper>
-        ) : (
-          <SectionWrapper title={t.sdPricing} className="bg-muted/50">
-            <div className="max-w-xl mx-auto text-center">
-              <p className="text-muted-foreground mb-2">{t.sdPricingCustom}</p>
-              <p className="text-sm text-muted-foreground/70 mb-6">{t.sdPricingCustomDesc}</p>
-              <CTAButton size="lg" />
-            </div>
-          </SectionWrapper>
+        {!service.hidePricing && (
+          service.pricingType === "public_packages" && service.pricingPlans ? (
+            <SectionWrapper title={t.sdPricingPlans} className="bg-muted/50" id="pricing">
+              <div className="max-w-4xl mx-auto">
+                {useRowPricing ? (
+                  <PricingRowList plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
+                ) : (
+                  <PricingTable plans={service.pricingPlans} onSelectPlan={handleSelectPlan} />
+                )}
+              </div>
+            </SectionWrapper>
+          ) : (
+            <SectionWrapper title={t.sdPricing} className="bg-muted/50">
+              <div className="max-w-xl mx-auto text-center">
+                <p className="text-muted-foreground mb-2">{t.sdPricingCustom}</p>
+                <p className="text-sm text-muted-foreground/70 mb-6">{t.sdPricingCustomDesc}</p>
+                <CTAButton size="lg" />
+              </div>
+            </SectionWrapper>
+          )
         )}
 
         {service.faq.length > 0 && (
