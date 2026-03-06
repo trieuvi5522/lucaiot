@@ -140,8 +140,8 @@ export const services: Service[] = [
     ),
     heroText: ls("", ""),
     introBlock: ls(
-      "I deliver a complete IIoT solution: connect both legacy and modern machines, collect real-time data, and turn it into clear dashboards—so you can make faster, more accurate operational decisions.",
-      "Tôi mang đến giải pháp IIoT toàn diện: Kết nối máy móc cũ lẫn mới, thu thập dữ liệu thời gian thực và biến chúng thành những biểu đồ trực quan, giúp bạn ra quyết định quản trị chính xác hơn bao giờ hết."
+      "Connect both legacy and modern machines, collect real-time data, and turn it into clear dashboards—so you can make faster, more accurate operational decisions.",
+      "Kết nối máy móc cũ lẫn mới, thu thập dữ liệu thời gian thực và biến chúng thành những biểu đồ trực quan, giúp bạn ra quyết định quản trị chính xác hơn bao giờ hết."
     ),
     targetUsers: [],
     painPoints: [],
