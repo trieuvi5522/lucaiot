@@ -110,14 +110,9 @@ const ServiceDetail = () => {
         {service.introBlock &&
         <section className={isIIoT ? "py-6 md:py-8" : "py-12 md:py-16"}>
             <div className="container mx-auto px-4">
-              <p
-
-
-
-              style={{ textWrap: 'balance' } as React.CSSProperties} className="bg-inherit text-left mx-[200px]">
-              
+              <blockquote className="border-l-4 border-accent pl-6 py-2 text-muted-foreground italic text-base leading-relaxed max-w-2xl" style={{ textWrap: 'balance' } as React.CSSProperties}>
                 {loc(service.introBlock)}
-              </p>
+              </blockquote>
             </div>
           </section>
         }
