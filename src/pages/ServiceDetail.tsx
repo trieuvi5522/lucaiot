@@ -114,7 +114,7 @@ const ServiceDetail = () => {
 
 
 
-              style={{ textWrap: 'balance' } as React.CSSProperties} className="mx-[150px] text-justify bg-inherit">
+              style={{ textWrap: 'balance' } as React.CSSProperties} className="bg-inherit text-left mx-[200px]">
               
                 {loc(service.introBlock)}
               </p>
