@@ -58,6 +58,7 @@ const ServiceDetail = () => {
   const relatedUseCases = useCases.filter((u) => service.relatedUseCaseIds.includes(u.id));
   const isHosting = service.group === "hosting";
   const isNodeRed = service.id === "nodered-hosting";
+  const isIIoT = service.id === "industrial-iot";
   const useRowPricing = isNodeRed && service.pricingPlans?.[0]?.specs;
   const handleSelectPlan = (planName: string) => {
     setSelectedPlan(planName);
@@ -71,7 +72,7 @@ const ServiceDetail = () => {
       <Header />
       <PageMeta title={loc(service.title)} description={loc(service.shortDescription)} />
       <main className="flex-1">
-        <section className="bg-hero py-16 md:py-24">
+        <section className={`bg-hero ${isIIoT ? "py-10 md:py-14" : "py-16 md:py-24"}`}>
           <div className="container mx-auto px-4">
             <Link to={localePath("/services")} className="inline-flex items-center gap-1 text-sm text-primary-foreground/60 hover:text-accent mb-6 transition-colors">
               <ArrowLeft size={14} /> {t.backToServices}
@@ -107,9 +108,14 @@ const ServiceDetail = () => {
         </section>
 
         {service.introBlock && (
-          <section className="py-12 md:py-16">
+          <section className={isIIoT ? "py-6 md:py-8" : "py-12 md:py-16"}>
             <div className="container mx-auto px-4">
-              <p className="max-w-3xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed text-center" style={{ textWrap: 'balance' } as React.CSSProperties}>
+              <p
+                className={`text-base md:text-lg text-muted-foreground leading-relaxed ${
+                  isIIoT ? "max-w-2xl text-left" : "max-w-3xl mx-auto text-center"
+                }`}
+                style={{ textWrap: 'balance' } as React.CSSProperties}
+              >
                 {loc(service.introBlock)}
               </p>
             </div>
@@ -134,6 +140,7 @@ const ServiceDetail = () => {
             title={service.sectionTitles?.painPoints ? loc(service.sectionTitles.painPoints) : t.sdProblems}
             subtitle={service.sectionIntros?.painPoints ? loc(service.sectionIntros.painPoints) : undefined}
             className="bg-muted/50"
+            compact={isIIoT}
           >
             <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
               {service.painPointCards ? (
@@ -162,6 +169,7 @@ const ServiceDetail = () => {
           <SectionWrapper
             title={service.sectionTitles?.included ? loc(service.sectionTitles.included) : t.sdIncluded}
             subtitle={service.sectionIntros?.included ? loc(service.sectionIntros.included) : undefined}
+            compact={isIIoT}
           >
             <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
               {service.offerCards ? (
@@ -203,6 +211,7 @@ const ServiceDetail = () => {
           title={service.sectionTitles?.process ? loc(service.sectionTitles.process) : t.sdProcess}
           subtitle={service.sectionIntros?.process ? loc(service.sectionIntros.process) : undefined}
           className={service.sectionTitles?.process ? "bg-muted/50" : ""}
+          compact={isIIoT}
         >
           <div className="max-w-3xl mx-auto">
             <div className="space-y-4">
@@ -289,7 +298,7 @@ const ServiceDetail = () => {
           </SectionWrapper>
         )}
 
-        <SectionWrapper dark className="text-center">
+        <SectionWrapper dark className="text-center" compact={isIIoT}>
           <div className="max-w-xl mx-auto">
             <h2 className="text-3xl font-display font-bold">{t.sdCtaTitle}</h2>
             <p className="mt-4 text-primary-foreground/70">{t.sdCtaDesc}</p>
